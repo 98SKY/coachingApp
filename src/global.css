@@ -1,9 +1,12 @@
 
 .global-text-color {
-    color: #333;
+    color: rgb(55, 198, 48);
   }
   
   .global-background-color {
     background-color: #f0f0f0;
+  }
+  .padding-all {
+    padding: 10px; 
   }
     
