@@ -1,0 +1,50 @@
+.login-box {
+    width: 300px;
+    padding: 30px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .login-box h2 {
+    margin-bottom: 20px;
+  }
+  
+  .login-box input {
+    width: 100%;
+    padding: 8px; /* Set the desired padding */
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+
+   .create-account{
+    margin-top: 10px;
+    font-size: 14px;
+    color: blue;
+    cursor: pointer;
+    text-align: start;
+  }
+  
+  .forgot-password {
+    margin-top: -14px;
+    font-size: 14px;
+    color: blue;
+    cursor: pointer;
+    text-align: end;
+  }
+  
+  .login-box button {
+    width: 100%;
+    padding: 8px;
+    border: none;
+    border-radius: 5px;
+    background-color: #333;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .body-img {
+    display: block; /* Set the image as a block-level element */
+    margin: 0 auto 20px; /* Center the image horizontally and add margin below */
+  }
