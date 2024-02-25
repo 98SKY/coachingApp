@@ -13,7 +13,7 @@ const Navigate = () => {
             <Route path='/' element={<Login/>}/>
             <Route path='/signUp' element={<SignUp/>}/>
             <Route path='/forgotPass' element={<ForgotPass/>}/>
-            <Route path='/controlPannel' element={<DashBoard/>}/>
+            <Route path='/controlPanel' element={<DashBoard/>}/>
         </Routes>
       </Router>
     </div>

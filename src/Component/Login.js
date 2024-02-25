@@ -1,4 +1,4 @@
-import React,{ useState } from 'react';
+import React,{ useState,useEffect } from 'react';
 import Reset from './Global';
 import '../global.css';
 import './login.css';
@@ -14,19 +14,35 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleLogin = () => {
-    const userExists = false;
+    if (username.trim() === '' || password.trim() === '') {
+      alert('Please fill in both username and password fields.');
+      return;
+    }
+  
+    let userExists = false;
     // Check your condition here
     console.log('Username:', username);
     console.log('Password:', password);
+    if(username=='Sunil' && password=='321'){
+      userExists = true;
+    }
 
     if (userExists) {
       // Navigate to the dashboard
-      navigate('/controlPannel');
+      localStorage.setItem('isLoggedIn', 'true');
+      navigate('/controlPanel');
     } else {
       // Show an error message or perform other actions
       alert('User does not exist');
     }
   };
+
+  useEffect(() => {
+    const isLoggedIn = localStorage.getItem('isLoggedIn');
+    if (isLoggedIn === 'true') {
+      navigate('/controlPanel');
+    }
+  }, []);
 
   return (
     <div className='wrapper'>
