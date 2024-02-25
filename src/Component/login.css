@@ -1,5 +1,5 @@
 .login-box {
-    width: 300px;
+    
     padding: 30px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -11,7 +11,7 @@
   
   .login-box input {
     width: 100%;
-    padding: 8px; /* Set the desired padding */
+    padding: 8px; 
     margin-bottom: 10px;
     border-radius: 5px;
     border: 1px solid #ccc;
@@ -45,6 +45,6 @@
   }
   
   .body-img {
-    display: block; /* Set the image as a block-level element */
-    margin: 0 auto 20px; /* Center the image horizontally and add margin below */
+    display: block;
+  margin: 60px auto 20px;
   }

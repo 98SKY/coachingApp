@@ -6,6 +6,7 @@ import './login.css';
 const Login = () => {
   Reset(5, 2);
   return (
+    <div className='wrapper'>
     <div className='padding-all'>
       <div className="header">Login</div>
       <div className="body">
@@ -18,7 +19,8 @@ const Login = () => {
           <div className="forgot-password">Forgot password?</div>
         </div>
       </div>
-      <div className="footer"></div>
+      <div className="footer"> working</div>
+    </div>
     </div>
   );
 };
