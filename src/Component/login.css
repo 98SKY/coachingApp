@@ -23,6 +23,7 @@
     color: blue;
     cursor: pointer;
     text-align: start;
+    
   }
   
   .forgot-password {
@@ -34,11 +35,12 @@
   }
   
   .login-box button {
-    width: 100%;
-    padding: 8px;
-    border: none;
+    width: 50%;
+    padding: 10px; 
+    margin-bottom: 10px;
     border-radius: 5px;
-    background-color: #333;
+    border: 1px solid #ccc;
+    background-color: rgb(43, 138, 186);
     color: white;
     font-weight: bold;
     cursor: pointer;
@@ -48,3 +50,11 @@
     display: block;
   margin: 60px auto 20px;
   }
+
+.create-account:focus,
+.create-account:active,
+.forgot-password:focus,
+.forgot-password:active {
+  outline: none !important; 
+  box-shadow: none !important; 
+}

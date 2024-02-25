@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Login from './Login';
 import SignUp from './SignUp';
 import ForgotPass from './ForgotPass';
+import DashBoard from './DashBoard'
 
 const Navigate = () => {
   return (
@@ -11,7 +12,8 @@ const Navigate = () => {
         <Routes>
             <Route path='/' element={<Login/>}/>
             <Route path='/signUp' element={<SignUp/>}/>
-            <Route path='/forgot' element={<ForgotPass/>}/>
+            <Route path='/forgotPass' element={<ForgotPass/>}/>
+            <Route path='/controlPannel' element={<DashBoard/>}/>
         </Routes>
       </Router>
     </div>
