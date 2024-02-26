@@ -26,34 +26,15 @@ const DashBoard = () => {
     };
   }, [navigate, backButtonCount]);
 
-  const toggleSideDrawer = () => {
-    setIsSideDrawerOpen(!isSideDrawerOpen);
-  };
+
 
   return (
     <div className='wrapper'>
       <div className='padding-all'>
-        <div className="header-dashBoard">
-          <button className="menu-button" onClick={toggleSideDrawer}>
-            Menu
-          </button>
-          <div className='dashboard-heading'>DashBoard</div>
-        </div>
-        <div className='dashBoardBody'>body</div>
-        {isSideDrawerOpen && <SideDrawer />}
+          <div className='header'>DashBoard</div>
+          <div className='body'>body</div>
+          <div className='footer'></div>
       </div>
-    </div>
-  );
-};
-
-const SideDrawer = () => {
-  return (
-    <div className="side-drawer">
-      <ul>
-        <li><a href="#">Link 1</a></li>
-        <li><a href="#">Link 2</a></li>
-        <li><a href="#">Link 3</a></li>
-      </ul>
     </div>
   );
 };

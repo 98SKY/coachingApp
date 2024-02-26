@@ -1,31 +1,3 @@
-.header-dashBoard {
-    background-color: rgb(43, 138, 186);
-    color: white;
-    padding: 10px;
-    position: fixed;
-    top: 0; 
-    left: 0;
-    width: 100%;
-    margin: 0; 
-    bottom: 10;
-    display: flex;
-    justify-content: space-between; 
-    align-items: center;
-    height: 30px;
-  }
-  
-  .menu-button {
-    cursor: pointer;
-    margin-right: 10px;
-    height: 30px;
-    width: 50px;
-  }
-  
-  .dashboard-heading {
-    flex: 1; 
-    text-align: center; 
-  }
-  
   @media screen and (max-width: 768px) {
     /* Adjust spacing for mobile view */
     .menu-button {
@@ -33,7 +5,6 @@
     }
   }
 
-  .dashBoardBody{
-    padding-top: 60px;
-    padding-bottom: 10px; 
+  .dashBoardFooter{
+
   }
