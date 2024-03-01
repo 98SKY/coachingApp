@@ -1,0 +1,115 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+
+.myBody {
+    padding: 50px 20px 20px; 
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 100px;
+}
+
+select {
+    margin-bottom: 20px;
+    padding: 5px;
+    width: 200px;
+}
+
+.chips {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+button {
+    margin: 0 10px;
+    padding: 8px 16px;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #007bff;
+    color: #fff;
+}
+
+button.selected {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.forwardButton {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+.forwardButton:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+.enabledButton {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+}
+.disabledButton {
+    background-color: #fff;
+    color: #000;
+    border: 1px solid #ccc;
+    padding: 8px 16px;
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.select-wrapper {
+    position: relative;
+    z-index: 1; /* Ensure the dropdown is above other elements */
+}
+
+.select-wrapper select {
+    position: relative;
+    z-index: 3; /* Ensure the dropdown options are above the select box */
+}
+
+@media (max-width: 768px) {
+    .select-wrapper {
+        z-index: 9999; /* Set a high z-index for the select wrapper */
+        position: relative; /* Reset position to relative */
+    }
+
+    .select-wrapper select {
+        position: relative; /* Reset position to relative */
+        z-index: 9999; /* Set a high z-index for the select options */
+    }
+
+    .container {
+        z-index: 0; /* Ensure the container stays below the select */
+    }
+}
+.error {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+}
