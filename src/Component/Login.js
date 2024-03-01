@@ -13,34 +13,47 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     if (username.trim() === '' || password.trim() === '') {
       alert('Please fill in both username and password fields.');
       return;
     }
-  
-    let userExists = false;
-    // Check your condition here
-    console.log('Username:', username);
-    console.log('Password:', password);
-    if(username=='Sunil' && password=='321'){
-      userExists = true;
-    }
+    try {
+      //Send login request to your server to authenticate user
+      const response = await fetch('https://your-api-endpoint.com/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password }),
+      });
 
-    if (userExists) {
+      if (!response.ok) {
+        throw new Error('Authentication failed');
+      }
+
+      const data = await response.json();
+      // Save JWT token to local storage
+      localStorage.setItem('token', data.token);
+
       // Navigate to the dashboard
-      localStorage.setItem('isLoggedIn', 'true');
       navigate('/controlPanel');
-    } else {
-      // Show an error message or perform other actions
-      alert('User does not exist');
+      
+    } catch (error) {
+      console.error('Login failed:', error.message);
+      alert('Authentication failed. Please check your credentials.');
     }
+      
   };
-
+   
   useEffect(() => {
-    const isLoggedIn = localStorage.getItem('isLoggedIn');
-    if (isLoggedIn === 'true') {
+    const token = localStorage.getItem('token');
+    if (token) {
+      // Navigate to the dashboard if user is already authenticated
       navigate('/controlPanel');
+    }else {
+      setUsername('');
+      setPassword('');
     }
   }, []);
 
