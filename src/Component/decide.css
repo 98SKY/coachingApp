@@ -45,7 +45,7 @@ button {
 }
 
 button:hover {
-    background-color: #007bff;
+    background-color: rgb(43, 138, 186);
     color: #fff;
 }
 
@@ -85,27 +85,28 @@ button.selected {
 
 .select-wrapper {
     position: relative;
-    z-index: 1; /* Ensure the dropdown is above other elements */
-}
+    z-index: 1; 
+} 
 
 .select-wrapper select {
     position: relative;
-    z-index: 3; /* Ensure the dropdown options are above the select box */
+    z-index: 3;
+    width: 100%; 
 }
 
 @media (max-width: 768px) {
     .select-wrapper {
-        z-index: 9999; /* Set a high z-index for the select wrapper */
-        position: relative; /* Reset position to relative */
+        z-index: 9999; 
+        position: relative; 
     }
 
     .select-wrapper select {
-        position: relative; /* Reset position to relative */
-        z-index: 9999; /* Set a high z-index for the select options */
+        position: relative; 
+        z-index: 9999; 
     }
 
     .container {
-        z-index: 0; /* Ensure the container stays below the select */
+        z-index: 1; 
     }
 }
 .error {

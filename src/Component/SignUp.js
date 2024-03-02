@@ -1,10 +1,17 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import '../global.css';
+import './dashBoard.css'
 
 const SignUp = () => {
   return (
-    <div>
-      <p>Create Account</p>
+    <div className='wrapper'>
+    <div className='padding-all'>
+        <div className='header'>Register My self</div>
+        <div className='body'>body</div>
+        <div className='footer'></div>
     </div>
+  </div>
   )
 }
 
