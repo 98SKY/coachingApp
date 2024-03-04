@@ -1,0 +1,41 @@
+.myWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.myPadding-all {
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  width: 400px;
+  overflow-y: hidden;
+  min-height: fit-content;
+  max-height: max-content;
+}
+
+
+
+.myInput-field {
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+}
+
+
+.body button {
+  
+  width: 50%;
+    padding: 10px; 
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: rgb(43, 138, 186);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
