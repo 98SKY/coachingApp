@@ -8,7 +8,7 @@
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 10px;
-  width: 400px;
+  width: 350px;
   overflow-y: hidden;
   min-height: fit-content;
   max-height: max-content;
@@ -26,16 +26,19 @@
 
 
 .body button {
-  
   width: 50%;
-    padding: 10px; 
-    margin-bottom: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    background-color: rgb(43, 138, 186);
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: white; /* Button color changed to white */
+  color: rgb(43, 138, 186); /* Text color changed to blue */
+  font-weight: bold;
+  cursor: pointer;
+}
+.errorText {
+  color: red;
+  margin-top: 10px;
 }
 
 
