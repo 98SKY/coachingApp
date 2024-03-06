@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import '../global.css';
 import './signUp.css';
 import { useNavigate } from 'react-router-dom';
+import { createUser } from './Global';
 
 const SignUp = () => {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     instituteName: '',
     phoneNumber: '',
@@ -17,10 +19,10 @@ const SignUp = () => {
     
     let filteredValue = value;
     if (name === 'instituteName') {
-      filteredValue = value.replace(/[^a-zA-Z ]/g, ''); // Allow only letters and spaces
+      filteredValue = value.replace(/[^a-zA-Z ]/g, ''); 
     } else if (name === 'phoneNumber') {
-      filteredValue = value.replace(/\D/g, ''); // Allow only digits
-      filteredValue = filteredValue.slice(0, 10); // Limit length to 10 characters
+      filteredValue = value.replace(/\D/g, ''); 
+      filteredValue = filteredValue.slice(0, 10); 
     }
   
     setFormData({
@@ -31,28 +33,20 @@ const SignUp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Perform form validation here
+    
     if (formData.instituteName && formData.phoneNumber && formData.emailId) {
+      setLoading(true);
       try {
-        const response = await fetch('your_api_endpoint_here', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(formData),
-        });
-        if (!response.ok) {
-          throw new Error('Failed to create user.');
-        }
-        const data = await response.json();
+        const response = await createUser(formData);
         
-        // Assuming API response contains userId and oneTimePassword
-        const { userId, oneTimePassword } = data;
+        // const { userId, oneTimePassword } = response;
+        setLoading(false);
   
         alert(`Check your email or phone for the  user ID and one-time password.`);
         setFormValid(true);
         navigate('/login');
       } catch (error) {
+        setLoading(false);
         console.error(error);
         alert('Failed to create user. Please try again.');
       }
@@ -76,7 +70,7 @@ const SignUp = () => {
             <input
               type='text'
               name='instituteName'
-              placeholder='Enter institute name 1'
+              placeholder='Enter institute name'
               value={formData.instituteName}
               onChange={handleChange}
               required
@@ -85,7 +79,7 @@ const SignUp = () => {
             <input
               type='tel'
               name='phoneNumber'
-              placeholder='Enter phone number 2'
+              placeholder='Enter phone number'
               value={formData.phoneNumber}
               onChange={handleChange}
               onKeyPress={handleKeyPress}
@@ -95,20 +89,16 @@ const SignUp = () => {
             <input
               type='email'
               name='emailId'
-              placeholder='Enter email ID 3'
+              placeholder='Enter email ID'
               value={formData.emailId}
               onChange={handleChange}
               required
               className='myInput-field'
             />
-            {/* <div className="buttonWrapper"> */}
-            <button type='submit' onClick={handleChange}>
-              Save
-            </button>
-            {/* </div> */}
+            {loading && <div className='loader'>Load...</div>}
+            <button type='submit'>Save</button>
           </div>
-          <div className='footer'>
-          </div>
+          <div className='footer'></div>
         </form>
       </div>
     </div>
