@@ -1,5 +1,5 @@
 import React,{ useState,useEffect } from 'react';
-import Reset from './Global';
+import {login as loginApi} from './Global';
 import '../global.css';
 import './login.css';
 import { Link,useNavigate } from 'react-router-dom';
@@ -10,6 +10,7 @@ import { useLocation } from "react-router-dom";
 const Login = () => {
 
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -23,28 +24,17 @@ const Login = () => {
       alert('Please fill in both username and password fields.');
       return;
     }
+    setLoading(true);
     try {
-      //Send login request to your server to authenticate user
-      const response = await fetch('https://your-api-endpoint.com/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ username, password }),
-      });
-
-      if (!response.ok) {
-        throw new Error('Authentication failed');
-      }
-
-      const data = await response.json();
-      // Save JWT token to local storage
-      localStorage.setItem('token', data.token);
-
+      const response = await loginApi({ username, password, userType }); 
+      // localStorage.setItem('token', data.token);
+  
       // Navigate to the dashboard
+      setLoading(false);
       navigate('/controlPanel');
       
     } catch (error) {
+      setLoading(false);
       console.error('Login failed:', error.message);
       alert('Authentication failed. Please check your credentials.');
     }

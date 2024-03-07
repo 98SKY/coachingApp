@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import '../global.css';
 import './signUp.css';
 import { useNavigate } from 'react-router-dom';
-import { createUser } from './Global';
+import { registerInstitute } from './Global';
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -37,7 +37,7 @@ const SignUp = () => {
     if (formData.instituteName && formData.phoneNumber && formData.emailId) {
       setLoading(true);
       try {
-        const response = await createUser(formData);
+        const response = await registerInstitute(formData);
         
         // const { userId, oneTimePassword } = response;
         setLoading(false);
