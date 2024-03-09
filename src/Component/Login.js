@@ -41,7 +41,7 @@ const Login = () => {
     } catch (error) {
       setLoading(false);
       console.error('Login failed:', error.message);
-      alert('Authentication failed. Please check your credentials.');
+      alert(error.message);
     }
       
   };

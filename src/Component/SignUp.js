@@ -44,7 +44,7 @@ const SignUp = () => {
   
         alert(`Check your email or phone for the  user ID and one-time password.`);
         setFormValid(true);
-        navigate('/login');
+        navigate(`/login?language=english&userType=institute`);
       } catch (error) {
         setLoading(false);
         console.error(error);
