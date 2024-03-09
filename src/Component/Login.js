@@ -26,12 +26,17 @@ const Login = () => {
     }
     setLoading(true);
     try {
-      const response = await loginApi({ username, password, userType }); 
-      // localStorage.setItem('token', data.token);
+      const response = await loginApi({ username, password, userType });
+      // console.log('responseresponse',response?.token); 
+      localStorage.setItem('token', response?.token);
+       const token = localStorage.getItem('token');
+    if (token) {
+      navigate('/controlPanel');
+    }
   
       // Navigate to the dashboard
       setLoading(false);
-      navigate('/controlPanel');
+      // navigate('/controlPanel');
       
     } catch (error) {
       setLoading(false);
@@ -72,6 +77,7 @@ const Login = () => {
               <input type={showPassword ? "text" : "password"} placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
               <i className={`fa ${showPassword ? "fa-eye-slash" : "fa-eye"} password-icon`} onClick={() => setShowPassword(!showPassword)}></i>
             </div>
+            {loading && <div className='loader'>Load...</div>}
           <button onClick={handleLogin}>Login</button>
           <div>
           <div className="create-account" onClick={handleCreateAccount}>Create account</div>

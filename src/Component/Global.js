@@ -54,7 +54,7 @@ export const login = (username, password, userType) =>{
   .then(data => {
     // Check if the response contains a message property indicating success
     if (data && data.message) {
-      return data.message; // Return success message
+      return data; // Return success message
     } else {
       throw new Error('Failed to login');
     }

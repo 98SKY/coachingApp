@@ -36,6 +36,15 @@ const Decide = () => {
         'spanish': 'Spanish'
     };
 
+    useEffect(() => {
+      const token = localStorage.getItem('token');
+      if (token) {
+        // Navigate to the dashboard if user is already authenticated
+        navigate('/login');
+      }
+    }, []);
+
+
 
   return (
     <div className="wrapper">
