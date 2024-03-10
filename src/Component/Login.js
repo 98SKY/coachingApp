@@ -81,7 +81,7 @@ const Login = () => {
           <button onClick={handleLogin}>Login</button>
           <div>
           <div className="create-account" onClick={handleCreateAccount}>Create account</div>
-          <div className="forgot-password"><Link to={"ForgotPass"}>Forgot password?</Link></div>
+          <div className="forgot-password"><Link to={"/forgotPass"}>Forgot password?</Link></div>
           </div>
         </div>
       </div>

@@ -56,13 +56,43 @@ export const login = (username, password, userType) =>{
     if (data && data.message) {
       return data; // Return success message
     } else {
-      throw new Error('Failed to login');
+      throw new Error('facing issue to login');
     }
   })
   .catch(error => {
     throw error;
   });
-}
+};
+
+export const recoverPassword = (userData) =>{
+  const apiUrl = `${BASE_URL}/recoverPassword`;
+  return fetch(apiUrl,{
+    method: 'POST',
+    headers:{
+      'Content-Type':'application/json'
+    },
+    body: json.stringify(userData),
+  })
+  .then(response => {
+    if(!response.ok){
+      return response.json().then(errorData =>{
+        throw new Error(errorData.error || 'Failed to Recover Password ')
+      });
+    }
+    return response.json();
+  })
+  .then(data =>{
+    if(data && data.message){
+      return data;
+    }else{
+      throw new Error('facing issue to recover your password')
+    }
+  })
+  .catch(error =>{
+    throw error;
+  })
+
+};
 
 
 
