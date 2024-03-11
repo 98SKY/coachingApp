@@ -68,10 +68,10 @@ const Decide = () => {
                 Institute
               </button>
               <button
-                className={selectedChip === "student" ? "selected" : ""}
-                onClick={() => handleChipClick("student")}
+                className={selectedChip === "user" ? "selected" : ""}
+                onClick={() => handleChipClick("user")}
               >
-                Student
+                User
               </button>
             </div>
             {errorMessage && <div className="error">{errorMessage}</div>}

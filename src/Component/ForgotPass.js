@@ -10,10 +10,21 @@ const ForgotPass = () => {
   const [userId, setUserId] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async () => {
-    if ((accountType === 'institute' && instituteId.trim() === '') || (accountType === 'user' && userId.trim() === '') || email.trim() === '' || phone.trim() === '') {
+    if (
+      (accountType === 'institute' && instituteId.trim() === '') ||
+      (accountType === 'user' && userId.trim() === '') ||
+      email.trim() === '' ||
+      phone.trim() === '' ||
+      newPassword.trim() === '' ||
+      confirmPassword.trim() === ''
+    ) {
       alert('Please fill in all fields.');
       return;
     }
@@ -28,17 +39,27 @@ const ForgotPass = () => {
       return;
     }
 
-    const userData = { accountType, instituteId, userId, email, phone };
+    if (!validatePassword(newPassword)) {
+      alert('Please enter a valid password. It must contain at least one uppercase letter, one digit, and one special character.');
+      return;
+    }
+
+    if (newPassword !== confirmPassword) {
+      alert('Passwords do not match.');
+      return;
+    }
+
+    const userData = { accountType, instituteId, userId, email, phone, newPassword };
     try {
-      console.log('userData',userData);
+      console.log('userData', userData);
       const response = await recoverPassword(userData);
       alert(response.message);
+      navigate(`/login?language=english&userType=${accountType}`)
     } catch (error) {
       console.error('Error:', error);
       alert('Facing issue to communicate with backend');
     }
   };
-
 
   const validateEmail = (email) => {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -50,6 +71,10 @@ const ForgotPass = () => {
     return re.test(phone);
   };
 
+  const validatePassword = (password) => {
+    const re = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
+    return re.test(password);
+  };
 
   return (
     <div className='myWrapper'>
@@ -120,7 +145,36 @@ const ForgotPass = () => {
             onChange={(e) => setPhone(e.target.value)}
             required
           />
-
+          <div className='password-input'>
+            <input
+              type={showNewPassword ? 'text' : 'password'}
+              id='newPassword'
+              name='newPassword'
+              placeholder='New Password'
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
+              required
+            />
+            <i
+              className={`fa ${showNewPassword ? 'fa-eye-slash' : 'fa-eye'} password-icon`}
+              onClick={() => setShowNewPassword(!showNewPassword)}
+            />
+          </div>
+          <div className='password-input'>
+            <input
+              type={showConfirmPassword ? 'text' : 'password'}
+              id='confirmPassword'
+              name='confirmPassword'
+              placeholder='Confirm Password'
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              required
+            />
+            <i
+              className={`fa ${showConfirmPassword ? 'fa-eye-slash' : 'fa-eye'} password-icon`}
+              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+            />
+          </div>
           <button type='button' onClick={handleSubmit}>
             Update
           </button>
@@ -132,4 +186,3 @@ const ForgotPass = () => {
 };
 
 export default ForgotPass;
-

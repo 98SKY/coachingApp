@@ -1,4 +1,4 @@
-
+import { json } from "react-router-dom";
 export const BASE_URL = 'http://localhost:3000';
 
 
@@ -71,7 +71,7 @@ export const recoverPassword = (userData) =>{
     headers:{
       'Content-Type':'application/json'
     },
-    body: json.stringify(userData),
+    body: JSON.stringify(userData),
   })
   .then(response => {
     if(!response.ok){
@@ -93,6 +93,8 @@ export const recoverPassword = (userData) =>{
   })
 
 };
+
+
 
 
 
