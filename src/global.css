@@ -56,3 +56,27 @@
   100% { transform: rotate(360deg); }
 }
     
+
+
+@media screen and (max-width: 768px) {
+  .menu-button {
+    margin-right: -50px;
+  }
+}
+
+.mainFooter {
+background-color: rgb(43, 138, 186);
+color: white;
+padding: 10px ;
+position: fixed;
+bottom: 0;
+left: 0;
+width: 100%;
+height: 30px;
+display: flex;
+justify-content: space-around;
+}
+
+.footer > svg {
+  cursor: pointer;
+}

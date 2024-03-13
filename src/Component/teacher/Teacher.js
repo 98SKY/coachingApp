@@ -1,42 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../global.css';
-import './dashBoard.css';
+import '../../global.css';
+import './teacher.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faUsers, faChalkboardTeacher, faUser } from '@fortawesome/free-solid-svg-icons';
 
-
-const DashBoard = () => {
+const Teacher = () => {
   const navigate = useNavigate();
-  const [backButtonCount, setBackButtonCount] = useState(0);
-
-  useEffect(() => {
-    const handleBeforeUnload = (event) => {
-      if (backButtonCount >= 2) {
-        event.preventDefault();
-        navigate('/');
-      } else {
-        setBackButtonCount((prevCount) => prevCount + 1);
-      }
-    };
-
-    window.addEventListener('beforeunload', handleBeforeUnload);
-
-    return () => {
-      window.removeEventListener('beforeunload', handleBeforeUnload);
-    };
-  }, [navigate, backButtonCount]);
-
   const handleNavigation = (path) => {
     navigate(path);
   };
-
-
-
   return (
     <div className='wrapper'>
       <div className='padding-all'>
-          <div className='header'>DashBoard</div>
+          <div className='header'>Teacher's</div>
           <div className='body'>body</div>
           <div className='mainFooter'>
           <FontAwesomeIcon icon={faHome} onClick={() => handleNavigation('/controlPanel')} />
@@ -46,7 +23,7 @@ const DashBoard = () => {
           </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default DashBoard
+export default Teacher
