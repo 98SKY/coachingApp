@@ -48,7 +48,7 @@ const SignUp = () => {
       } catch (error) {
         setLoading(false);
         console.error(error);
-        alert('Failed to create user. Please try again.');
+        alert(error);
       }
     }
   };

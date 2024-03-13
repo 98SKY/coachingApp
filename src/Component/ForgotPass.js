@@ -25,7 +25,7 @@ const ForgotPass = () => {
       newPassword.trim() === '' ||
       confirmPassword.trim() === ''
     ) {
-      alert('Please fill in all fields.');
+      alert('Please fill all fields.');
       return;
     }
 
@@ -57,7 +57,7 @@ const ForgotPass = () => {
       navigate(`/login?language=english&userType=${accountType}`)
     } catch (error) {
       console.error('Error:', error);
-      alert('Facing issue to communicate with backend');
+      alert(error);
     }
   };
 

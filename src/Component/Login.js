@@ -31,7 +31,7 @@ const Login = () => {
       localStorage.setItem('token', response?.token);
        const token = localStorage.getItem('token');
     if (token) {
-      navigate('/controlPanel');
+      navigate(`/controlPanel?language=${language}&userType=${userType}`);
     }
   
       // Navigate to the dashboard
