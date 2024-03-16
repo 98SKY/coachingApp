@@ -18,6 +18,7 @@ const Login = () => {
   const params = new URLSearchParams(location.search);
   const language = params.get("language");
   const userType = params.get("userType");
+  let myCoachingId = '';
 
   const handleLogin = async () => {
     if (username.trim() === '' || password.trim() === '') {
@@ -27,16 +28,17 @@ const Login = () => {
     setLoading(true);
     try {
       const response = await loginApi({ username, password, userType });
-      // console.log('responseresponse',response?.token); 
+      // console.log('responseresponse',response?.getInstituteId);
+       myCoachingId =  response?.getInstituteId;
       localStorage.setItem('token', response?.token);
        const token = localStorage.getItem('token');
+
     if (token) {
-      navigate(`/controlPanel?language=${language}&userType=${userType}`);
+      navigate(`/controlPanel?language=${language}&userType=${userType}&myCoachingId=${myCoachingId}`);
     }
   
-      // Navigate to the dashboard
       setLoading(false);
-      // navigate('/controlPanel');
+     
       
     } catch (error) {
       setLoading(false);
@@ -61,7 +63,7 @@ const Login = () => {
     if (userType !== "institute") {
       alert("Contact your institute to create an account.");
     } else {
-      navigate("/SignUp");
+      navigate(`/SignUp?userType=${userType}`);
     }
   };
 

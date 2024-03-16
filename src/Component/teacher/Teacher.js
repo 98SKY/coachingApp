@@ -4,11 +4,22 @@ import '../../global.css';
 import './teacher.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faUsers, faChalkboardTeacher, faUser } from '@fortawesome/free-solid-svg-icons';
+import { useLocation } from "react-router-dom";
 
 const Teacher = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  let myCoachingId = params.get("myCoachingId");
+
   const handleNavigation = (path) => {
-    navigate(path);
+    const currentPath = window.location.pathname;
+    const newPath = `${path}?myCoachingId=${myCoachingId}`
+    if (currentPath === path || currentPath === newPath) {
+      return;
+    }
+    
+    navigate(newPath);
   };
   return (
     <div className='wrapper'>

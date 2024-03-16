@@ -4,11 +4,16 @@ import '../global.css';
 import './dashBoard.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faUsers, faChalkboardTeacher, faUser } from '@fortawesome/free-solid-svg-icons';
+import { useLocation } from "react-router-dom";
+
 
 
 const DashBoard = () => {
   const navigate = useNavigate();
   const [backButtonCount, setBackButtonCount] = useState(0);
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  let myCoachingId = params.get("myCoachingId");
 
   useEffect(() => {
     const handleBeforeUnload = (event) => {
@@ -28,7 +33,13 @@ const DashBoard = () => {
   }, [navigate, backButtonCount]);
 
   const handleNavigation = (path) => {
-    navigate(path);
+    const currentPath = window.location.pathname;
+    const newPath = `${path}?myCoachingId=${myCoachingId}`
+    if (currentPath === path || currentPath === newPath) {
+      return;
+    }
+    
+    navigate(newPath);
   };
 
 
