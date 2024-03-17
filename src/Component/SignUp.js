@@ -9,12 +9,16 @@ const SignUp = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const params = new URLSearchParams(location.search);
-  const userType = params.get("userType");
+  const userTypeParam = params.get("userType");
+  const userType = userTypeParam ? userTypeParam.split('?')[0] : null;
+  const myCoachingId = userTypeParam ? userTypeParam.split('=')[1] : null;
+  // console.log('>>>',myCoachingId);
+
   
   const isStudent = userType === 'student';
   const isTeacher = userType === 'teacher';
   const isInstitute = userType==='institute';
-
+//  console.log('userTypeuserTypeuserTypeuserType',myCoachingId);
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
@@ -51,8 +55,8 @@ const SignUp = () => {
     if (isValid) {
       setLoading(true);
       try {
-        console.log('userType',userType);
-        const formDataWithUserType = { ...formData, userType };
+        console.log('userType',userType,myCoachingId);
+        const formDataWithUserType = { ...formData, userType,myCoachingId };
         const response = await registerInstitute(formDataWithUserType);
         setLoading(false);
         alert(`Check your email or phone for the user ID and one-time password.`);

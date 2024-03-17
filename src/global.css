@@ -80,3 +80,20 @@ justify-content: space-around;
 .footer > svg {
   cursor: pointer;
 }
+
+.plushIcon {
+  position: fixed;
+  bottom: 90px;
+  right: 40px;
+  background-color: rgb(43, 138, 186);
+  color: white;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 999; /* Ensure the icon is above other content */
+}
+
