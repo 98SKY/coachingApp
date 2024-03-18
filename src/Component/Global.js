@@ -94,6 +94,34 @@ export const recoverPassword = (userData) =>{
 
 };
 
+export const instituteName = () =>{
+  const apiUrl = `${BASE_URL}/instituteName`;
+  return fetch(apiUrl,{
+    method: 'GET',
+    headers:{
+      'Content-Type':'application/json'
+    },
+  })
+  .then(response => {
+    if(!response.ok){
+      return response.json().then(errorData =>{
+        throw new Error(errorData.error || 'Failed to fetch Institute Name')
+      });
+    }
+    return response.json();
+  })
+  .then(data =>{
+    if(data && data.message){
+      return data;
+    }else{
+      throw new Error('facing issue to fetch Institute name')
+    }
+  })
+  .catch(error =>{
+    throw error;
+  })
+}
+
 
 
 

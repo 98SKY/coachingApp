@@ -3,6 +3,7 @@ import '../global.css';
 import './forgotPass.css';
 import { useNavigate } from 'react-router-dom';
 import { recoverPassword } from './Global';
+import { useLocation } from "react-router-dom";
 
 const ForgotPass = () => {
   const [accountType, setAccountType] = useState('user');
@@ -15,6 +16,10 @@ const ForgotPass = () => {
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const userCategory = params.get("userCategory");
+  const getInstituteIdFromParam = params.get("instituteId")
 
   const handleSubmit = async () => {
     if (
@@ -49,12 +54,12 @@ const ForgotPass = () => {
       return;
     }
 
-    const userData = { accountType, instituteId, userId, email, phone, newPassword };
+    const userData = { accountType, instituteId, userId, email, phone, newPassword, userCategory,getInstituteIdFromParam};
     try {
-      console.log('userData', userData);
+      console.log('userData', userData,);
       const response = await recoverPassword(userData);
       alert(response.message);
-      navigate(`/login?language=english&userType=${accountType}`)
+      navigate(`/login?language=english&userType=${accountType}&userCategory=${userCategory}&instituteId=${getInstituteIdFromParam}`)
     } catch (error) {
       console.error('Error:', error);
       alert(error);

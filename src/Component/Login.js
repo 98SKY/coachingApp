@@ -18,6 +18,8 @@ const Login = () => {
   const params = new URLSearchParams(location.search);
   const language = params.get("language");
   const userType = params.get("userType");
+  const userCategory = params.get("userCategory");
+  const getInstituteIdFromParam = params.get("instituteId")
   let myCoachingId = '';
 
   const handleLogin = async () => {
@@ -34,7 +36,7 @@ const Login = () => {
        const token = localStorage.getItem('token');
 
     if (token) {
-      navigate(`/controlPanel?language=${language}&userType=${userType}&myCoachingId=${myCoachingId}`);
+      navigate(`/controlPanel?language=${language}&userType=${userType}&myCoachingId=${myCoachingId}&userCategory=${userCategory}`);
     }
   
       setLoading(false);
@@ -83,7 +85,7 @@ const Login = () => {
           <button onClick={handleLogin}>Login</button>
           <div>
           <div className="create-account" onClick={handleCreateAccount}>Create account</div>
-          <div className="forgot-password"><Link to={"/forgotPass"}>Forgot password?</Link></div>
+          <div className="forgot-password"><Link to={`/forgotPass?userType=${userType}&userCategory=${userCategory}&instituteId=${getInstituteIdFromParam}`}>Forgot password?</Link></div>
           </div>
         </div>
       </div>
