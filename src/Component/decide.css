@@ -1,34 +1,26 @@
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    overflow-x: hidden;
-    overflow-y: hidden;
-}
-
-
 .myBody {
-    padding: 50px 20px 20px; 
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
-    margin: 0;
+    height: 70vh;
     font-family: Arial, sans-serif;
 }
 
 .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 100px;
+    padding: 30px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    max-width: 300px; 
+    margin: 0 auto; 
 }
 
 select {
     margin-bottom: 20px;
     padding: 5px;
-    width: 200px;
+    width: 100%; 
+    box-sizing: border-box; 
 }
 
 .chips {
@@ -50,67 +42,83 @@ button:hover {
 }
 
 button.selected {
-    background-color: #007bff;
+    background-color: rgb(43, 138, 186);
     color: #fff;
 }
 
 .forwardButton {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
+    margin-top: 20px; 
     padding: 10px 20px;
     border: none;
     cursor: pointer;
+    background-color: rgb(43, 138, 186);
+    color: #fff;
+    border-radius: 5px;
 }
 
 .forwardButton:disabled {
     opacity: 0.5;
     cursor: not-allowed;
 }
-.enabledButton {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 8px 16px;
-    cursor: pointer;
-}
-.disabledButton {
-    background-color: #fff;
-    color: #000;
-    border: 1px solid #ccc;
-    padding: 8px 16px;
-    cursor: not-allowed;
-    opacity: 0.5;
-}
 
-.select-wrapper {
-    position: relative;
-    z-index: 1; 
-} 
-
-.select-wrapper select {
-    position: relative;
-    z-index: 3;
-    width: 100%; 
-}
-
-@media (max-width: 768px) {
-    .select-wrapper {
-        z-index: 9999; 
-        position: relative; 
-    }
-
-    .select-wrapper select {
-        position: relative; 
-        z-index: 9999; 
-    }
-
-    .container {
-        z-index: 1; 
-    }
-}
 .error {
     color: red;
     font-size: 14px;
     margin-top: 10px;
 }
+
+.popup {
+    position: fixed;
+    top: 60px; /* Adjust this value to set the distance from the top */
+    right: 10px;
+    left:10px;
+    background-color: #f1f1f1;
+    border: 1px solid #ccc;
+    padding: 15px;
+    /* z-index: 9999; */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: none;
+  }
+  
+  
+  .popup.show {
+    display: block;
+  }
+  
+  .popup .popuptext {
+    color: rgb(244, 12, 12);
+    /* right: 20px; */
+  }
+  
+  .popup .closeButton {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: right; /* Align the text to the right */
+  }
+  
+  /* Adjust the size of the icon for mobile devices */
+  @media (max-width: 768px) {
+    .popup .closeButton {
+        display: flex;
+        justify-content: flex-end; /* Align the icon to the right */
+        position:sticky;
+        right: 5px;
+        background: none;
+        border: none;
+        cursor: pointer;
+      }
+      
+      .popup .closeButton i {
+        margin-left: auto; /* Push the icon to the right */
+      }
+      
+  }
+  
+  
+  
+  
+
