@@ -77,6 +77,12 @@ display: flex;
 justify-content: space-around;
 }
 
+
+.mainFooter .selected {
+  color: rgb(11, 10, 10); 
+}
+
+
 .footer > svg {
   cursor: pointer;
 }
