@@ -74,7 +74,7 @@ const Login = () => {
     <div className='padding-all'>
       <div className="header">Login</div>
       <div className="body">
-        <img src="/logo192.png" alt="Logo" className='body-img' />
+        <img src="/logo.gif" alt="Logo" className='body-img' />
         <div className="login-box">
           <input type="text" placeholder={userType === "institute" ? "Institute ID" : "Username"} value={username} onChange={(e) => setUsername(e.target.value)} />
           <div className="password-input">
