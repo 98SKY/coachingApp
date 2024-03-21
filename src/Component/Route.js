@@ -6,6 +6,8 @@ import ForgotPass from './ForgotPass';
 import DashBoard from './DashBoard';
 import Decide from './Decide';
 import Student from './student/Student';
+import StudentHome from './student/StudentHome';
+import TeacherHome from './teacher/TeacherHome'
 import Teacher from './teacher/Teacher';
 import Profile from './profile/Profile';
 
@@ -20,7 +22,9 @@ const Navigate = () => {
             <Route path='/forgotPass' element={<ForgotPass/>}/>
             <Route path='/controlPanel' element={<DashBoard/>}/>
             <Route path='/student' element={<Student/>}/>
+            <Route path='/studentHome'element={<StudentHome/>}/>
             <Route path='/teacher' element={<Teacher/>}/>
+            <Route path='teacherHome' element={<TeacherHome/>}/>
             <Route path='/profile' element={<Profile/>}/>
 
         </Routes>

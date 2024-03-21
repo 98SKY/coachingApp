@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import "../global.css";
-import "./dashBoard.css";
+import { useNavigate, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHome,
@@ -9,39 +7,27 @@ import {
   faChalkboardTeacher,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
-import { useLocation } from "react-router-dom";
+import "../global.css";
+import "./dashBoard.css";
 
 const DashBoard = () => {
   const navigate = useNavigate();
-  const [backButtonCount, setBackButtonCount] = useState(0);
   const location = useLocation();
-  const [selectedIcon, setSelectedIcon] = useState("/controlPanel");
   const params = new URLSearchParams(location.search);
-  let myCoachingId = params.get("myCoachingId");
-
-  useEffect(() => {
-    const handleBeforeUnload = (event) => {
-      if (backButtonCount >= 2) {
-        event.preventDefault();
-        navigate("/");
-      } else {
-        setBackButtonCount((prevCount) => prevCount + 1);
-      }
-    };
-
-    window.addEventListener("beforeunload", handleBeforeUnload);
-
-    return () => {
-      window.removeEventListener("beforeunload", handleBeforeUnload);
-    };
-  }, [navigate, backButtonCount]);
+  const myCoachingId = params.get("myCoachingId");
+  const userType = params.get("userType");
+  const userCategory = params.get("userCategory");
+  const [selectedIcon, setSelectedIcon] = useState("/controlPanel");
 
   const handleNavigation = (path) => {
     const currentPath = window.location.pathname;
     const newPath = `${path}?myCoachingId=${myCoachingId}`;
+
     if (currentPath === path || currentPath === newPath) {
+      currentPath  = `${path}?myCoachingId=${myCoachingId}`;
       return;
     }
+
     setSelectedIcon(path);
     navigate(newPath);
   };
@@ -52,12 +38,12 @@ const DashBoard = () => {
         <div className="header">DashBoard</div>
         <div className="body">body</div>
         <div className="mainFooter">
-          <FontAwesomeIcon
-            icon={faHome}
-            className={selectedIcon === "/controlPanel" ? "selected" : ""}
-            onClick={() => handleNavigation("/controlPanel")}
-          />
-          <FontAwesomeIcon
+              <FontAwesomeIcon
+                icon={faHome}
+                className={selectedIcon === "/controlPanel" ? "selected" : ""}
+                onClick={() => handleNavigation("/controlPanel")}
+              />
+              <FontAwesomeIcon
             icon={faUsers}
             className={selectedIcon === "/student" ? "selected" : ""}
             onClick={() => handleNavigation("/student")}

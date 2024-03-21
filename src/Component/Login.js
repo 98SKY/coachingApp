@@ -33,11 +33,26 @@ const Login = () => {
       // console.log('responseresponse',response?.getInstituteId);
        myCoachingId =  response?.getInstituteId;
       localStorage.setItem('token', response?.token);
+      localStorage.setItem('userType',userType);
+      localStorage.setItem('userCategory',userCategory);
+      localStorage.setItem('myCoachingId',myCoachingId);
        const token = localStorage.getItem('token');
 
-    if (token) {
-      navigate(`/controlPanel?language=${language}&userType=${userType}&myCoachingId=${myCoachingId}&userCategory=${userCategory}`);
-    }
+       switch(true) {
+        case (token && userType === 'institute'):
+          navigate(`/controlPanel?language=${language}&userType=${userType}&myCoachingId=${myCoachingId}`);
+          break;
+        case (token && userType === 'user' && userCategory === 'student'):
+          navigate(`/studentHome?language=${language}&myCoachingId=${myCoachingId}&userType=${userType}&userCategory=${userCategory}`);
+          break;
+        case (token && userType === 'user' && userCategory === 'teacher'):
+        navigate(`/teacherHome?language=${language}&myCoachingId=${myCoachingId}&userType=${userType}&userCategory=${userCategory}`);
+          break;
+        default:
+          navigate("/")
+          break;
+      }
+      
   
       setLoading(false);
      
@@ -52,12 +67,30 @@ const Login = () => {
    
   useEffect(() => {
     const token = localStorage.getItem('token');
-    if (token) {
-      // Navigate to the dashboard if user is already authenticated
-      navigate('/controlPanel');
-    }else {
-      setUsername('');
-      setPassword('');
+    const userTypeForLogin = localStorage.getItem('userType');
+       const userCategoryForLogin = localStorage.getItem('userCategory');
+       const myCoachingIdForLogin = localStorage.getItem('myCoachingId');
+    // if (token && userTypeForLogin && myCoachingIdForLogin) {
+    //   // Navigate to the dashboard if user is already authenticated
+    //   navigate(`/controlPanel&userType=${userTypeForLogin}&myCoachingId=${myCoachingIdForLogin}&userCategory=${userCategoryForLogin}`);
+    // }else {
+    //   setUsername('');
+    //   setPassword('');
+    // }
+    switch(true){
+      case(token && userTypeForLogin=='institute' && myCoachingIdForLogin):
+        navigate(`/controlPanel&userType=${userTypeForLogin}&myCoachingId=${myCoachingIdForLogin}`);
+        break;
+      case(token && userTypeForLogin=='user' && myCoachingIdForLogin && userCategoryForLogin=='student'):
+        navigate(`/studentHome&userType=${userTypeForLogin}&myCoachingId=${myCoachingIdForLogin}`);
+        break;
+      case(token && userTypeForLogin=='user' && myCoachingIdForLogin && userCategoryForLogin=='teacher'):
+        navigate(`/teacherHome&userType=${userTypeForLogin}&myCoachingId=${myCoachingIdForLogin}`);
+        break;
+      default:
+        setUsername('');
+        setPassword('');
+        break;
     }
   }, []);
 

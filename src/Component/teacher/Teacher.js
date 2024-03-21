@@ -18,10 +18,12 @@ const Teacher = () => {
   const [selectedIcon, setSelectedIcon] = useState("/teacher");
   const params = new URLSearchParams(location.search);
   let myCoachingId = params.get("myCoachingId");
+  const userType = params.get("userType");
+  const userCategory = params.get("userCategory");
 
   const handleNavigation = (path) => {
     const currentPath = window.location.pathname;
-    const newPath = `${path}?myCoachingId=${myCoachingId}`;
+    const newPath = `${path}?myCoachingId=${myCoachingId}&userType=${userType}&userCategory=${userCategory}`;
     if (currentPath === path || currentPath === newPath) {
       return;
     }
