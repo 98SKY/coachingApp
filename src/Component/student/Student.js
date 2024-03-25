@@ -31,12 +31,143 @@ const Student = () => {
     navigate(newPath);
   };
 
+  // Sample student data
+  const students = [
+    {
+      name: "John Doe",
+      status: "Active",
+      feeStatus: "Paid",
+      subject: "Maths",
+      address: "sdvxcvcvdfdfdfdfvfghhfgbcvcbfgb",
+    },
+    {
+      name: "Jane Doe",
+      status: "Inactive",
+      feeStatus: "Pending",
+      subject: "Science",
+      address: "cdcd",
+    },
+    {
+      name: "John Doe",
+      status: "Active",
+      feeStatus: "Paid",
+      subject: "Maths",
+      address: "sdvxcvcv",
+    },
+    {
+      name: "Jane Doe",
+      status: "Inactive",
+      feeStatus: "Pending",
+      subject: "Science",
+      address: "cdcd",
+    },
+    {
+      name: "John Doe",
+      status: "Active",
+      feeStatus: "Paid",
+      subject: "Maths",
+      address: "sdvxcvcv",
+    },
+    {
+      name: "Jane Doe",
+      status: "Inactive",
+      feeStatus: "Pending",
+      subject: "Science",
+      address: "cdcd",
+    },
+    {
+      name: "John Doe",
+      status: "Active",
+      feeStatus: "Paid",
+      subject: "Maths",
+      address: "sdvxcvcv",
+    },
+    {
+      name: "Jane Doe",
+      status: "Inactive",
+      feeStatus: "Pending",
+      subject: "Science",
+      address: "cdcd",
+    },
+    {
+      name: "John Doe",
+      status: "Active",
+      feeStatus: "Paid",
+      subject: "Maths",
+      address: "sdvxcvcv",
+    },
+    {
+      name: "Jane Doe kumarssdfddfnjsdfnsfsdfbvxcjnvvdfvipuvdfsvsvjs[nv",
+      status: "Inactive",
+      feeStatus: "Pending",
+      subject: "Science",
+      address: "cdcd",
+    },
+    {
+      name: "John Doe",
+      status: "Active",
+      feeStatus: "Paid",
+      subject: "Maths",
+      address: "sdvxcvcv",
+    },
+    {
+      name: "Jane Doe",
+      status: "Inactive",
+      feeStatus: "Pending",
+      subject: "Science",
+      address: "cdcd",
+    },
+    {
+      name: "John Doe",
+      status: "Active",
+      feeStatus: "Paid",
+      subject: "Maths",
+      address: "sdvxcvcv",
+    },
+    {
+      name: "Jane Doe",
+      status: "Inactive",
+      feeStatus: "Pending",
+      subject: "Science",
+      address: "cdcd",
+    },
+    {
+      name: "John Doe",
+      status: "Active",
+      feeStatus: "Paid",
+      subject: "Maths",
+      address: "sdvxcvcv",
+    },
+    {
+      name: "Jane Doe",
+      status: "Inactive",
+      feeStatus: "Pending",
+      subject: "Science",
+      address: "cdcd",
+    },
+    
+    
+  ];
+
   return (
     <div className="wrapper">
       <div className="padding-all">
         <div className="header">Student's</div>
         <div className="body">
-          body
+          {students.map((student, index) => (
+            <div
+              key={index}
+              className={"student-card"}
+              onClick={() => handleNavigation(`/student/${index}`)}
+            >
+              <div className="name">{student.name.length > 20 ? student.name.slice(0, 20) + '...' : student.name}</div>
+              <div className="status">{student.status}</div>
+              <div className="address">{student.address.length > 20 ? student.address.slice(0,20) + '...': student.address}</div>
+              <div className="fee-status">{student.feeStatus}</div>
+              <div className="subject">{student.subject}</div>
+            </div>
+          ))}
+
           <div
             className="plushIcon"
             onClick={() => handleNavigation(`/SignUp?userType=student`)}

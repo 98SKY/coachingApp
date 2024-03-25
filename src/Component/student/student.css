@@ -1,0 +1,74 @@
+.student-card {
+    position: relative;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    overflow: auto;
+  }
+  
+  .student-card:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+  
+  .name {
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+
+  }
+  
+  .address {
+    text-align: center;
+    margin-top: 30px;
+  }
+  
+  .status {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+  
+  .fee-status {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+  }
+  
+  .subject {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+  }
+
+.name,
+.address,
+.status,
+.fee-status,
+.subject {
+  white-space: nowrap; /* Prevent text wrapping */
+  overflow-x: auto; /* Enable horizontal scrolling */
+  -webkit-overflow-scrolling: touch; /* Enable smooth scrolling on iOS */
+}
+/* .scrollable {
+    overflow-x: scroll;
+  } */
+
+  .scroll {
+    animation: scrollText linear infinite;
+  }
+  
+  @keyframes scrollText {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+  
