@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../global.css";
 import "./student.css";
@@ -9,6 +9,7 @@ import {
   faChalkboardTeacher,
   faUser,
   faPlus,
+  faSearch
 } from "@fortawesome/free-solid-svg-icons";
 import { useLocation } from "react-router-dom";
 
@@ -20,6 +21,9 @@ const Student = () => {
   let myCoachingId = params.get("myCoachingId");
   const userType = params.get("userType");
   const userCategory = params.get("userCategory");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [isSearchVisible, setIsSearchVisible] = useState(false);
+  const searchRef = useRef(null);
 
   const handleNavigation = (path) => {
     const currentPath = window.location.pathname;
@@ -31,7 +35,26 @@ const Student = () => {
     navigate(newPath);
   };
 
-  // Sample student data
+  const handleSearch = () => {
+    setIsSearchVisible(!isSearchVisible);
+    console.log("Searching for:", searchQuery);
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (!e.target.classList.contains("search-icon")) {
+        setIsSearchVisible(false);
+      }
+    };
+  
+    document.addEventListener("click", handleClickOutside);
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
+  
+  
+
   const students = [
     {
       name: "John Doe",
@@ -149,10 +172,27 @@ const Student = () => {
     
   ];
 
+
   return (
     <div className="wrapper">
       <div className="padding-all">
-        <div className="header">Student's</div>
+        <div className="header">
+          Student's
+          <div className="search-icon" onClick={handleSearch}>
+            <FontAwesomeIcon icon={faSearch} />
+          </div>
+          {isSearchVisible && (
+            <div className="search-input">
+              <input
+                type="text"
+                placeholder="Search by name or ID"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                ref={searchRef}
+              />
+            </div>
+          )}
+        </div>
         <div className="body">
           {students.map((student, index) => (
             <div
