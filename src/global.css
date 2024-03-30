@@ -107,7 +107,7 @@ justify-content: space-around;
 }
 
 /*search icon */
-.search-icon {
+.searchIcon {
   position: absolute;
   top: 50%;
   right: 30px;
@@ -118,7 +118,7 @@ justify-content: space-around;
 .search-input {
   display: inline-block;
   position: absolute;
-  right: 10px;
+  right: 25px;
   top: 50%;
   transform: translateY(-50%);
   background-color: white;
@@ -132,4 +132,14 @@ justify-content: space-around;
   outline: none;
   width: 150px;
 }
+
+.close-icon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: rgb(43, 138, 186);
+}
+
 

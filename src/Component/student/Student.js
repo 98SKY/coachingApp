@@ -9,7 +9,8 @@ import {
   faChalkboardTeacher,
   faUser,
   faPlus,
-  faSearch
+  faSearch,
+  faTimes
 } from "@fortawesome/free-solid-svg-icons";
 import { useLocation } from "react-router-dom";
 
@@ -38,20 +39,13 @@ const Student = () => {
   const handleSearch = () => {
     setIsSearchVisible(!isSearchVisible);
     console.log("Searching for:", searchQuery);
+    const filteredStudents = students.filter(student =>
+      student.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    // Use filteredStudents for displaying or navigating based on search results
   };
-
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (!e.target.classList.contains("search-icon")) {
-        setIsSearchVisible(false);
-      }
-    };
   
-    document.addEventListener("click", handleClickOutside);
-    return () => {
-      document.removeEventListener("click", handleClickOutside);
-    };
-  }, []);
+  
   
   
 
@@ -178,20 +172,23 @@ const Student = () => {
       <div className="padding-all">
         <div className="header">
           Student's
-          <div className="search-icon" onClick={handleSearch}>
+          <div className="searchIcon" onClick={handleSearch}>
             <FontAwesomeIcon icon={faSearch} />
           </div>
           {isSearchVisible && (
-            <div className="search-input">
-              <input
-                type="text"
-                placeholder="Search by name or ID"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                ref={searchRef}
-              />
-            </div>
-          )}
+  <div className="search-input">
+    <input
+      type="text"
+      placeholder="Search by name or ID"
+      value={searchQuery}
+      onChange={(e) => setSearchQuery(e.target.value)}
+      ref={searchRef}
+    />
+    <div className="close-icon" onClick={() => setIsSearchVisible(false)}>
+      <FontAwesomeIcon icon={faTimes} />
+    </div>
+  </div>
+)}
         </div>
         <div className="body">
           {students.map((student, index) => (
