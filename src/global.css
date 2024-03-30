@@ -142,4 +142,23 @@ justify-content: space-around;
   color: rgb(43, 138, 186);
 }
 
+/* list view */
+
+.listView-card {
+  position: relative;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  overflow: auto;
+}
+
+.listView-card:hover {
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
 
