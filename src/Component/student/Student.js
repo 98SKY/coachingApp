@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../global.css";
+import { userList as userListApi } from ".././Global";
 import "./student.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -10,12 +11,13 @@ import {
   faUser,
   faPlus,
   faSearch,
-  faTimes
+  faTimes,
 } from "@fortawesome/free-solid-svg-icons";
 import { useLocation } from "react-router-dom";
 
 const Student = () => {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const location = useLocation();
   const [selectedIcon, setSelectedIcon] = useState("/student");
   const params = new URLSearchParams(location.search);
@@ -25,6 +27,7 @@ const Student = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [isSearchVisible, setIsSearchVisible] = useState(false);
   const searchRef = useRef(null);
+  const [students, setStudents] = useState([]);
 
   const handleNavigation = (path) => {
     const currentPath = window.location.pathname;
@@ -39,133 +42,34 @@ const Student = () => {
   const handleSearch = () => {
     setIsSearchVisible(!isSearchVisible);
     console.log("Searching for:", searchQuery);
-    const filteredStudents = students.filter(student =>
+    const filteredStudents = students.filter((student) =>
       student.name.toLowerCase().includes(searchQuery.toLowerCase())
     );
     // Use filteredStudents for displaying or navigating based on search results
   };
-  
-  
-  
-  
 
-  const students = [
-    {
-      name: "John Doe",
-      status: "Active",
-      feeStatus: "Paid",
-      subject: "Maths",
-      address: "sdvxcvcvdfdfdfdfvfghhfgbcvcbfgb",
-    },
-    {
-      name: "Jane Doe",
-      status: "Inactive",
-      feeStatus: "Pending",
-      subject: "Science",
-      address: "cdcd",
-    },
-    {
-      name: "John Doe",
-      status: "Active",
-      feeStatus: "Paid",
-      subject: "Maths",
-      address: "sdvxcvcv",
-    },
-    {
-      name: "Jane Doe",
-      status: "Inactive",
-      feeStatus: "Pending",
-      subject: "Science",
-      address: "cdcd",
-    },
-    {
-      name: "John Doe",
-      status: "Active",
-      feeStatus: "Paid",
-      subject: "Maths",
-      address: "sdvxcvcv",
-    },
-    {
-      name: "Jane Doe",
-      status: "Inactive",
-      feeStatus: "Pending",
-      subject: "Science",
-      address: "cdcd",
-    },
-    {
-      name: "John Doe",
-      status: "Active",
-      feeStatus: "Paid",
-      subject: "Maths",
-      address: "sdvxcvcv",
-    },
-    {
-      name: "Jane Doe",
-      status: "Inactive",
-      feeStatus: "Pending",
-      subject: "Science",
-      address: "cdcd",
-    },
-    {
-      name: "John Doe",
-      status: "Active",
-      feeStatus: "Paid",
-      subject: "Maths",
-      address: "sdvxcvcv",
-    },
-    {
-      name: "Jane Doe kumarssdfddfnjsdfnsfsdfbvxcjnvvdfvipuvdfsvsvjs[nv",
-      status: "Inactive",
-      feeStatus: "Pending",
-      subject: "Science",
-      address: "cdcd",
-    },
-    {
-      name: "John Doe",
-      status: "Active",
-      feeStatus: "Paid",
-      subject: "Maths",
-      address: "sdvxcvcv",
-    },
-    {
-      name: "Jane Doe",
-      status: "Inactive",
-      feeStatus: "Pending",
-      subject: "Science",
-      address: "cdcd",
-    },
-    {
-      name: "John Doe",
-      status: "Active",
-      feeStatus: "Paid",
-      subject: "Maths",
-      address: "sdvxcvcv",
-    },
-    {
-      name: "Jane Doe",
-      status: "Inactive",
-      feeStatus: "Pending",
-      subject: "Science",
-      address: "cdcd",
-    },
-    {
-      name: "John Doe",
-      status: "Active",
-      feeStatus: "Paid",
-      subject: "Maths",
-      address: "sdvxcvcv",
-    },
-    {
-      name: "Jane Doe",
-      status: "Inactive",
-      feeStatus: "Pending",
-      subject: "Science",
-      address: "cdcd",
-    },
-    
-    
-  ];
+  useEffect(() => {
+    const userData = {
+      coachingId: myCoachingId,
+      userCategory: userCategory ? userCategory : "student",
+      userType: userType ? userType : "institute",
+    };
 
+    const fetchData = async () => {
+      try {
+        const response = await userListApi(userData);
+        console.log("response", response);
+        setStudents(response.users);
+      } catch (error) {
+        console.error("Failed to fetch user list:", error.message);
+        alert(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <div className="wrapper">
@@ -176,19 +80,22 @@ const Student = () => {
             <FontAwesomeIcon icon={faSearch} />
           </div>
           {isSearchVisible && (
-  <div className="search-input">
-    <input
-      type="text"
-      placeholder="Search by name or ID"
-      value={searchQuery}
-      onChange={(e) => setSearchQuery(e.target.value)}
-      ref={searchRef}
-    />
-    <div className="close-icon" onClick={() => setIsSearchVisible(false)}>
-      <FontAwesomeIcon icon={faTimes} />
-    </div>
-  </div>
-)}
+            <div className="search-input">
+              <input
+                type="text"
+                placeholder="Search by name or ID"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                ref={searchRef}
+              />
+              <div
+                className="close-icon"
+                onClick={() => setIsSearchVisible(false)}
+              >
+                <FontAwesomeIcon icon={faTimes} />
+              </div>
+            </div>
+          )}
         </div>
         <div className="body">
           {students.map((student, index) => (
@@ -198,10 +105,10 @@ const Student = () => {
               onClick={() => handleNavigation(`/student/${index}`)}
             >
               <div className="name">{student.name.length > 20 ? student.name.slice(0, 20) + '...' : student.name}</div>
-              <div className="status">{student.status}</div>
+              <div className="status">{student.user_status}</div>
               <div className="address">{student.address.length > 20 ? student.address.slice(0,20) + '...': student.address}</div>
-              <div className="fee-status">{student.feeStatus}</div>
-              <div className="subject">{student.subject}</div>
+              <div className="fee-status">{student.medium}</div>
+              <div className="subject">{student.course}</div>
             </div>
           ))}
 
