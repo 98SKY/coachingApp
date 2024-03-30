@@ -1,5 +1,6 @@
 import { json } from "react-router-dom";
 export const BASE_URL = 'http://localhost:3000';
+export const BASE_URL1 = 'http://192.168.0.101:3001';
 
 
 export const registerInstitute = (userData) => {

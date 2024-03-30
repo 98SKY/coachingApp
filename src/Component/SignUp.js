@@ -28,6 +28,7 @@ const SignUp = () => {
     medium: '',
     course: '',
     experienceInCourse: '',
+    address: '',
   });
   const [formValid, setFormValid] = useState(false);
 
@@ -44,11 +45,11 @@ const SignUp = () => {
     e.preventDefault();
   
     let isValid = true;
-    if (isStudent && (!formData.name || !formData.email || !formData.phoneNumber || !formData.std || !formData.medium || !formData.course)) {
+    if (isStudent && (!formData.name || !formData.email || !formData.phoneNumber || !formData.std || !formData.medium || !formData.course || !formData.address)) {
       isValid = false;
-    } else if (isTeacher && (!formData.name || !formData.email || !formData.phoneNumber || !formData.course || !formData.experienceInCourse)) {
+    } else if (isTeacher && (!formData.name || !formData.email || !formData.phoneNumber || !formData.course || !formData.experienceInCourse || !formData.address )) {
       isValid = false;
-    } else if (isInstitute && (!formData.instituteName || !formData.phoneNumber || !formData.emailId)) {
+    } else if (isInstitute && (!formData.instituteName || !formData.phoneNumber || !formData.emailId || !formData.address)) {
       isValid = false;
     }
   
@@ -61,7 +62,11 @@ const SignUp = () => {
         setLoading(false);
         alert(`Check your email or phone for the user ID and one-time password.`);
         setFormValid(true);
+        if(!userType== 'institute' ){
         navigate(`/login?language=english&userType=${userType}`);
+        }else{
+          window.history.back();
+        }
       } catch (error) {
         setLoading(false);
         console.error(error);
@@ -119,6 +124,15 @@ const SignUp = () => {
                 />
                 <input
                   type='text'
+                  name='address'
+                  placeholder='Enter Address'
+                  value={formData.address}
+                  onChange={handleChange}
+                  required
+                  className='myInput-field'
+                />
+                <input
+                  type='text'
                   name='medium'
                   placeholder='Enter medium'
                   value={formData.medium}
@@ -153,6 +167,15 @@ const SignUp = () => {
                   name='email'
                   placeholder='Enter email ID'
                   value={formData.email}
+                  onChange={handleChange}
+                  required
+                  className='myInput-field'
+                />
+                <input
+                  type='text'
+                  name='address'
+                  placeholder='Enter Address'
+                  value={formData.address}
                   onChange={handleChange}
                   required
                   className='myInput-field'
@@ -202,6 +225,15 @@ const SignUp = () => {
                   name='phoneNumber'
                   placeholder='Enter phone number'
                   value={formData.phoneNumber}
+                  onChange={handleChange}
+                  required
+                  className='myInput-field'
+                />
+                <input
+                  type='text'
+                  name='address'
+                  placeholder='Enter Address'
+                  value={formData.address}
                   onChange={handleChange}
                   required
                   className='myInput-field'

@@ -39,37 +39,71 @@ const Student = () => {
     navigate(newPath);
   };
 
+
   const handleSearch = () => {
     setIsSearchVisible(!isSearchVisible);
-    console.log("Searching for:", searchQuery);
+  if (isSearchVisible && searchQuery === "") {
+    fetchData(); // Fetch all students again
+  } else {
+    applyFilter(); // Apply filter when opening the search input or search query is not empty
+  }
+  };
+
+  const handleClose = () => {
+    setSearchQuery(""); // Clear the search query
+    setIsSearchVisible(false); // Hide the search input field
+  };
+  
+  
+  const applyFilter = () => {
     const filteredStudents = students.filter((student) =>
       student.name.toLowerCase().includes(searchQuery.toLowerCase())
     );
-    // Use filteredStudents for displaying or navigating based on search results
+    setStudents(filteredStudents);
   };
-
+  
+  
+  
+  
   useEffect(() => {
+    if (searchQuery === "") {
+      
+      fetchData();
+    } else {
+
+      const filteredStudents = students.filter((student) =>
+        student.name.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+      setStudents(filteredStudents);
+    }
+  }, [searchQuery]);
+  
+  
+  
+
+  const fetchData = async () => {
     const userData = {
       coachingId: myCoachingId,
       userCategory: userCategory ? userCategory : "student",
       userType: userType ? userType : "institute",
     };
+    setLoading(true);
+    try {
+      const response = await userListApi(userData);
+      // console.log("response", response);
+      setStudents(response.users);
+      setLoading(false);
+    } catch (error) {
+      console.error("Failed to fetch user list:", error.message);
+      alert(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+  
+  
 
-    const fetchData = async () => {
-      try {
-        const response = await userListApi(userData);
-        console.log("response", response);
-        setStudents(response.users);
-      } catch (error) {
-        console.error("Failed to fetch user list:", error.message);
-        alert(error.message);
-      } finally {
-        setLoading(false);
-      }
-    };
 
-    fetchData();
-  }, []);
 
   return (
     <div className="wrapper">
@@ -90,7 +124,7 @@ const Student = () => {
               />
               <div
                 className="close-icon"
-                onClick={() => setIsSearchVisible(false)}
+                onClick={handleClose}
               >
                 <FontAwesomeIcon icon={faTimes} />
               </div>
@@ -104,9 +138,21 @@ const Student = () => {
               className={"student-card"}
               onClick={() => handleNavigation(`/student/${index}`)}
             >
-              <div className="name">{student.name.length > 20 ? student.name.slice(0, 20) + '...' : student.name}</div>
+              <div className="name">
+                {student.name
+                  ? student.name.length > 20
+                    ? student.name.slice(0, 20) + "..."
+                    : student.name
+                  : ""}
+              </div>
               <div className="status">{student.user_status}</div>
-              <div className="address">{student.address.length > 20 ? student.address.slice(0,20) + '...': student.address}</div>
+              <div className="address">
+                {student.address
+                  ? student.address.length > 20
+                    ? student.address.slice(0, 20) + "..."
+                    : student.address
+                  : ""}
+              </div>
               <div className="fee-status">{student.medium}</div>
               <div className="subject">{student.course}</div>
             </div>
