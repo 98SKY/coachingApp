@@ -157,22 +157,22 @@ const Teacher = () => {
           <FontAwesomeIcon
             icon={faHome}
             className={selectedIcon === "/controlPanel" ? "selected" : ""}
-            onClick={() => handleNavigation("/controlPanel")}
+            onClick={() => handleNavigation("/controlPanel?")}
           />
           <FontAwesomeIcon
             icon={faUsers}
             className={selectedIcon === "/student" ? "selected" : ""}
-            onClick={() => handleNavigation("/student")}
+            onClick={() => handleNavigation("/student?")}
           />
           <FontAwesomeIcon
             icon={faChalkboardTeacher}
             className={selectedIcon === "/teacher" ? "selected" : ""}
-            onClick={() => handleNavigation("/teacher")}
+            onClick={() => handleNavigation("/teacher?")}
           />
           <FontAwesomeIcon
             icon={faUser}
             className={selectedIcon === "/profile" ? "selected" : ""}
-            onClick={() => handleNavigation("/profile")}
+            onClick={() => handleNavigation("/profile?")}
           />
         </div>
       </div>

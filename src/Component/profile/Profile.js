@@ -22,7 +22,7 @@ const Profile = () => {
 
   const handleNavigation = (path) => {
     const currentPath = window.location.pathname;
-    const newPath = `${path}?myCoachingId=${myCoachingId}&userType=${userType}&userCategory=${userCategory}`;
+    const newPath = `${path}?myCoachingId=${myCoachingId}`;
     if (currentPath === path || currentPath === newPath) {
       return;
     }
