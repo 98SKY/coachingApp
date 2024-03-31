@@ -31,7 +31,7 @@ const Teacher = () => {
 
   const handleNavigation = (path) => {
     const currentPath = window.location.pathname;
-    const newPath = `${path}?myCoachingId=${myCoachingId}`;
+    const newPath = `${path}myCoachingId=${myCoachingId}`;
     if (currentPath === path || currentPath === newPath) {
       return;
     }
@@ -125,7 +125,7 @@ const Teacher = () => {
             <div
               key={index}
               className={"listView-card"}
-              onClick={() => handleNavigation(`/teacher/${index}`)}
+              onClick={() => handleNavigation(`/teacherDetails?${index}&uuid=${teacher.uuid}&name=${teacher.name}&`)}
             >
               <div className="name">
                 {teacher.name
