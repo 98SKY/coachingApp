@@ -4,6 +4,8 @@ import './signUp.css';
 import { useNavigate } from 'react-router-dom';
 import { registerInstitute } from './Global';
 import { useLocation } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {faChevronLeft,} from "@fortawesome/free-solid-svg-icons";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -81,7 +83,9 @@ const SignUp = () => {
   return (
     <div className='myWrapper'>
       <div className='myPadding-all'>
-        <div className='header'>{isStudent ? 'Student Registration' : isTeacher ? 'Teacher Registration' : 'Register Myself'}</div>
+        <div className='header'>
+        <FontAwesomeIcon icon={faChevronLeft} onClick={() => navigate(-1)} />
+          {isStudent ? 'Student Registration' : isTeacher ? 'Teacher Registration' : 'Register Myself'}</div>
         <form onSubmit={handleSubmit}>
           <div className='body'>
             {isStudent && (

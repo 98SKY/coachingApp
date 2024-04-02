@@ -12,6 +12,7 @@ import {
   faPlus,
   faSearch,
   faTimes,
+  faChevronLeft
 } from "@fortawesome/free-solid-svg-icons";
 import { useLocation } from "react-router-dom";
 
@@ -98,7 +99,9 @@ const Teacher = () => {
   return (
     <div className="wrapper">
       <div className="padding-all">
-        <div className="header">Teacher's
+        <div className="header">
+        <FontAwesomeIcon icon={faChevronLeft} onClick={() => navigate(-1)} />
+          Teacher's
         <div className="searchIcon" onClick={handleSearch}>
             <FontAwesomeIcon icon={faSearch} />
           </div>
