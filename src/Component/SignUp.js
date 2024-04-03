@@ -51,7 +51,7 @@ const SignUp = () => {
       isValid = false;
     } else if (isTeacher && (!formData.name || !formData.email || !formData.phoneNumber || !formData.course || !formData.experienceInCourse || !formData.address )) {
       isValid = false;
-    } else if (isInstitute && (!formData.instituteName || !formData.phoneNumber || !formData.emailId || !formData.address)) {
+    } else if (isInstitute && (!formData.name || !formData.phoneNumber || !formData.email || !formData.address)) {
       isValid = false;
     }
   
@@ -217,9 +217,9 @@ const SignUp = () => {
               <>
                 <input
                   type='text'
-                  name='instituteName'
+                  name='name'
                   placeholder='Enter institute name'
-                  value={formData.instituteName}
+                  value={formData.name}
                   onChange={handleChange}
                   required
                   className='myInput-field'
@@ -244,9 +244,9 @@ const SignUp = () => {
                 />
                 <input
                   type='email'
-                  name='emailId'
+                  name='email'
                   placeholder='Enter email ID'
-                  value={formData.emailId}
+                  value={formData.email}
                   onChange={handleChange}
                   required
                   className='myInput-field'

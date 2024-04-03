@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import "../../global.css";
-import "./profile.css";
+import { useNavigate, useLocation } from "react-router-dom";
+import { profileData as myDataApi } from "../Global";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHome,
@@ -12,18 +11,21 @@ import {
   faEllipsisV,
   faTimes,
 } from "@fortawesome/free-solid-svg-icons";
-import { useLocation } from "react-router-dom";
+import "../../global.css";
+import "./profile.css";
 
 const Profile = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const [loading, setLoading] = useState(false);
   const [selectedIcon, setSelectedIcon] = useState("/profile");
-  const [showMenu, setShowMenu] = useState(false); // State to manage menu visibility
+  const [showMenu, setShowMenu] = useState(false); 
   const params = new URLSearchParams(location.search);
   let myCoachingId = params.get("myCoachingId");
   const userType = params.get("userType");
-  const userCategory = params.get("userCategory");
+  const username = localStorage.getItem('name');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [profileDetails, setProfileDetails] = useState({});
 
   const handleNavigation = (path) => {
     const currentPath = window.location.pathname;
@@ -38,7 +40,47 @@ const Profile = () => {
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
     setShowMenu(!showMenu);
-    console.log("Menu toggled");
+  };
+
+  const logOut = () =>{
+    localStorage.clear();
+    navigate(`/login?language=english&userType=institute`)
+  }
+
+  useEffect(() =>{
+    loadMyData();
+  },[]);
+
+  const loadMyData = async () =>{
+    if (loading) {
+      return; // Return if already loading
+    }
+  
+    const userData = {
+      instituteID: myCoachingId,
+      userType: userType ? userType : "institute",
+      userID: username
+    };
+    setLoading(true);
+    try {
+      const response = await myDataApi(userData);
+      if (response.userData && response.userData.length > 0) {
+        setProfileDetails(response.userData[0]);
+      }
+    } catch (error) {
+      console.error("Failed to fetch profile data:", error.message);
+      alert(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleEmailClick = (email) => {
+    window.location.href = `mailto:${email}`;
+  };
+
+  const handlePhoneClick = (phone) => {
+    window.location.href = `tel:${phone}`;
   };
 
   return (
@@ -71,6 +113,11 @@ const Profile = () => {
                 >
                   About
                 </div>
+                <div
+                  className="menu-item"
+                  onClick={logOut}>
+                  Logout
+                </div>
               </div>
             )}
           </div>
@@ -78,20 +125,38 @@ const Profile = () => {
         <div className="body">
           <div className="profile-card">
             <div className="avatar">
-              {/* Add profile image here */}
               <FontAwesomeIcon icon={faUser} />
             </div>
             <div className="details">
-              <div className="detail-item">
-                <span className="label">Username:</span> {/* Add username */}
-              </div>
-              <div className="detail-item">
-                <span className="label">Name:</span> {/* Add name */}
-              </div>
-              <div className="detail-item">
-                <span className="label">Phone:</span> {/* Add phone number */}
-              </div>
-              {/* Add more details as needed */}
+              {loading ? (
+                <div>Loading...</div>
+              ) : (
+                <>
+                  <div className="detail-item">
+                    <span className="label">Username:</span> {profileDetails.username}
+                  </div>
+                  <div className="detail-item">
+                    <span className="label">Email:</span>{" "}
+                    <span className="clickable" onClick={() => handleEmailClick(profileDetails.email)}>{profileDetails.email}</span>
+                  </div>
+                  <div className="detail-item">
+                    <span className="label">Phone:</span>{" "}
+                    <span className="clickable" onClick={() => handlePhoneClick(profileDetails.phone_no)}>{profileDetails.phone_no}</span>
+                  </div>
+                  <div className="detail-item">
+                    <span className="label">Institute Name:</span>{" "}
+                    {profileDetails.institute_name}
+                  </div>
+                  <div className="detail-item">
+                    <span className="label">Institute Status:</span>{" "}
+                    {profileDetails.institute_status}
+                  </div>
+                  <div className="detail-item">
+                    <span className="label">Address:</span>{" "}
+                    {profileDetails.address || "Not provided"}
+                  </div>
+                </>
+              )}
             </div>
           </div>
         </div>

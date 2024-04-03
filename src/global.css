@@ -150,7 +150,7 @@ justify-content: space-around;
   border: 1px solid #ccc;
   border-radius: 10px;
   padding: 10px;
-  margin-bottom: 10px;
+  /* margin-bottom:0px; */
   cursor: pointer;
   width: 100%;
   margin-top: 20px;
@@ -197,11 +197,12 @@ justify-content: space-around;
 }
 
 .details {
-  text-align: left;
+  text-align:left;
 }
 
 .detail-item {
   margin-bottom: 10px;
+  margin-top: 20px;
 }
 
 .label {
@@ -222,10 +223,10 @@ justify-content: space-around;
 .menu-items {
   display: none;
   position: absolute;
-  top: 150%;
-  right: 3px;
-  background-color: rgb(247, 247, 247);
-  border: 1px solid rgb(43, 138, 186);
+  top: 155%;
+  right: 0px;
+  background-color:transparent;
+  border: 1px solid #f0f0f0;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   width: 150px;
@@ -237,9 +238,11 @@ justify-content: space-around;
   color: black;
 }
 
-.menu-item:hover {
-  background-color: #f0f0f0;
+.menu-item:hover,
+.menu-item:active {
+  background-color: #8bc6f7;
 }
+
 .menu-items.active {
   display:list-item;
   font-size: 15px;

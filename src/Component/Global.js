@@ -155,7 +155,39 @@ export const userList = (userData) => {
 };
 
 
+export const profileData = (userData) => {
+  const apiUrl = `${BASE_URL}/user-profile`;
 
+  return fetch(apiUrl, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(userData),
+  })
+  .then(response => {
+    if (!response.ok) {
+      return response.json().then(errorData => {
+        throw new Error(errorData.error || 'Failed to load user from UI');
+      });
+    }
+    return response.json();
+  })
+  .then(data => {
+    // Check if the response contains a message property indicating success
+    if (data && data.message) {
+      return data; // Return success message
+    } else {
+      throw new Error('Failed to fetch Data from UI');
+    }
+  })
+  .catch(error => {
+    throw error;
+  });
+};
+
+
+  
 
 
 

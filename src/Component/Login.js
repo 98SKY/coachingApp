@@ -34,6 +34,7 @@ const Login = () => {
        myCoachingId =  response?.getInstituteId;
       localStorage.setItem('token', response?.token);
       localStorage.setItem('userType',userType);
+      localStorage.setItem('name',username);
       localStorage.setItem('userCategory',userCategory);
       localStorage.setItem('myCoachingId',myCoachingId);
        const token = localStorage.getItem('token');
