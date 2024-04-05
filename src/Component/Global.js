@@ -186,6 +186,37 @@ export const profileData = (userData) => {
   });
 };
 
+export const userDetails = (userData) => {
+  const apiUrl = `${BASE_URL}/detailsOfUser`;
+
+  return fetch(apiUrl, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(userData),
+  })
+  .then(response => {
+    if (!response.ok) {
+      return response.json().then(errorData => {
+        throw new Error(errorData.error || 'Failed to load user');
+      });
+    }
+    return response.json();
+  })
+  .then(data => {
+    // Check if the response contains a message property indicating success
+    if (data && data.message) {
+      return data; // Return success message
+    } else {
+      throw new Error('Failed to create user');
+    }
+  })
+  .catch(error => {
+    throw error;
+  });
+};
+
 
   
 

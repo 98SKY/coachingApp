@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../global.css";
-import "./teacherDetailsView.css"
+import "./studentDetailsView.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faChevronLeft,
@@ -9,10 +9,10 @@ import {
   faChevronUp
 } from "@fortawesome/free-solid-svg-icons";
 import { useLocation } from "react-router-dom";
-import { userDetails as myDetailsApi } from "../Global";
+import {userDetails as myDetailsApi} from ".././Global";
 
-const TeacherDetailsView = () => {
-  const navigate = useNavigate();
+const StudentDetailsView = () => {
+    const navigate = useNavigate();
   const location = useLocation();
   const [loading, setLoading] = useState(false);
   const params = new URLSearchParams(location.search);
@@ -22,13 +22,14 @@ const TeacherDetailsView = () => {
     const uuid = params.get("uuid");
     const userCategory = params.get("userCategory");
   const [expandedCard, setExpandedCard] = useState(null);
-  const [teacherData, setTeacherDetails] = useState([]);
+  const [studentData, setStudentDetails] = useState([]);
+
 
   const cardData = [
-    { title: "Personal Info", data: { name: teacherData.teacher_name, email: teacherData.email,address: teacherData.address, "Enter Date": teacherData.enterdate, gender:teacherData.gender, Mobile:teacherData.phone_no} },
-    { title: "Institute Info", data: { institute: teacherData.institute_name, address: teacherData.institute_address, userName:teacherData.username, Status:teacherData.user_status, userType:teacherData.role_type} },
-    // { title: "Fee Info", data: { fees: 1000, paymentStatus: "Paid" } },
-    // { title: "Study Info", data: { subjects: ["Math", "Science"], grades: ["A", "B"] } }
+    { title: "Personal Info", data: { name: studentData.student_name, age: 30, email: studentData.email,address: studentData.address, EnterDate: studentData.enterdate, gender:studentData.gender, Mobile:studentData.phone_no} },
+    { title: "Institute Info", data: { institute: studentData.institute_name, address: studentData.institute_address, userName:studentData.username, Status:studentData.user_status, userType:studentData.role_type} },
+    { title: "Fee Info", data: { fees: studentData.amount, paymentStatus: studentData.description } },
+    { title: "Study Info", data: { subjects:studentData.course, } }
   ];
 
   const handleExpandCard = (index) => {
@@ -40,13 +41,12 @@ const TeacherDetailsView = () => {
   };
 
   const handleSave = (index) => {
-    // Implement save functionality for the card at the specified index
+    
     console.log("Save data for card:", index);
   };
 
   const isFormValid = (formData) => {
-    // Implement your form validation logic here
-    // For example, check if all required fields are filled
+ 
     return Object.values(formData).every(value => value !== '');
   };
 
@@ -57,15 +57,15 @@ const TeacherDetailsView = () => {
   const fetchData = async () =>{
     const userData = {
         instituteID : myCoachingId,
-        userCategory: userCategory ? userCategory : "teacher",
+        userCategory: userCategory ? userCategory : "student",
         userType: userType ? userType : "institute",
         userId: uuid,
     };
     setLoading(true);
     try {
         const response = await myDetailsApi(userData);
-        console.log('dddddd',response.userData[0]);
-        setTeacherDetails(response.userData[0]);
+        // console.log('dddddd',response.userData[0]);
+        setStudentDetails(response.userData[0]);
         setLoading(false);
     } catch (error) {
         console.error("Failed to fetch Data:", error.message);
@@ -75,7 +75,6 @@ const TeacherDetailsView = () => {
     }
   };
   
-
   return (
     <div className="wrapper">
       <div className="padding-all">
@@ -109,6 +108,6 @@ const TeacherDetailsView = () => {
       </div>
     </div>
   );
-};
+}
 
-export default TeacherDetailsView;
+export default StudentDetailsView

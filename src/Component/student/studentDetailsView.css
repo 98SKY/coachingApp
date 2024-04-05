@@ -11,7 +11,7 @@
     justify-content: space-between;
     cursor: pointer;
   }
-   .card-header div {
+  .card-header div {
     text-transform: uppercase;
     font-weight: bold;
 }

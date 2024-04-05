@@ -32,7 +32,7 @@ const Student = () => {
 
   const handleNavigation = (path) => {
     const currentPath = window.location.pathname;
-    const newPath = `${path}?myCoachingId=${myCoachingId}`;
+    const newPath = `${path}&myCoachingId=${myCoachingId}`;
     if (currentPath === path || currentPath === newPath) {
       return;
     }
@@ -44,15 +44,15 @@ const Student = () => {
   const handleSearch = () => {
     setIsSearchVisible(!isSearchVisible);
   if (isSearchVisible && searchQuery === "") {
-    fetchData(); // Fetch all students again
+    fetchData(); 
   } else {
-    applyFilter(); // Apply filter when opening the search input or search query is not empty
+    applyFilter(); 
   }
   };
 
   const handleClose = () => {
-    setSearchQuery(""); // Clear the search query
-    setIsSearchVisible(false); // Hide the search input field
+    setSearchQuery(""); 
+    setIsSearchVisible(false); 
   };
   
   
@@ -138,7 +138,7 @@ const Student = () => {
             <div
               key={index}
               className={"listView-card"}
-              onClick={() => handleNavigation(`/student/${index}`)}
+              onClick={() => handleNavigation(`/studentDetails?${index}&uuid=${student.uuid}&name=${student.name}`)}
             >
               <div className="name">
                 {student.name
@@ -171,22 +171,22 @@ const Student = () => {
           <FontAwesomeIcon
             icon={faHome}
             className={selectedIcon === "/controlPanel" ? "selected" : ""}
-            onClick={() => handleNavigation("/controlPanel")}
+            onClick={() => handleNavigation("/controlPanel?")}
           />
           <FontAwesomeIcon
             icon={faUsers}
             className={selectedIcon === "/student" ? "selected" : ""}
-            onClick={() => handleNavigation("/student")}
+            onClick={() => handleNavigation("/student?")}
           />
           <FontAwesomeIcon
             icon={faChalkboardTeacher}
             className={selectedIcon === "/teacher" ? "selected" : ""}
-            onClick={() => handleNavigation("/teacher")}
+            onClick={() => handleNavigation("/teacher?")}
           />
           <FontAwesomeIcon
             icon={faUser}
             className={selectedIcon === "/profile" ? "selected" : ""}
-            onClick={() => handleNavigation("/profile")}
+            onClick={() => handleNavigation("/profile?")}
           />
         </div>
       </div>
