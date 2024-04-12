@@ -31,8 +31,8 @@ const Student = () => {
   const [students, setStudents] = useState([]);
 
   const handleNavigation = (path) => {
-    const currentPath = window.location.pathname;
-    const newPath = `${path}&myCoachingId=${myCoachingId}`;
+    let currentPath = window.location.pathname;
+    let newPath = `${path}&myCoachingId=${myCoachingId}`;
     if (currentPath === path || currentPath === newPath) {
       return;
     }
@@ -166,6 +166,11 @@ const Student = () => {
           >
             <FontAwesomeIcon icon={faPlus} />
           </div>
+          {loading && (
+              <div className='loader-overlay'>
+            <div className='loader'></div>
+            </div>
+            )}
         </div>
         <div className="mainFooter">
           <FontAwesomeIcon
@@ -176,7 +181,7 @@ const Student = () => {
           <FontAwesomeIcon
             icon={faUsers}
             className={selectedIcon === "/student" ? "selected" : ""}
-            onClick={() => handleNavigation("/student?")}
+            onClick={() => handleNavigation("/student")}
           />
           <FontAwesomeIcon
             icon={faChalkboardTeacher}

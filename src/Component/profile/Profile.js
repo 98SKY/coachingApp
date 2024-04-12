@@ -129,7 +129,9 @@ const Profile = () => {
             </div>
             <div className="details">
               {loading ? (
-                <div>Loading...</div>
+                <div className='loader-overlay'>
+                <div className='loader'></div>
+                </div>
               ) : (
                 <>
                   <div className="detail-item">

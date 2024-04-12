@@ -115,7 +115,11 @@ const Login = () => {
               <input type={showPassword ? "text" : "password"} placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
               <i className={`fa ${showPassword ? "fa-eye-slash" : "fa-eye"} password-icon`} onClick={() => setShowPassword(!showPassword)}></i>
             </div>
-            {loading && <div className='loader'>Load...</div>}
+            {loading && (
+              <div className='loader-overlay'>
+            <div className='loader'></div>
+            </div>
+            )}
           <button onClick={handleLogin}>Login</button>
           <div>
           <div className="create-account" onClick={handleCreateAccount}>Create account</div>

@@ -155,6 +155,11 @@ const Teacher = () => {
           >
             <FontAwesomeIcon icon={faPlus} />
           </div>
+          {loading && (
+              <div className='loader-overlay'>
+            <div className='loader'></div>
+            </div>
+            )}
         </div>
         <div className="mainFooter">
           <FontAwesomeIcon
@@ -170,7 +175,7 @@ const Teacher = () => {
           <FontAwesomeIcon
             icon={faChalkboardTeacher}
             className={selectedIcon === "/teacher" ? "selected" : ""}
-            onClick={() => handleNavigation("/teacher?")}
+            onClick={() => handleNavigation("/teacher")}
           />
           <FontAwesomeIcon
             icon={faUser}

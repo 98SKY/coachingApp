@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -20,8 +20,8 @@ const DashBoard = () => {
   const [selectedIcon, setSelectedIcon] = useState("/controlPanel");
 
   const handleNavigation = (path) => {
-    const currentPath = window.location.pathname;
-    const newPath = `${path}?myCoachingId=${myCoachingId}`;
+    let currentPath = window.location.pathname;
+    let newPath = `${path}?myCoachingId=${myCoachingId}`;
 
     if (currentPath === path || currentPath === newPath) {
       currentPath  = `${path}?myCoachingId=${myCoachingId}`;
