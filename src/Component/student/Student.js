@@ -147,7 +147,7 @@ const Student = () => {
                     : student.name
                   : ""}
               </div>
-              <div className="status">{student.user_status}</div>
+              <div className={`status chip ${student.user_status === 'Active' ? 'green' : 'red'}`}>{student.user_status}</div>
               <div className="address">
                 {student.address
                   ? student.address.length > 20

@@ -16,7 +16,7 @@ const SignUp = () => {
   const params = new URLSearchParams(location.search);
   const userTypeParam = params.get("userType");
   const userType = userTypeParam ? userTypeParam.split("?")[0] : null;
-  const myCoachingId = userTypeParam ? userTypeParam.split("=")[1] : null;
+  const myCoachingId = params.get("myCoachingId");;
   const [isEmailVerified, setIsEmailVerified] = useState(false);
   const [otp, setOtp] = useState("");
   const [otpSent, setOtpSent] = useState(false);

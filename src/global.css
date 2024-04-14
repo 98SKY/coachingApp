@@ -78,6 +78,14 @@
   .menu-button {
     margin-right: -50px;
   }
+  .detail-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .label {
+    margin-bottom: 5px;
+  }
+
 }
 
 .mainFooter {
@@ -161,7 +169,7 @@ justify-content: space-around;
   position: relative;
   border: 1px solid #ccc;
   border-radius: 10px;
-  padding: 10px;
+  padding: 15px;
   /* margin-bottom:0px; */
   cursor: pointer;
   width: 100%;
@@ -215,11 +223,13 @@ justify-content: space-around;
 .detail-item {
   margin-bottom: 10px;
   margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .label {
-  font-weight: bold;
-  
+  font-weight:bold;
+
 }
 
 /* kebab-menu */
@@ -260,3 +270,22 @@ justify-content: space-around;
   font-size: 15px;
   font-weight: lighter;
 }
+
+  /* Define the colors for the chip */
+  .green {
+    background-color: rgb(53, 163, 108);
+    color: white;
+  }
+  
+  .red {
+    background-color: rgba(220, 70, 70, 0.696);
+    color: white;
+  }
+  
+  /* Style for the chip */
+  .status {
+    padding: 5px 10px;
+    border-radius: 10px;
+    display: inline-block;
+    /* margin-right: 5px;  */
+  }
