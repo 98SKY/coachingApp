@@ -38,27 +38,40 @@ const DashBoard = () => {
         <div className="header">DashBoard</div>
         <div className="body">body</div>
         <div className="mainFooter">
-              <FontAwesomeIcon
-                icon={faHome}
-                className={selectedIcon === "/controlPanel" ? "selected" : ""}
-                onClick={() => handleNavigation("/controlPanel")}
-              />
-              <FontAwesomeIcon
-            icon={faUsers}
-            className={selectedIcon === "/student" ? "selected" : ""}
-            onClick={() => handleNavigation("/student")}
-          />
-          <FontAwesomeIcon
-            icon={faChalkboardTeacher}
-            className={selectedIcon === "/teacher" ? "selected" : ""}
-            onClick={() => handleNavigation("/teacher")}
-          />
-          <FontAwesomeIcon
-            icon={faUser}
-            className={selectedIcon === "/profile" ? "selected" : ""}
-            onClick={() => handleNavigation("/profile")}
-          />
+          <div className="icon">
+            <FontAwesomeIcon
+              icon={faHome}
+              className={selectedIcon === "/controlPanel" ? "selected" : ""}
+              onClick={() => handleNavigation("/controlPanel")}
+            />
+            <span className="label">Home</span>
+          </div>
+          <div className="icon">
+            <FontAwesomeIcon
+              icon={faUsers}
+              className={selectedIcon === "/student" ? "selected" : ""}
+              onClick={() => handleNavigation("/student")}
+            />
+            <span className="label">Students</span>
+          </div>
+          <div className="icon">
+            <FontAwesomeIcon
+              icon={faChalkboardTeacher}
+              className={selectedIcon === "/teacher" ? "selected" : ""}
+              onClick={() => handleNavigation("/teacher")}
+            />
+            <span className="label">Teachers</span>
+          </div>
+          <div className="icon">
+            <FontAwesomeIcon
+              icon={faUser}
+              className={selectedIcon === "/profile" ? "selected" : ""}
+              onClick={() => handleNavigation("/profile")}
+            />
+            <span className="label">Profile</span>
+          </div>
         </div>
+
       </div>
     </div>
   );

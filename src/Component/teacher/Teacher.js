@@ -29,6 +29,7 @@ const Teacher = () => {
   const [isSearchVisible, setIsSearchVisible] = useState(false);
   const searchRef = useRef(null);
   const [teachers, setTeachers] = useState([]);
+  const [showPlusIcon, setShowPlusIcon] = useState(true);
 
   const handleNavigation = (path) => {
     const currentPath = window.location.pathname;
@@ -95,6 +96,20 @@ const Teacher = () => {
     }
   };
 
+  useEffect(() => {
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  const handleScroll = () => {
+    const bodyScrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+    const visible = bodyScrollTop >100;
+    setShowPlusIcon(!visible);
+  };
+
 
   return (
     <div className="wrapper">
@@ -123,7 +138,7 @@ const Teacher = () => {
             </div>
           )}
         </div>
-        <div className="body">
+        <div className="body" onScroll={handleScroll}>
         {teachers.map((teacher, index) => (
             <div
               key={index}
@@ -151,6 +166,7 @@ const Teacher = () => {
           ))}
           <div
             className="plushIcon"
+            style={{ display: isSearchVisible ? 'none' : '' }}
             onClick={() => handleNavigation(`/SignUp?userType=teacher`)}
           >
             <FontAwesomeIcon icon={faPlus} />
@@ -162,26 +178,38 @@ const Teacher = () => {
             )}
         </div>
         <div className="mainFooter">
+        <div className="icon">
           <FontAwesomeIcon
             icon={faHome}
             className={selectedIcon === "/controlPanel" ? "selected" : ""}
             onClick={() => handleNavigation("/controlPanel?")}
           />
+          <span className="label">Home</span>
+          </div>
+          <div className="icon">
           <FontAwesomeIcon
             icon={faUsers}
             className={selectedIcon === "/student" ? "selected" : ""}
             onClick={() => handleNavigation("/student?")}
           />
+          <span className="label">Students</span>
+          </div>
+          <div className="icon">
           <FontAwesomeIcon
             icon={faChalkboardTeacher}
             className={selectedIcon === "/teacher" ? "selected" : ""}
             onClick={() => handleNavigation("/teacher")}
           />
+          <span className="label">Teachers</span>
+          </div>
+          <div className="icon">
           <FontAwesomeIcon
             icon={faUser}
             className={selectedIcon === "/profile" ? "selected" : ""}
             onClick={() => handleNavigation("/profile?")}
           />
+          <span className="label">Profile</span>
+          </div>
         </div>
       </div>
     </div>
