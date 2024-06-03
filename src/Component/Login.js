@@ -5,6 +5,10 @@ import './login.css';
 import { Link,useNavigate } from 'react-router-dom';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import { useLocation } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faChevronLeft
+} from "@fortawesome/free-solid-svg-icons";
 
 
 const Login = () => {
@@ -106,7 +110,9 @@ const Login = () => {
   return (
     <div className='wrapper'>
     <div className='padding-all'>
-      <div className="header">Login</div>
+      <div className="header">
+      <FontAwesomeIcon icon={faChevronLeft} onClick={() => navigate(-1)} />
+        Login</div>
       <div className="body">
         <img src="/logo.gif" alt="Logo" className='body-img' />
         <div className="login-box">

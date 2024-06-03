@@ -41,11 +41,22 @@ const SignUp = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
+    // Check if the field is 'course' and handle multiple selection
+    if (name === 'course') {
+        const selectedCourses = Array.from(e.target.selectedOptions, option => option.value);
+
+        setFormData({
+            ...formData,
+            [name]: selectedCourses,
+        });
+    } else {
+        setFormData({
+            ...formData,
+            [name]: value,
+        });
+    }
+};
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -172,24 +183,32 @@ const SignUp = () => {
                   required
                   className="myInput-field"
                 />
-                <input
-                  type="text"
+                <select
                   name="medium"
-                  placeholder="Enter medium"
                   value={formData.medium}
                   onChange={handleChange}
                   required
                   className="myInput-field"
-                />
-                <input
-                  type="text"
+                >
+                  <option value="">Select medium</option>
+                  <option value="English">English</option>
+                  <option value="Hindi">Hindi</option>
+                  <option value="Other">Other</option>
+                </select>
+
+                <select
                   name="course"
-                  placeholder="Enter course"
                   value={formData.course}
                   onChange={handleChange}
                   required
+                  multiple
                   className="myInput-field"
-                />
+                >
+                  <option value="Math">Math</option>
+                  <option value="Science">Science</option>
+                  <option value="History">History</option>
+                </select>
+
                 <input
                   type="email"
                   name="email"

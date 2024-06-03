@@ -4,6 +4,10 @@ import './forgotPass.css';
 import { useNavigate } from 'react-router-dom';
 import { recoverPassword } from './Global';
 import { useLocation } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faChevronLeft
+} from "@fortawesome/free-solid-svg-icons";
 
 const ForgotPass = () => {
   const [accountType, setAccountType] = useState('user');
@@ -84,7 +88,9 @@ const ForgotPass = () => {
   return (
     <div className='myWrapper'>
       <div className='myPadding-all'>
-        <div className='header'>Password Recovery</div>
+        <div className='header'>
+        <FontAwesomeIcon icon={faChevronLeft} onClick={() => navigate(-1)} />
+          Password Recovery</div>
         <div className='body'>
           <div>
             <input
