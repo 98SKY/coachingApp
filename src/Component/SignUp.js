@@ -35,25 +35,26 @@ const SignUp = () => {
     course: "",
     experienceInCourse: "",
     address: "",
+    fee: ""
   });
   const [formValid, setFormValid] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    // Check if the field is 'course' and handle multiple selection
-    if (name === 'course') {
+        // Check if the field is 'course' and handle multiple selection
+        if (name === 'course') {
         const selectedCourses = Array.from(e.target.selectedOptions, option => option.value);
 
         setFormData({
             ...formData,
             [name]: selectedCourses,
         });
-    } else {
+        } else {
         setFormData({
             ...formData,
             [name]: value,
-        });
+    });
     }
 };
 
@@ -70,7 +71,9 @@ const SignUp = () => {
         !formData.std ||
         !formData.medium ||
         !formData.course ||
-        !formData.address)
+        !formData.address ||
+        !formData.fee
+        )
     ) {
       isValid = false;
     } else if (
@@ -165,6 +168,17 @@ const SignUp = () => {
                   required
                   className="myInput-field"
                 />
+
+                <input
+                  type="decimal"
+                  name="fee"
+                  placeholder="Enter fee"
+                  value={formData.fee}
+                  onChange={handleChange}
+                  required
+                  className="myInput-field"
+                />
+
                 <input
                   type="text"
                   name="std"
@@ -241,22 +255,6 @@ const SignUp = () => {
                   required
                   className="myInput-field"
                 />
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Enter email ID"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  className="myInput-field"
-                />
-                {!isEmailVerified && (
-                  <FontAwesomeIcon
-                    icon={faCheckCircle}
-                    onClick={handleVerifyEmail}
-                    className="verify-icon"
-                  />
-                )}
 
                 <input
                   type="text"
@@ -294,6 +292,22 @@ const SignUp = () => {
                   required
                   className="myInput-field"
                 />
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Enter email ID"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                  className="myInput-field"
+                />
+                {!isEmailVerified && (
+                  <FontAwesomeIcon
+                    icon={faCheckCircle}
+                    onClick={handleVerifyEmail}
+                    className="verify-icon"
+                  />
+                )}
               </>
             )}
             {!isStudent && !isTeacher && (
