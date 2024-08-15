@@ -75,13 +75,7 @@ const Login = () => {
     const userTypeForLogin = localStorage.getItem('userType');
        const userCategoryForLogin = localStorage.getItem('userCategory');
        const myCoachingIdForLogin = localStorage.getItem('myCoachingId');
-    // if (token && userTypeForLogin && myCoachingIdForLogin) {
-    //   // Navigate to the dashboard if user is already authenticated
-    //   navigate(`/controlPanel&userType=${userTypeForLogin}&myCoachingId=${myCoachingIdForLogin}&userCategory=${userCategoryForLogin}`);
-    // }else {
-    //   setUsername('');
-    //   setPassword('');
-    // }
+    
     switch(true){
       case(token && userTypeForLogin=='institute' && myCoachingIdForLogin):
         navigate(`/controlPanel&userType=${userTypeForLogin}&myCoachingId=${myCoachingIdForLogin}`);

@@ -22,14 +22,14 @@ const Profile = () => {
   const [showMenu, setShowMenu] = useState(false); 
   const params = new URLSearchParams(location.search);
   let myCoachingId = params.get("myCoachingId");
-  const userType = params.get("userType");
+  let  userType = params.get("userType");
   const username = localStorage.getItem('name');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [profileDetails, setProfileDetails] = useState({});
 
   const handleNavigation = (path) => {
     const currentPath = window.location.pathname;
-    const newPath = `${path}?myCoachingId=${myCoachingId}`;
+    const newPath = `${path}?myCoachingId=${myCoachingId}&userType=${userType}`;
     if (currentPath === path || currentPath === newPath) {
       return;
     }
@@ -44,7 +44,7 @@ const Profile = () => {
 
   const logOut = () =>{
     localStorage.clear();
-    navigate(`/login?language=english&userType=institute`)
+    handleNavigation(`/login?language=english&userType=${userType}&`)
   }
 
   useEffect(() =>{
@@ -53,7 +53,7 @@ const Profile = () => {
 
   const loadMyData = async () =>{
     if (loading) {
-      return; // Return if already loading
+      return; 
     }
   
     const userData = {

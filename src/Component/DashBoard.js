@@ -21,10 +21,10 @@ const DashBoard = () => {
 
   const handleNavigation = (path) => {
     let currentPath = window.location.pathname;
-    let newPath = `${path}?myCoachingId=${myCoachingId}`;
+    let newPath = `${path}?myCoachingId=${myCoachingId}&userType=${userType}`;
 
     if (currentPath === path || currentPath === newPath) {
-      currentPath  = `${path}?myCoachingId=${myCoachingId}`;
+      currentPath  = `${path}?myCoachingId=${myCoachingId}&userType=${userType}`;
       return;
     }
 

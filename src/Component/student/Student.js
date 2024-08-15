@@ -33,7 +33,7 @@ const Student = () => {
 
   const handleNavigation = (path) => {
     let currentPath = window.location.pathname;
-    let newPath = `${path}&myCoachingId=${myCoachingId}`;
+    let newPath = `${path}&myCoachingId=${myCoachingId}&userType=${userType}`;
     if (currentPath === path || currentPath === newPath) {
       return;
     }
