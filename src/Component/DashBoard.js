@@ -28,8 +28,8 @@ const DashBoard = () => {
   const [showToDatePicker, setShowToDatePicker] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
   const [selectedOption, setSelectedOption] = useState("");
-  const [studentsData, setStudentsData] = useState(0);
-  const [teachersData, setTeachersData] = useState(0);
+  const [studentsData, setStudentsData] = useState({totalStudents: 0, activeStudents: 0, inactiveStudents: 0});
+  const [teachersData, setTeachersData] = useState({totalTeachers: 0, activeTeachers: 0, inActiveTeachers: 0});
   const [instituteInfo, setInstituteInfo] = useState(0);
 
   useEffect(() => {
@@ -64,9 +64,6 @@ const DashBoard = () => {
   const handleConfirmDate = () => {
     if (selectedOption && fromDate && toDate) {
       setShowPopup(false);
-      console.log("Selected From Date:", fromDate);
-      console.log("Selected To Date:", toDate);
-      console.log("Selected Option:", selectedOption);
       fetchDashBoardCount([selectedOption.toLowerCase()], fromDate, toDate);
       setFromDate(null);
       setToDate(null);
@@ -92,10 +89,19 @@ const DashBoard = () => {
       console.log("responseresponse", response.counts);
       const data = response.counts;
       if (categories.includes("students")) {
-        setStudentsData(data.students || 0);
+        setStudentsData({
+          totalStudents: data.totalStudents || 0,
+          activeStudents: data.activeStudents || 0,
+          inactiveStudents: data.inactiveStudents || 0
+        });
+
       }
       if (categories.includes("teachers")) {
-        setTeachersData(data.teachers || 0);
+        setTeachersData({
+          totalTeachers: data.totalTeachers || 0,
+          activeTeachers: data.activeTeachers || 0,
+          inActiveTeachers: data.inActiveTeachers || 0
+        });
       }
       if (categories.includes("instituteInfo")) {
         setInstituteInfo(data.instituteInfo || 0);
@@ -178,7 +184,17 @@ const DashBoard = () => {
               <p>
                 {loading && selectedOption === "students"
                   ? "Loading..."
-                  : `${studentsData} Students`}
+                  : ` Total ${studentsData.totalStudents}`}
+              </p>
+              <p>
+                {loading && selectedOption === "students"
+                  ? "Loading..."
+                  : `Active ${studentsData.activeStudents}`}
+              </p>
+              <p>
+                {loading && selectedOption === "students"
+                  ? "Loading..."
+                  : `Inactive ${studentsData.inactiveStudents}`}
               </p>
             </div>
             <div className="card" onClick={() => handleCardClick("teachers")}>
@@ -186,7 +202,17 @@ const DashBoard = () => {
               <p>
                 {loading && selectedOption === "teachers"
                   ? "Loading..."
-                  : `${teachersData} Teachers`}
+                  : `Total ${teachersData.totalTeachers}`}
+              </p>
+              <p>
+                {loading && selectedOption === "teachers"
+                  ? "Loading..."
+                  : `Active ${teachersData.activeTeachers}`}
+              </p>
+              <p>
+                {loading && selectedOption === "teachers"
+                  ? "Loading..."
+                  : `Inactive ${teachersData.inActiveTeachers}`}
               </p>
             </div>
           </div>
