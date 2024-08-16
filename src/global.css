@@ -176,7 +176,7 @@ padding: 10px ;
 
 /* list view */
 
-.listView-card, .card-detailsView {
+.listView-card, .card-detailsView,.notification-card{
   position: relative;
   border: 1px solid #ccc;
   border-radius: 10px;
@@ -189,8 +189,8 @@ padding: 10px ;
   overflow: auto;
 }
 
-.listView-card:hover {
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+.listView-card:hover, .notification-card:hover ,.listView-card:active, .notification:active{
+  box-shadow: 0 4px 8px rgb(43, 138, 186);
 }
 
 /* details view card*/
@@ -272,9 +272,9 @@ padding: 10px ;
 }
 
 .menu-item:hover,
-.menu-item:active,popup-content button:hover,
+.menu-item:active,.popup-content button:hover,
  .popup-content button:active {
-  background-color: #8bc6f7;
+  background-color: rgb(43, 138, 186);
 }
 
 .menu-items.active {

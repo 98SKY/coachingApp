@@ -82,9 +82,34 @@ const DashBoard = () => {
             </div>
           )}
         </div>
+        
         <div className="body">
-          <div className="instituteHeader">Institute info</div>
+          <div className="card notification-card">
+            <h3>Notifications</h3>
+            <p>Latest updates and alerts will appear here.</p>
+          </div>
+
+          <div className="card-container">
+            {/* Institute Info Card */}
+            <div className="card">
+              <h3>Institute Info</h3>
+              <p>Details about the institute.</p>
+            </div>
+
+            {/* Students Card */}
+            <div className="card">
+              <h3>Students</h3>
+              <p>Manage and view student details.</p>
+            </div>
+
+            {/* Teachers Card */}
+            <div className="card">
+              <h3>Teachers</h3>
+              <p>Manage and view teacher details.</p>
+            </div>
+          </div>
         </div>
+
         <div className="mainFooter">
           <div className="icon">
             <FontAwesomeIcon
