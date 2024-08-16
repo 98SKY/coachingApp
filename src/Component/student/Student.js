@@ -164,14 +164,20 @@ const Student = () => {
                       : student.address
                     : ""}
                 </div>
+                <div className="fee-status-container">
                 <div className="fee-status">{student.medium}</div>
-                <div className="subject">
-                  {courses.map((course, idx) => (
-                    <span key={idx} className="course-item">
-                      {course}
-                    </span>
-                  ))}
+                <div className="info-box">More information about the medium</div>
                 </div>
+
+                <div className="subject">
+                {courses.map((course, idx) => (
+                  <div key={idx} className="course-container">
+                    <span className="course-item">{course}</span>
+                    <div className="info-box">More information about {course}</div>
+                  </div>
+                ))}
+                </div>
+
               </div>
             );
           })}
