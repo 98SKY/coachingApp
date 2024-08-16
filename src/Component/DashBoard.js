@@ -68,6 +68,8 @@ const DashBoard = () => {
       console.log("Selected To Date:", toDate);
       console.log("Selected Option:", selectedOption);
       fetchDashBoardCount([selectedOption.toLowerCase()], fromDate, toDate);
+      setFromDate(null);
+      setToDate(null);
     } else {
       alert("Please select both dates and an option.");
     }
@@ -81,8 +83,8 @@ const DashBoard = () => {
     const dashBoardData = {
       instituteID: myCoachingId,
       categories,
-      fromDate,
-      toDate,
+      fromDate: fromDate?.toISOString(),
+      toDate: toDate?.toISOString(), 
     };
     setLoading(true);
     try {
@@ -107,8 +109,15 @@ const DashBoard = () => {
     }
   };
 
+  const getFirstDayOfMonth = () => {
+    const now = new Date();
+    return new Date(now.getFullYear(), now.getMonth(), 1);
+  };
+
   const handleCardClick = (category) => {
-    fetchDashBoardCount([category]);
+    const currentDate = new Date();
+    const firstDayOfMonth = getFirstDayOfMonth();
+    fetchDashBoardCount([category], firstDayOfMonth, currentDate);
   };
 
   return (
