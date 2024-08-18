@@ -3,7 +3,7 @@ export const BASE_URL = "http://localhost:3000";
 export const BASE_URL1 = "http://192.168.0.101:3001";
 
 export const registerInstitute = (userData) => {
-  const apiUrl = `${BASE_URL}/register-institute`;
+  const apiUrl = `${BASE_URL}/register`;
 
   return fetch(apiUrl, {
     method: "POST",

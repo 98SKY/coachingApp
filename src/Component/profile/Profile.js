@@ -64,8 +64,11 @@ const Profile = () => {
     setLoading(true);
     try {
       const response = await myDataApi(userData);
-      if (response.userData && response.userData.length > 0) {
-        setProfileDetails(response.userData[0]);
+    
+      if (response && Object.keys(response.data[0]).length) {
+        const userData = response.data[0];
+        // console.log(userData);
+        setProfileDetails(userData);
       }
     } catch (error) {
       console.error("Failed to fetch profile data:", error.message);

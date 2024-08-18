@@ -86,7 +86,6 @@ const DashBoard = () => {
     setLoading(true);
     try {
       const response = await dashBoardCountApi(dashBoardData);
-      console.log("responseresponse", response.counts);
       const data = response.counts;
       if (categories.includes("students")) {
         setStudentsData({
@@ -144,6 +143,7 @@ const DashBoard = () => {
                 <DatePicker
                   selected={fromDate}
                   onChange={(date) => handleDateChange(date, "from")}
+                  maxDate={new Date()}
                 />
               </div>
             </div>
@@ -155,6 +155,7 @@ const DashBoard = () => {
                 <DatePicker
                   selected={toDate}
                   onChange={(date) => handleDateChange(date, "to")}
+                  minDate={fromDate}
                 />
               </div>
             </div>

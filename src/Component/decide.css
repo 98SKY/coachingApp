@@ -34,6 +34,9 @@ button {
     padding: 8px 16px;
     border: none;
     cursor: pointer;
+    color: #f1f1f1;
+    background-color: #f1f1f1;
+    border-radius: 5px; /* Consistent button styling */
 }
 
 button:hover {
@@ -44,16 +47,6 @@ button:hover {
 button.selected {
     background-color: rgb(43, 138, 186);
     color: #fff;
-}
-
-.forwardButton {
-    margin-top: 20px; 
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-    background-color: rgb(43, 138, 186);
-    color: #fff;
-    border-radius: 5px;
 }
 
 .forwardButton:disabled {

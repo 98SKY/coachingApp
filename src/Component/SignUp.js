@@ -274,15 +274,17 @@ const SignUp = () => {
                   required
                   className="myInput-field"
                 />
-                <input
-                  type="text"
+                <select
                   name="course"
-                  placeholder="Enter course"
                   value={formData.course}
                   onChange={handleChange}
                   required
                   className="myInput-field"
-                />
+                >
+                  <option value="Math">PCM</option>
+                  <option value="Science">PCB</option>
+                  <option value="History">Other</option>
+                </select>
                 <input
                   type="text"
                   name="experienceInCourse"
