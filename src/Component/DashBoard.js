@@ -173,7 +173,7 @@ const DashBoard = () => {
               className="card"
               onClick={() => fetchDashBoardCount(["instituteInfo"])}
             >
-              <h3 className="dashBoardCardHeader">Institute Info</h3>
+              <h3 className="dashBoardCardHeader">INSTITUTE INFO</h3>
               <div className={`dasboardCardItems`}>
                 {loading && selectedOption === "institute"
                   ? "Loading..."
@@ -181,7 +181,7 @@ const DashBoard = () => {
               </div>
             </div>
             <div className="card" onClick={() => handleCardClick("students")}>
-              <h3 className="dashBoardCardHeader">Students</h3>
+              <h3 className="dashBoardCardHeader">STUDENTS</h3>
               <div className={`dasboardCardItems total`}>
                 {loading && selectedOption === "students"
                   ? "Loading..."
@@ -199,7 +199,7 @@ const DashBoard = () => {
               </div>
             </div>
             <div className="card" onClick={() => handleCardClick("teachers")}>
-              <h3 className="dashBoardCardHeader">Teachers</h3>
+              <h3 className="dashBoardCardHeader">TEACHERS</h3>
               <div className={`dasboardCardItems total`}>
                 {loading && selectedOption === "teachers"
                   ? "Loading..."
@@ -255,12 +255,13 @@ const DashBoard = () => {
         </div>
       </div>
       {showPopup && (
-        <div className="popup-overlay">
+        <div className={`popup-overlay`}>
           <div className="popup-content">
             <h3 className="popUpHeader">Confirm Date</h3>
             <p>
-              Do you want to apply the selected date range:{" "}
-              {fromDate?.toDateString()} - {toDate?.toDateString()} for:
+              Do you want to apply the 
+              <p>selected date range:{" "}
+              {fromDate?.toDateString()}</p> - {toDate?.toDateString()} for:
             </p>
             <div className="radio-group">
               <label>
