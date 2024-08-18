@@ -89,5 +89,39 @@
   background-color: rgb(43, 138, 186); 
 }
 
+.dashBoardCardHeader{
+  background-color: rgb(127, 170, 192);
+  height: 40px;
+  padding: 10px;
+}
+
+.dasboardCardItems{
+  display: flex;
+  padding: 10px;
+  font-size: 20px;
+  font-weight: 500;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  /* width: 150px; */
+  margin: 10px;
+}
+
+.total {
+  background-color: rgb(213, 224, 231) !important;
+}
+
+.active {
+  background-color: rgb(228, 245, 228); 
+}
+
+.inactive {
+  background-color: rgb(245, 226, 226);
+}
+
 
   

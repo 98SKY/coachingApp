@@ -173,48 +173,48 @@ const DashBoard = () => {
               className="card"
               onClick={() => fetchDashBoardCount(["instituteInfo"])}
             >
-              <h3>Institute Info</h3>
-              <p>
+              <h3 className="dashBoardCardHeader">Institute Info</h3>
+              <div className={`dasboardCardItems`}>
                 {loading && selectedOption === "institute"
                   ? "Loading..."
-                  : instituteInfo}
-              </p>
+                  : `info ${instituteInfo}`}
+              </div>
             </div>
             <div className="card" onClick={() => handleCardClick("students")}>
-              <h3>Students</h3>
-              <p>
+              <h3 className="dashBoardCardHeader">Students</h3>
+              <div className={`dasboardCardItems total`}>
                 {loading && selectedOption === "students"
                   ? "Loading..."
                   : ` Total ${studentsData.totalStudents}`}
-              </p>
-              <p>
+              </div>
+              <div className={`dasboardCardItems active`}>
                 {loading && selectedOption === "students"
                   ? "Loading..."
                   : `Active ${studentsData.activeStudents}`}
-              </p>
-              <p>
+              </div>
+              <div className={`dasboardCardItems inactive`}>
                 {loading && selectedOption === "students"
                   ? "Loading..."
                   : `Inactive ${studentsData.inactiveStudents}`}
-              </p>
+              </div>
             </div>
             <div className="card" onClick={() => handleCardClick("teachers")}>
-              <h3>Teachers</h3>
-              <p>
+              <h3 className="dashBoardCardHeader">Teachers</h3>
+              <div className={`dasboardCardItems total`}>
                 {loading && selectedOption === "teachers"
                   ? "Loading..."
                   : `Total ${teachersData.totalTeachers}`}
-              </p>
-              <p>
+              </div>
+              <div className={`dasboardCardItems active`}>
                 {loading && selectedOption === "teachers"
                   ? "Loading..."
                   : `Active ${teachersData.activeTeachers}`}
-              </p>
-              <p>
+              </div>
+              <div className={`dasboardCardItems inactive`}>
                 {loading && selectedOption === "teachers"
                   ? "Loading..."
                   : `Inactive ${teachersData.inActiveTeachers}`}
-              </p>
+              </div>
             </div>
           </div>
         </div>
