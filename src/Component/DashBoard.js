@@ -29,7 +29,7 @@ const DashBoard = () => {
   const [showPopup, setShowPopup] = useState(false);
   const [selectedOption, setSelectedOption] = useState("");
   const [studentsData, setStudentsData] = useState({totalStudents: 0, activeStudents: 0, inactiveStudents: 0});
-  const [teachersData, setTeachersData] = useState({totalTeachers: 0, activeTeachers: 0, inActiveTeachers: 0});
+  const [teachersData, setTeachersData] = useState({totalTeachers: 0, activeTeachers: 0, inactiveTeachers: 0});
   const [instituteInfo, setInstituteInfo] = useState(0);
 
   useEffect(() => {
@@ -99,7 +99,7 @@ const DashBoard = () => {
         setTeachersData({
           totalTeachers: data.totalTeachers || 0,
           activeTeachers: data.activeTeachers || 0,
-          inActiveTeachers: data.inActiveTeachers || 0
+          inactiveTeachers: data.inactiveTeachers || 0
         });
       }
       if (categories.includes("instituteInfo")) {
@@ -213,7 +213,7 @@ const DashBoard = () => {
               <div className={`dasboardCardItems inactive`}>
                 {loading && selectedOption === "teachers"
                   ? "Loading..."
-                  : `Inactive ${teachersData.inActiveTeachers}`}
+                  : `Inactive ${teachersData.inactiveTeachers}`}
               </div>
             </div>
           </div>
