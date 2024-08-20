@@ -27,9 +27,18 @@ const DashBoard = () => {
   const [showFromDatePicker, setShowFromDatePicker] = useState(false);
   const [showToDatePicker, setShowToDatePicker] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
+  const [selectedOptions, setSelectedOptions] = useState([]);
   const [selectedOption, setSelectedOption] = useState("");
-  const [studentsData, setStudentsData] = useState({totalStudents: 0, activeStudents: 0, inactiveStudents: 0});
-  const [teachersData, setTeachersData] = useState({totalTeachers: 0, activeTeachers: 0, inactiveTeachers: 0});
+  const [studentsData, setStudentsData] = useState({
+    totalStudents: 0,
+    activeStudents: 0,
+    inactiveStudents: 0,
+  });
+  const [teachersData, setTeachersData] = useState({
+    totalTeachers: 0,
+    activeTeachers: 0,
+    inactiveTeachers: 0,
+  });
   const [instituteInfo, setInstituteInfo] = useState(0);
 
   useEffect(() => {
@@ -62,9 +71,13 @@ const DashBoard = () => {
   };
 
   const handleConfirmDate = () => {
-    if (selectedOption && fromDate && toDate) {
+    if (selectedOptions.length > 0 && fromDate && toDate) {
       setShowPopup(false);
-      fetchDashBoardCount([selectedOption.toLowerCase()], fromDate, toDate);
+      console.log("selectedOptions", selectedOptions);
+      const lowercaseOptions = selectedOptions.map((option) =>
+        option.toLowerCase()
+      );
+      fetchDashBoardCount(lowercaseOptions, fromDate, toDate);
       setFromDate(null);
       setToDate(null);
     } else {
@@ -81,7 +94,7 @@ const DashBoard = () => {
       instituteID: myCoachingId,
       categories,
       fromDate: fromDate?.toISOString(),
-      toDate: toDate?.toISOString(), 
+      toDate: toDate?.toISOString(),
     };
     setLoading(true);
     try {
@@ -91,15 +104,14 @@ const DashBoard = () => {
         setStudentsData({
           totalStudents: data.totalStudents || 0,
           activeStudents: data.activeStudents || 0,
-          inactiveStudents: data.inactiveStudents || 0
+          inactiveStudents: data.inactiveStudents || 0,
         });
-
       }
       if (categories.includes("teachers")) {
         setTeachersData({
           totalTeachers: data.totalTeachers || 0,
           activeTeachers: data.activeTeachers || 0,
-          inactiveTeachers: data.inactiveTeachers || 0
+          inactiveTeachers: data.inactiveTeachers || 0,
         });
       }
       if (categories.includes("instituteInfo")) {
@@ -123,6 +135,15 @@ const DashBoard = () => {
     const currentDate = new Date();
     const firstDayOfMonth = getFirstDayOfMonth();
     fetchDashBoardCount([category], firstDayOfMonth, currentDate);
+  };
+
+  const handleOptionChange = (event) => {
+    const { value, checked } = event.target;
+    if (checked) {
+      setSelectedOptions([...selectedOptions, value]);
+    } else {
+      setSelectedOptions(selectedOptions.filter((option) => option !== value));
+    }
   };
 
   return (
@@ -259,35 +280,34 @@ const DashBoard = () => {
           <div className="popup-content">
             <h3 className="popUpHeader">Confirm Date</h3>
             <p>
-              Do you want to apply the 
-              <p>selected date range:{" "}
-              {fromDate?.toDateString()}</p> - {toDate?.toDateString()} for:
+              Do you want to apply the selected date range:{" "}
+              {fromDate?.toDateString()} - {toDate?.toDateString()} for:
             </p>
-            <div className="radio-group">
+            <div className="checkbox-group">
               <label>
                 <input
-                  type="radio"
+                  type="checkbox"
                   value="Students"
-                  checked={selectedOption === "Students"}
-                  onChange={(e) => setSelectedOption(e.target.value)}
+                  checked={selectedOptions.includes("Students")}
+                  onChange={(e) => handleOptionChange(e)}
                 />
                 Students
               </label>
               <label>
                 <input
-                  type="radio"
+                  type="checkbox"
                   value="Teachers"
-                  checked={selectedOption === "Teachers"}
-                  onChange={(e) => setSelectedOption(e.target.value)}
+                  checked={selectedOptions.includes("Teachers")}
+                  onChange={(e) => handleOptionChange(e)}
                 />
                 Teachers
               </label>
               <label>
                 <input
-                  type="radio"
+                  type="checkbox"
                   value="InstituteInfo"
-                  checked={selectedOption === "InstituteInfo"}
-                  onChange={(e) => setSelectedOption(e.target.value)}
+                  checked={selectedOptions.includes("InstituteInfo")}
+                  onChange={(e) => handleOptionChange(e)}
                 />
                 Institute Info
               </label>
