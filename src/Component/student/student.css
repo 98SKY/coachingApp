@@ -1,0 +1,65 @@
+.name {
+  font-weight: bold;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+.address {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.status {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.fee-status {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+}
+
+.subject {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  display: flex;
+  gap: 5px; /* Add spacing between course items */
+}
+
+.name,
+.address,
+.status,
+.fee-status,
+.subject {
+  white-space: nowrap; /* Prevent text wrapping */
+  overflow-x: auto; /* Enable horizontal scrolling */
+  -webkit-overflow-scrolling: touch; /* Enable smooth scrolling on iOS */
+}
+
+/* Styling for each course item */
+.course-item {
+  display: inline-block;
+  background-color: #f0f0f0;
+  padding: 3px 5px;
+  border-radius: 3px;
+  margin-right: 5px;
+}
+
+.info-box {
+  display: none; /* Hidden by default */
+  position: absolute;
+  background-color: #fff;
+  color: #333;
+  padding: 8px;
+  border: 1px solid #ddd;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+  width: 200px;
+  top: 100%; /* Position below the hovered element */
+  left: 50%;
+  transform: translateX(-50%);
+}

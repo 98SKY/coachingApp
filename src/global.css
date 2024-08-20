@@ -1,27 +1,378 @@
   .padding-all {
     padding: 10px; 
   }
-  /* Header */
+  
 .header {
   background-color: rgb(43, 138, 186);
   color: white;
   padding: 10px;
+  position: fixed;
+  top: 0; 
+  left: 0;
+  width: 100%;
+  height: 40px;
+  display: flex; 
+  align-items: flex-start;
+  z-index: 1000;
+
 }
 
-/* Body */
+
 .body {
-  padding: 20px;
+  flex: 1;
+  padding: 50px 20px 20px; 
   text-align: center;
+  display: grid;
+  flex-direction: column;
+  align-items: center;
 }
 
-/* Footer */
+
 .footer {
-  background-color: rgb(36, 66, 108);
+  background-color: rgb(43, 138, 186);
   color: white;
   padding: 10px;
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
+  height: 40px;
+}
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; 
+}
+
+.loader {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  border: 4px solid #f3f3f3; 
+  border-top: 4px solid #3498db; 
+  border-radius: 50%;
+  animation: spin 1s linear infinite; 
+  background-color: rgba(48, 142, 155, 0.968); 
+}
+
+.loader-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
     
+
+
+@media screen and (max-width: 768px) {
+  .menu-button {
+    margin-right: -50px;
+  }
+  .detail-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .label {
+    margin-bottom: 5px;
+  }
+
+}
+
+.mainFooter {
+  background-color: rgb(43, 138, 186);
+  color: white;
+padding: 10px ;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.mainFooter .icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px; /* Adjust the gap between icon and label */
+}
+
+.mainFooter .icon .label {
+  font-size: 0.8em; /* Adjust the font size of the label */
+}
+
+.mainFooter .selected {
+  color: rgb(11, 10, 10); 
+}
+
+
+.footer > svg {
+  cursor: pointer;
+}
+
+.plushIcon {
+  position: fixed;
+  bottom: 90px;
+  right: 15px;
+  background-color: rgb(43, 138, 186);
+  color: white;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 999; 
+}
+
+/*search icon */
+.searchIcon,.calendar-icon{
+  position: absolute;
+  top: 50%;
+  right: 30px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.popup-overlay{
+  position: absolute;
+  top: 35%;
+  right: 30px;
+  left: 100px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: 500;
+  justify-content: center;
+  padding: 20px;
+  border-radius: 12px;
+  margin: 10px;
+}
+
+.search-input {
+  display: inline-block;
+  position: absolute;
+  right: 25px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 2px 5px;
+}
+
+.search-input input {
+  border: none;
+  outline: none;
+  width: 150px;
+}
+
+.close-icon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: rgb(43, 138, 186);
+}
+
+/* list view */
+
+.listView-card, .card-detailsView,.notification-card{
+  position: relative;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 15px;
+  /* margin-bottom:0px; */
+  cursor: pointer;
+  width: 100%;
+  margin-top: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  overflow: auto;
+}
+
+.listView-card:hover, .notification-card:hover ,.listView-card:active, .notification:active{
+  box-shadow: 0 4px 8px rgb(43, 138, 186);
+}
+
+/* details view card*/
+
+.card-detailsView {
+  
+}
+
+/* profile */
+.profile-card {
+  width: 90%;
+  margin: 20px;
+  padding: 20px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.avatar {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 20px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f0f0;
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.details {
+  text-align:left;
+}
+
+.detail-item {
+  margin-bottom: 10px;
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.label {
+  display: block;
+  margin-top: 5px;
+}
+
+/* kebab-menu */
+.kebab-menu {
+
+  position: absolute;
+  top: 50%;
+  right: 35px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.menu-items {
+  display: none;
+  position: absolute;
+  top: 155%;
+  right: 0px;
+  background-color:transparent;
+  border: 1px solid #f0f0f0;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 150px;
+}
+
+.menu-item {
+  padding: 10px 20px;
+  cursor: pointer;
+  color: black;
+}
+
+.menu-item:hover,
+.menu-item:active,.popup-content button:hover,
+ .popup-content button:active {
+  background-color: rgb(43, 138, 186);
+}
+
+.menu-items.active {
+  display:list-item;
+  font-size: 15px;
+  font-weight: lighter;
+}
+
+  /* Define the colors for the chip */
+  .green {
+    background-color: rgb(53, 163, 108);
+    color: white;
+  }
+  
+  .red {
+    background-color: rgba(220, 70, 70, 0.696);
+    color: white;
+  }
+  
+  /* Style for the chip */
+  .status {
+    padding: 5px 10px;
+    border-radius: 10px;
+    display: inline-block;
+    /* margin-right: 5px;  */
+  }
+
+  .datepicker-container  {
+  display: inline-block;
+  position: absolute;
+  right: 50px;
+  top: 185px;
+  z-index: 100;
+  transform: translateY(-50%);
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 2px 5px;
+  }
+/* pop-up */
+
+.popup-content {
+  background: rgb(251, 250, 250);
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.popup-content h3 {
+  margin-top: 0;
+}
+
+.popup-content button {
+  margin: 10px;
+  padding: 10px 20px;
+  border: none;
+  width: 140px;
+  background-color: rgb(196, 242, 251);
+  color: rgb(43, 138, 186);
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+
+.radio-group {
+  display: flex;
+  flex-direction: column; 
+  align-items:flex-start; 
+  margin: 10px 0;
+}
+
+.radio-group label {
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.popUpHeader{
+  height: 40px;
+  align-items: center;
+  background-color: rgb(43, 138, 186);
+}
+
+  
+  
