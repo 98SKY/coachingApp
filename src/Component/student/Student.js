@@ -12,7 +12,7 @@ import {
   faPlus,
   faSearch,
   faTimes,
-  faChevronLeft
+  faChevronLeft,
 } from "@fortawesome/free-solid-svg-icons";
 import { useLocation } from "react-router-dom";
 
@@ -74,14 +74,15 @@ const Student = () => {
   }, [searchQuery]);
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
   const handleScroll = () => {
-    const bodyScrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+    const bodyScrollTop =
+      document.documentElement.scrollTop || document.body.scrollTop;
     const visible = bodyScrollTop > 100;
     setShowPlusIcon(!visible);
   };
@@ -134,9 +135,10 @@ const Student = () => {
           {students.map((student, index) => {
             let courses = [];
             try {
-              // Convert the string {"Maths","Science"} to ["Maths", "Science"]
-              const courseStr = student.course.replace(/^{|}$/g, '');
-              courses = courseStr.split(',').map(course => course.trim().replace(/"/g, ''));
+              const courseStr = student.course.replace(/^{|}$/g, "");
+              courses = courseStr
+                .split(",")
+                .map((course) => course.trim().replace(/"/g, ""));
             } catch (error) {
               console.error("Failed to parse courses:", error);
             }
@@ -145,7 +147,11 @@ const Student = () => {
               <div
                 key={index}
                 className={"listView-card"}
-                onClick={() => handleNavigation(`/studentDetails?${index}&uuid=${student.uuid}&name=${student.name}`)}
+                onClick={() =>
+                  handleNavigation(
+                    `/studentDetails?${index}&uuid=${student.uuid}&name=${student.name}`
+                  )
+                }
               >
                 <div className="name">
                   {student.name
@@ -154,7 +160,11 @@ const Student = () => {
                       : student.name
                     : ""}
                 </div>
-                <div className={`status chip ${student.user_status === 'Active' ? 'green' : 'red'}`}>
+                <div
+                  className={`status chip ${
+                    student.user_status === "Active" ? "green" : "red"
+                  }`}
+                >
                   {student.user_status}
                 </div>
                 <div className="address">
@@ -165,33 +175,36 @@ const Student = () => {
                     : ""}
                 </div>
                 <div className="fee-status-container">
-                <div className="fee-status">{student.medium}</div>
-                <div className="info-box">More information about the medium</div>
+                  <div className="fee-status">{student.medium}</div>
+                  <div className="info-box">
+                    More information about the medium
+                  </div>
                 </div>
 
                 <div className="subject">
-                {courses.map((course, idx) => (
-                  <div key={idx} className="course-container">
-                    <span className="course-item">{course}</span>
-                    <div className="info-box">More information about {course}</div>
-                  </div>
-                ))}
+                  {courses.map((course, idx) => (
+                    <div key={idx} className="course-container">
+                      <span className="course-item">{course}</span>
+                      <div className="info-box">
+                        More information about {course}
+                      </div>
+                    </div>
+                  ))}
                 </div>
-
               </div>
             );
           })}
 
           <div
             className="plushIcon"
-            style={{ display: isSearchVisible ? 'none' : '' }}
+            style={{ display: isSearchVisible ? "none" : "" }}
             onClick={() => handleNavigation(`/SignUp?userType=student`)}
           >
             <FontAwesomeIcon icon={faPlus} />
           </div>
           {loading && (
-            <div className='loader-overlay'>
-              <div className='loader'></div>
+            <div className="loader-overlay">
+              <div className="loader"></div>
             </div>
           )}
         </div>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../global.css";
 import "./decide.css";
-import '@fortawesome/fontawesome-free/css/all.min.css';
+import "@fortawesome/fontawesome-free/css/all.min.css";
 import { instituteName as instituteNameApi } from "./Global";
 
 const Decide = () => {
@@ -55,13 +55,13 @@ const Decide = () => {
       (selectedChip === "user" &&
         (selectedUserType === "" || selectedInstitute === ""))
     ) {
-      setErrorMessage("Please select a user type, a user category, and an institute name");
+      setErrorMessage(
+        "Please select a user type, a user category, and an institute name"
+      );
       setTimeout(() => {
-        setErrorMessage('');
-      }, 5000); // Hide the error message after 5 seconds
-    }
-
-     else {
+        setErrorMessage("");
+      }, 5000);
+    } else {
       setErrorMessage("");
       navigate(
         `/login?language=${selectedLanguage}&userType=${selectedChip}${
@@ -89,7 +89,6 @@ const Decide = () => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
-      // Navigate to the dashboard if the user is already authenticated
       navigate("/login");
     }
 
@@ -133,7 +132,9 @@ const Decide = () => {
                     <option value="">Select User Category</option>
                     <option value="student">Student</option>
                     <option value="teacher">Teacher</option>
-                    <option value="accountDepartment">Account Department</option>
+                    <option value="accountDepartment">
+                      Account Department
+                    </option>
                   </select>
                   {selectedUserType && (
                     <select
@@ -152,13 +153,15 @@ const Decide = () => {
               )}
             </div>
             {errorMessage && (
-              <div className={`popup ${errorMessage ? 'show' : ''}`}>
-              <span className="popuptext">{errorMessage}</span>
-              <button onClick={() => setErrorMessage('')} className="closeButton">
-              <i className="fas fa-times fa-2x"></i> 
-              </button>
-            </div>
-          
+              <div className={`popup ${errorMessage ? "show" : ""}`}>
+                <span className="popuptext">{errorMessage}</span>
+                <button
+                  onClick={() => setErrorMessage("")}
+                  className="closeButton"
+                >
+                  <i className="fas fa-times fa-2x"></i>
+                </button>
+              </div>
             )}
             <button
               onClick={handleForwardButtonClick}

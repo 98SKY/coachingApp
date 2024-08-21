@@ -1,4 +1,4 @@
-import React, { useState,useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../global.css";
 import "./teacher.css";
@@ -12,7 +12,7 @@ import {
   faPlus,
   faSearch,
   faTimes,
-  faChevronLeft
+  faChevronLeft,
 } from "@fortawesome/free-solid-svg-icons";
 import { useLocation } from "react-router-dom";
 
@@ -43,16 +43,16 @@ const Teacher = () => {
 
   const handleSearch = () => {
     setIsSearchVisible(!isSearchVisible);
-  if (isSearchVisible && searchQuery === "") {
-    fetchData(); 
-  } else {
-    applyFilter(); 
-  }
+    if (isSearchVisible && searchQuery === "") {
+      fetchData();
+    } else {
+      applyFilter();
+    }
   };
 
   const handleClose = () => {
-    setSearchQuery(""); 
-    setIsSearchVisible(false); 
+    setSearchQuery("");
+    setIsSearchVisible(false);
   };
 
   const applyFilter = () => {
@@ -62,13 +62,10 @@ const Teacher = () => {
     setTeachers(filteredTeachers);
   };
 
-   
   useEffect(() => {
     if (searchQuery === "") {
-      
       fetchData();
     } else {
-
       const filteredTeachers = teachers.filter((teacher) =>
         teacher.name.toLowerCase().includes(searchQuery.toLowerCase())
       );
@@ -85,7 +82,6 @@ const Teacher = () => {
     setLoading(true);
     try {
       const response = await teacherListApi(userData);
-      // console.log("response", response);
       setTeachers(response.users);
       setLoading(false);
     } catch (error) {
@@ -97,27 +93,26 @@ const Teacher = () => {
   };
 
   useEffect(() => {
-
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
   const handleScroll = () => {
-    const bodyScrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-    const visible = bodyScrollTop >100;
+    const bodyScrollTop =
+      document.documentElement.scrollTop || document.body.scrollTop;
+    const visible = bodyScrollTop > 100;
     setShowPlusIcon(!visible);
   };
-
 
   return (
     <div className="wrapper">
       <div className="padding-all">
         <div className="header">
-        <FontAwesomeIcon icon={faChevronLeft} onClick={() => navigate(-1)} />
+          <FontAwesomeIcon icon={faChevronLeft} onClick={() => navigate(-1)} />
           Teacher's
-        <div className="searchIcon" onClick={handleSearch}>
+          <div className="searchIcon" onClick={handleSearch}>
             <FontAwesomeIcon icon={faSearch} />
           </div>
           {isSearchVisible && (
@@ -129,21 +124,22 @@ const Teacher = () => {
                 onChange={(e) => setSearchQuery(e.target.value)}
                 ref={searchRef}
               />
-              <div
-                className="close-icon"
-                onClick={handleClose}
-              >
+              <div className="close-icon" onClick={handleClose}>
                 <FontAwesomeIcon icon={faTimes} />
               </div>
             </div>
           )}
         </div>
         <div className="body" onScroll={handleScroll}>
-        {teachers.map((teacher, index) => (
+          {teachers.map((teacher, index) => (
             <div
               key={index}
               className={"listView-card"}
-              onClick={() => handleNavigation(`/teacherDetails?${index}&uuid=${teacher.uuid}&name=${teacher.name}&`)}
+              onClick={() =>
+                handleNavigation(
+                  `/teacherDetails?${index}&uuid=${teacher.uuid}&name=${teacher.name}&`
+                )
+              }
             >
               <div className="name">
                 {teacher.name
@@ -152,7 +148,13 @@ const Teacher = () => {
                     : teacher.name
                   : ""}
               </div>
-              <div className={`status chip ${teacher.user_status === 'Active' ? 'green' : 'red'}`}>{teacher.user_status}</div>
+              <div
+                className={`status chip ${
+                  teacher.user_status === "Active" ? "green" : "red"
+                }`}
+              >
+                {teacher.user_status}
+              </div>
               <div className="address">
                 {teacher.address
                   ? teacher.address.length > 20
@@ -166,49 +168,49 @@ const Teacher = () => {
           ))}
           <div
             className="plushIcon"
-            style={{ display: isSearchVisible ? 'none' : '' }}
+            style={{ display: isSearchVisible ? "none" : "" }}
             onClick={() => handleNavigation(`/SignUp?userType=teacher`)}
           >
             <FontAwesomeIcon icon={faPlus} />
           </div>
           {loading && (
-              <div className='loader-overlay'>
-            <div className='loader'></div>
+            <div className="loader-overlay">
+              <div className="loader"></div>
             </div>
-            )}
+          )}
         </div>
         <div className="mainFooter">
-        <div className="icon">
-          <FontAwesomeIcon
-            icon={faHome}
-            className={selectedIcon === "/controlPanel" ? "selected" : ""}
-            onClick={() => handleNavigation("/controlPanel?")}
-          />
-          <span className="label">Home</span>
+          <div className="icon">
+            <FontAwesomeIcon
+              icon={faHome}
+              className={selectedIcon === "/controlPanel" ? "selected" : ""}
+              onClick={() => handleNavigation("/controlPanel?")}
+            />
+            <span className="label">Home</span>
           </div>
           <div className="icon">
-          <FontAwesomeIcon
-            icon={faUsers}
-            className={selectedIcon === "/student" ? "selected" : ""}
-            onClick={() => handleNavigation("/student?")}
-          />
-          <span className="label">Students</span>
+            <FontAwesomeIcon
+              icon={faUsers}
+              className={selectedIcon === "/student" ? "selected" : ""}
+              onClick={() => handleNavigation("/student?")}
+            />
+            <span className="label">Students</span>
           </div>
           <div className="icon">
-          <FontAwesomeIcon
-            icon={faChalkboardTeacher}
-            className={selectedIcon === "/teacher" ? "selected" : ""}
-            onClick={() => handleNavigation("/teacher")}
-          />
-          <span className="label">Teachers</span>
+            <FontAwesomeIcon
+              icon={faChalkboardTeacher}
+              className={selectedIcon === "/teacher" ? "selected" : ""}
+              onClick={() => handleNavigation("/teacher")}
+            />
+            <span className="label">Teachers</span>
           </div>
           <div className="icon">
-          <FontAwesomeIcon
-            icon={faUser}
-            className={selectedIcon === "/profile" ? "selected" : ""}
-            onClick={() => handleNavigation("/profile?")}
-          />
-          <span className="label">Profile</span>
+            <FontAwesomeIcon
+              icon={faUser}
+              className={selectedIcon === "/profile" ? "selected" : ""}
+              onClick={() => handleNavigation("/profile?")}
+            />
+            <span className="label">Profile</span>
           </div>
         </div>
       </div>

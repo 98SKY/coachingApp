@@ -21,9 +21,8 @@ export const registerInstitute = (userData) => {
       return response.json();
     })
     .then((data) => {
-      // Check if the response contains a message property indicating success
       if (data && data.message) {
-        return data.message; // Return success message
+        return data.message;
       } else {
         throw new Error("Failed to create user");
       }
@@ -52,9 +51,8 @@ export const login = (username, password, userType) => {
       return response.json();
     })
     .then((data) => {
-      // Check if the response contains a message property indicating success
       if (data && data.message) {
-        return data; // Return success message
+        return data;
       } else {
         throw new Error("facing issue to login");
       }
@@ -140,9 +138,8 @@ export const userList = (userData) => {
       return response.json();
     })
     .then((data) => {
-      // Check if the response contains a message property indicating success
       if (data && data.message) {
-        return data; // Return success message
+        return data;
       } else {
         throw new Error("Failed to create user");
       }
@@ -171,9 +168,8 @@ export const profileData = (userData) => {
       return response.json();
     })
     .then((data) => {
-      // Check if the response contains a message property indicating success
       if (data && data.message) {
-        return data; // Return success message
+        return data;
       } else {
         throw new Error("Failed to fetch Data from UI");
       }
@@ -202,9 +198,8 @@ export const userDetails = (userData) => {
       return response.json();
     })
     .then((data) => {
-      // Check if the response contains a message property indicating success
       if (data && data.message) {
-        return data; // Return success message
+        return data;
       } else {
         throw new Error("Failed to create user");
       }

@@ -16,7 +16,7 @@ const SignUp = () => {
   const params = new URLSearchParams(location.search);
   const userTypeParam = params.get("userType");
   const userType = userTypeParam ? userTypeParam.split("?")[0] : null;
-  const myCoachingId = params.get("myCoachingId");;
+  const myCoachingId = params.get("myCoachingId");
   const [isEmailVerified, setIsEmailVerified] = useState(false);
   const [otp, setOtp] = useState("");
   const [otpSent, setOtpSent] = useState(false);
@@ -24,7 +24,6 @@ const SignUp = () => {
   const isStudent = userType === "student";
   const isTeacher = userType === "teacher";
   const isInstitute = userType === "institute";
-  //  console.log('userTypeuserTypeuserTypeuserType',myCoachingId);
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -35,29 +34,29 @@ const SignUp = () => {
     course: "",
     experienceInCourse: "",
     address: "",
-    fee: ""
+    fee: "",
   });
   const [formValid, setFormValid] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    if (name === "course") {
+      const selectedCourses = Array.from(
+        e.target.selectedOptions,
+        (option) => option.value
+      );
 
-        // Check if the field is 'course' and handle multiple selection
-        if (name === 'course') {
-        const selectedCourses = Array.from(e.target.selectedOptions, option => option.value);
-
-        setFormData({
-            ...formData,
-            [name]: selectedCourses,
-        });
-        } else {
-        setFormData({
-            ...formData,
-            [name]: value,
-    });
+      setFormData({
+        ...formData,
+        [name]: selectedCourses,
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [name]: value,
+      });
     }
-};
-
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -72,8 +71,7 @@ const SignUp = () => {
         !formData.medium ||
         !formData.course ||
         !formData.address ||
-        !formData.fee
-        )
+        !formData.fee)
     ) {
       isValid = false;
     } else if (
@@ -123,7 +121,6 @@ const SignUp = () => {
   };
 
   const handleVerifyEmail = () => {
-    
     setIsEmailVerified(true);
   };
   const handleSendOtp = async () => {
@@ -157,7 +154,6 @@ const SignUp = () => {
                   required
                   className="myInput-field"
                 />
-                
 
                 <input
                   type="tel"
@@ -234,14 +230,14 @@ const SignUp = () => {
                 />
                 {!isEmailVerified && (
                   <>
-                  <FontAwesomeIcon
-                    icon={faCheckCircle}
-                    onClick={handleVerifyEmail}
-                    className="verify-icon"
-                  />
-                  <span className='verify-text'>Verify</span>
+                    <FontAwesomeIcon
+                      icon={faCheckCircle}
+                      onClick={handleVerifyEmail}
+                      className="verify-icon"
+                    />
+                    <span className="verify-text">Verify</span>
                   </>
-                  )}
+                )}
               </>
             )}
             {isTeacher && (
@@ -352,20 +348,20 @@ const SignUp = () => {
                 />
                 {!isEmailVerified && (
                   <>
-                  <FontAwesomeIcon
-                    icon={faCheckCircle}
-                    onClick={handleVerifyEmail}
-                    className="verify-icon"
-                  />
-                  <span className='verify-text'>Verify</span>
+                    <FontAwesomeIcon
+                      icon={faCheckCircle}
+                      onClick={handleVerifyEmail}
+                      className="verify-icon"
+                    />
+                    <span className="verify-text">Verify</span>
                   </>
-                  )}
+                )}
               </>
             )}
             {loading && (
-              <div className='loader-overlay'>
-            <div className='loader'></div>
-            </div>
+              <div className="loader-overlay">
+                <div className="loader"></div>
+              </div>
             )}
             <button type="submit" disabled={!isEmailVerified}>
               Save

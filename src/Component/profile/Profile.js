@@ -19,11 +19,11 @@ const Profile = () => {
   const location = useLocation();
   const [loading, setLoading] = useState(false);
   const [selectedIcon, setSelectedIcon] = useState("/profile");
-  const [showMenu, setShowMenu] = useState(false); 
+  const [showMenu, setShowMenu] = useState(false);
   const params = new URLSearchParams(location.search);
   let myCoachingId = params.get("myCoachingId");
-  let  userType = params.get("userType");
-  const username = localStorage.getItem('name');
+  let userType = params.get("userType");
+  const username = localStorage.getItem("name");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [profileDetails, setProfileDetails] = useState({});
 
@@ -42,32 +42,31 @@ const Profile = () => {
     setShowMenu(!showMenu);
   };
 
-  const logOut = () =>{
+  const logOut = () => {
     localStorage.clear();
-    handleNavigation(`/login?language=english&userType=${userType}&`)
-  }
+    handleNavigation(`/login?language=english&userType=${userType}&`);
+  };
 
-  useEffect(() =>{
+  useEffect(() => {
     loadMyData();
-  },[]);
+  }, []);
 
-  const loadMyData = async () =>{
+  const loadMyData = async () => {
     if (loading) {
-      return; 
+      return;
     }
-  
+
     const userData = {
       instituteID: myCoachingId,
       userType: userType ? userType : "institute",
-      userID: username
+      userID: username,
     };
     setLoading(true);
     try {
       const response = await myDataApi(userData);
-    
+
       if (response && Object.keys(response.data[0]).length) {
         const userData = response.data[0];
-        // console.log(userData);
         setProfileDetails(userData);
       }
     } catch (error) {
@@ -116,9 +115,7 @@ const Profile = () => {
                 >
                   About
                 </div>
-                <div
-                  className="menu-item"
-                  onClick={logOut}>
+                <div className="menu-item" onClick={logOut}>
                   Logout
                 </div>
               </div>
@@ -132,21 +129,32 @@ const Profile = () => {
             </div>
             <div className="details">
               {loading ? (
-                <div className='loader-overlay'>
-                <div className='loader'></div>
+                <div className="loader-overlay">
+                  <div className="loader"></div>
                 </div>
               ) : (
                 <>
                   <div className="detail-item">
-                    <span className="label">Username:</span> {profileDetails.username}
+                    <span className="label">Username:</span>{" "}
+                    {profileDetails.username}
                   </div>
                   <div className="detail-item">
                     <span className="label">Email:</span>{" "}
-                    <span className="clickable" onClick={() => handleEmailClick(profileDetails.email)}>{profileDetails.email}</span>
+                    <span
+                      className="clickable"
+                      onClick={() => handleEmailClick(profileDetails.email)}
+                    >
+                      {profileDetails.email}
+                    </span>
                   </div>
                   <div className="detail-item">
                     <span className="label">Phone:</span>{" "}
-                    <span className="clickable" onClick={() => handlePhoneClick(profileDetails.phone_no)}>{profileDetails.phone_no}</span>
+                    <span
+                      className="clickable"
+                      onClick={() => handlePhoneClick(profileDetails.phone_no)}
+                    >
+                      {profileDetails.phone_no}
+                    </span>
                   </div>
                   <div className="detail-item">
                     <span className="label">Institute Name:</span>{" "}
@@ -166,37 +174,37 @@ const Profile = () => {
           </div>
         </div>
         <div className="mainFooter">
-        <div className="icon">
-          <FontAwesomeIcon
-            icon={faHome}
-            className={selectedIcon === "/controlPanel" ? "selected" : ""}
-            onClick={() => handleNavigation("/controlPanel")}
-          />
-          <span className="label">Home</span>
+          <div className="icon">
+            <FontAwesomeIcon
+              icon={faHome}
+              className={selectedIcon === "/controlPanel" ? "selected" : ""}
+              onClick={() => handleNavigation("/controlPanel")}
+            />
+            <span className="label">Home</span>
           </div>
           <div className="icon">
-          <FontAwesomeIcon
-            icon={faUsers}
-            className={selectedIcon === "/student" ? "selected" : ""}
-            onClick={() => handleNavigation("/student")}
-          />
-          <span className="label">Students</span>
+            <FontAwesomeIcon
+              icon={faUsers}
+              className={selectedIcon === "/student" ? "selected" : ""}
+              onClick={() => handleNavigation("/student")}
+            />
+            <span className="label">Students</span>
           </div>
           <div className="icon">
-          <FontAwesomeIcon
-            icon={faChalkboardTeacher}
-            className={selectedIcon === "/teacher" ? "selected" : ""}
-            onClick={() => handleNavigation("/teacher")}
-          />
-          <span className="label">Teachers</span>
+            <FontAwesomeIcon
+              icon={faChalkboardTeacher}
+              className={selectedIcon === "/teacher" ? "selected" : ""}
+              onClick={() => handleNavigation("/teacher")}
+            />
+            <span className="label">Teachers</span>
           </div>
           <div className="icon">
-          <FontAwesomeIcon
-            icon={faUser}
-            className={selectedIcon === "/profile" ? "selected" : ""}
-            onClick={() => handleNavigation("/profile")}
-          />
-          <span className="label">Profile</span>
+            <FontAwesomeIcon
+              icon={faUser}
+              className={selectedIcon === "/profile" ? "selected" : ""}
+              onClick={() => handleNavigation("/profile")}
+            />
+            <span className="label">Profile</span>
           </div>
         </div>
       </div>
