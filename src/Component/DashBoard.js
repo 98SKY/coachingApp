@@ -276,7 +276,7 @@ const DashBoard = () => {
         </div>
       </div>
       {showPopup && (
-        <div className={`popup-overlay`}>
+        <div className="popup-overlay">
           <div className="popup-content">
             <h3 className="popUpHeader">Confirm Date</h3>
             <p>
