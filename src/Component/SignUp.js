@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../global.css";
 import "./signUp.css";
 import { useNavigate } from "react-router-dom";
-import { registerInstitute } from "./Global";
+import { registerInstitute, courseName } from "./Global";
 import { useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -13,6 +13,7 @@ import {
 const SignUp = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const [courses, setCourses] = useState([]);
   const params = new URLSearchParams(location.search);
   const userTypeParam = params.get("userType");
   const userType = userTypeParam ? userTypeParam.split("?")[0] : null;
@@ -31,24 +32,34 @@ const SignUp = () => {
     phoneNumber: "",
     std: "",
     medium: "",
-    course: "",
+    course: [],
     experienceInCourse: "",
     address: "",
     fee: "",
   });
   const [formValid, setFormValid] = useState(false);
 
+  useEffect(() => {
+    if (myCoachingId) {
+      const getCourses = async () => {
+        const coursesData = await fetchCourses(myCoachingId);
+        setCourses(coursesData);
+      };
+
+      getCourses();
+    }
+  }, [myCoachingId]);
+
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    if (name === "course") {
-      const selectedCourses = Array.from(
-        e.target.selectedOptions,
+    const { name, value, type, selectedOptions } = e.target;
+    if (type === "select-multiple") {
+      const selectedValues = Array.from(
+        selectedOptions,
         (option) => option.value
       );
-
       setFormData({
         ...formData,
-        [name]: selectedCourses,
+        [name]: selectedValues,
       });
     } else {
       setFormData({
@@ -69,7 +80,7 @@ const SignUp = () => {
         !formData.phoneNumber ||
         !formData.std ||
         !formData.medium ||
-        !formData.course ||
+        formData.course.length === 0 ||
         !formData.address ||
         !formData.fee)
     ) {
@@ -97,7 +108,6 @@ const SignUp = () => {
     if (isValid) {
       setLoading(true);
       try {
-        console.log("userType", userType, myCoachingId);
         const formDataWithUserType = { ...formData, userType, myCoachingId };
         const response = await registerInstitute(formDataWithUserType);
         setLoading(false);
@@ -105,7 +115,7 @@ const SignUp = () => {
           `Check your email or phone for the user ID and one-time password.`
         );
         setFormValid(true);
-        if (!userType === "institute") {
+        if (userType !== "institute") {
           navigate(`/login?language=english&userType=${userType}`);
         } else {
           window.history.back();
@@ -123,11 +133,38 @@ const SignUp = () => {
   const handleVerifyEmail = () => {
     setIsEmailVerified(true);
   };
+
   const handleSendOtp = async () => {
     // Call API to send OTP to the email
     // For example, you can use a function like sendOtpEmail(formData.email)
     // Make sure to handle the API call and state update accordingly
     setOtpSent(true);
+  };
+
+  const fetchCourses = async (myCoachingId) => {
+    const coachingId = myCoachingId;
+    setLoading(true);
+    try {
+      console.log("coachingIdcoachingId", coachingId);
+      const response = await courseName(coachingId);
+      if (response.courses == null) {
+        const errorData = await response;
+        console.error("Response Error:", errorData);
+        throw new Error(errorData.error || "Failed to fetch courses");
+      }
+
+      const data = await response;
+      if (data && data.courses) {
+        return data.courses;
+      } else {
+        throw new Error("Courses not found in response data");
+      }
+    } catch (error) {
+      console.error("Error fetching courses:", error.message);
+      return [];
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -154,7 +191,6 @@ const SignUp = () => {
                   required
                   className="myInput-field"
                 />
-
                 <input
                   type="tel"
                   name="phoneNumber"
@@ -164,7 +200,6 @@ const SignUp = () => {
                   required
                   className="myInput-field"
                 />
-
                 <input
                   type="decimal"
                   name="fee"
@@ -174,7 +209,6 @@ const SignUp = () => {
                   required
                   className="myInput-field"
                 />
-
                 <input
                   type="text"
                   name="std"
@@ -194,19 +228,6 @@ const SignUp = () => {
                   className="myInput-field"
                 />
                 <select
-                  name="medium"
-                  value={formData.medium}
-                  onChange={handleChange}
-                  required
-                  className="myInput-field"
-                >
-                  <option value="">Select medium</option>
-                  <option value="English">English</option>
-                  <option value="Hindi">Hindi</option>
-                  <option value="Other">Other</option>
-                </select>
-
-                <select
                   name="course"
                   value={formData.course}
                   onChange={handleChange}
@@ -214,9 +235,18 @@ const SignUp = () => {
                   multiple
                   className="myInput-field"
                 >
-                  <option value="Math">Math</option>
-                  <option value="Science">Science</option>
-                  <option value="History">History</option>
+                  {courses.length > 0 ? (
+                    courses.map((course) => (
+                      <option
+                        key={course.master_course_id}
+                        value={course.master_course_id}
+                      >
+                        {course.master_course_name}
+                      </option>
+                    ))
+                  ) : (
+                    <option value="">No courses available</option>
+                  )}
                 </select>
 
                 <input
@@ -251,7 +281,6 @@ const SignUp = () => {
                   required
                   className="myInput-field"
                 />
-
                 <input
                   type="text"
                   name="address"
@@ -275,11 +304,21 @@ const SignUp = () => {
                   value={formData.course}
                   onChange={handleChange}
                   required
+                  multiple
                   className="myInput-field"
                 >
-                  <option value="Math">PCM</option>
-                  <option value="Science">PCB</option>
-                  <option value="History">Other</option>
+                  {courses.length > 0 ? (
+                    courses.map((course) => (
+                      <option
+                        key={course.master_course_id}
+                        value={course.master_course_id}
+                      >
+                        {course.master_course_name}
+                      </option>
+                    ))
+                  ) : (
+                    <option value="">No courses available</option>
+                  )}
                 </select>
                 <input
                   type="text"

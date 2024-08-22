@@ -235,3 +235,31 @@ export const dashBoardCount = (dashBoardData) => {
       }
     });
 };
+
+export const courseName = (coachingId) => {
+  const apiUrl = `${BASE_URL}/courses?coachingId=${coachingId}`;
+  return fetch(apiUrl, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => {
+      if (!response.ok) {
+        return response.json().then((errorData) => {
+          throw new Error(errorData.error || "Failed to fetch Courses Name");
+        });
+      }
+      return response.json();
+    })
+    .then((data) => {
+      if (data && data.message) {
+        return data;
+      } else {
+        throw new Error("facing issue to fetch Courses name");
+      }
+    })
+    .catch((error) => {
+      throw error;
+    });
+};
