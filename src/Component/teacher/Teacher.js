@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../global.css";
 import "./teacher.css";
-import { userList as teacherListApi } from ".././Global";
+import { userList as teacherListApi } from "../Global";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHome,
@@ -30,6 +30,7 @@ const Teacher = () => {
   const searchRef = useRef(null);
   const [teachers, setTeachers] = useState([]);
   const [showPlusIcon, setShowPlusIcon] = useState(true);
+  const [currentCourseIndex, setCurrentCourseIndex] = useState({});
 
   const handleNavigation = (path) => {
     const currentPath = window.location.pathname;
@@ -73,6 +74,23 @@ const Teacher = () => {
     }
   }, [searchQuery]);
 
+  useEffect(() => {
+    const intervals = [];
+    teachers.forEach((teacher) => {
+      if (teacher.courses && teacher.courses.length > 1) {
+        const intervalId = setInterval(() => {
+          setCurrentCourseIndex((prevIndex) => ({
+            ...prevIndex,
+            [teacher.uuid]:
+              (prevIndex[teacher.uuid] || 0) + 1,
+          }));
+        }, 3000); // 3 seconds interval for multiple courses
+        intervals.push(intervalId);
+      }
+    });
+    return () => intervals.forEach((intervalId) => clearInterval(intervalId));
+  }, [teachers]);
+
   const fetchData = async () => {
     const userData = {
       coachingId: myCoachingId,
@@ -92,19 +110,19 @@ const Teacher = () => {
     }
   };
 
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
   const handleScroll = () => {
     const bodyScrollTop =
       document.documentElement.scrollTop || document.body.scrollTop;
     const visible = bodyScrollTop > 100;
     setShowPlusIcon(!visible);
   };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   return (
     <div className="wrapper">
@@ -131,41 +149,66 @@ const Teacher = () => {
           )}
         </div>
         <div className="body" onScroll={handleScroll}>
-          {teachers.map((teacher, index) => (
-            <div
-              key={index}
-              className={"listView-card"}
-              onClick={() =>
-                handleNavigation(
-                  `/teacherDetails?${index}&uuid=${teacher.uuid}&name=${teacher.name}&`
-                )
-              }
-            >
-              <div className="name">
-                {teacher.name
-                  ? teacher.name.length > 20
-                    ? teacher.name.slice(0, 20) + "..."
-                    : teacher.name
-                  : ""}
-              </div>
+          {teachers.map((teacher, index) => {
+            const courses = teacher.courses || [];
+            const currentIndex = currentCourseIndex[teacher.uuid] || 0;
+
+            return (
               <div
-                className={`status chip ${
-                  teacher.user_status === "Active" ? "green" : "red"
-                }`}
+                key={index}
+                className="listView-card"
+                onClick={() =>
+                  handleNavigation(
+                    `/teacherDetails?${index}&uuid=${teacher.uuid}&name=${teacher.name}&`
+                  )
+                }
               >
-                {teacher.user_status}
+                <div className="name">
+                  {teacher.name
+                    ? teacher.name.length > 20
+                      ? teacher.name.slice(0, 20) + "..."
+                      : teacher.name
+                    : ""}
+                </div>
+                <div
+                  className={`status chip ${
+                    teacher.user_status === "Active" ? "green" : "red"
+                  }`}
+                >
+                  {teacher.user_status}
+                </div>
+                <div className="address">
+                  {teacher.address
+                    ? teacher.address.length > 20
+                      ? teacher.address.slice(0, 20) + "..."
+                      : teacher.address
+                    : ""}
+                </div>
+                <div className="fee-status">{teacher.phone_no}</div>
+                <div className="subject">
+                  {courses.length > 0 && (
+                    <div
+                      className={`course-item ${
+                        currentIndex % 2 === 0
+                          ? "course-item-even"
+                          : "course-item-odd"
+                      }`}
+                    >
+                      {courses.length === 1
+                        ? courses[0].course
+                        : courses[currentIndex % courses.length].course}
+                      <div className="info-box">
+                        More information about{" "}
+                        {courses.length === 1
+                          ? courses[0].course
+                          : courses[currentIndex % courses.length].course}
+                      </div>
+                    </div>
+                  )}
+                </div>
               </div>
-              <div className="address">
-                {teacher.address
-                  ? teacher.address.length > 20
-                    ? teacher.address.slice(0, 20) + "..."
-                    : teacher.address
-                  : ""}
-              </div>
-              <div className="fee-status">{teacher.phone_no}</div>
-              <div className="subject">{teacher.course}</div>
-            </div>
-          ))}
+            );
+          })}
           <div
             className="plushIcon"
             style={{ display: isSearchVisible ? "none" : "" }}

@@ -109,7 +109,6 @@ const Student = () => {
     setLoading(true);
     try {
       const response = await userListApi(userData);
-      // console.log("response", response.users);
       setStudents(response.users);
       setLoading(false);
     } catch (error) {
@@ -190,7 +189,13 @@ const Student = () => {
                 <div className="subject">
                   {courses.length > 0 && (
                     <div className="course-container">
-                      <span className="course-item">
+                      <span
+                        className={`course-item ${
+                          currentIndex % 2 === 0
+                            ? "course-item-even"
+                            : "course-item-odd"
+                        }`}
+                      >
                         {courses.length === 1
                           ? courses[0].course
                           : courses[currentIndex % courses.length].course}
