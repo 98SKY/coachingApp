@@ -8,6 +8,7 @@ import {
   faUsers,
   faChalkboardTeacher,
   faUser,
+  faTimes
 } from "@fortawesome/free-solid-svg-icons";
 import "../global.css";
 import "./dashBoard.css";
@@ -29,6 +30,7 @@ const DashBoard = () => {
   const [showPopup, setShowPopup] = useState(false);
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [selectedOption, setSelectedOption] = useState("");
+  const [iconToggle, setIconToggle] = useState(false);
   const [studentsData, setStudentsData] = useState({
     totalStudents: 0,
     activeStudents: 0,
@@ -153,9 +155,12 @@ const DashBoard = () => {
           DashBoard
           <div
             className="calendar-icon"
-            onClick={() => setShowFromDatePicker(!showFromDatePicker)}
+            onClick={() => {
+              setShowFromDatePicker(!showFromDatePicker);
+              setIconToggle(!iconToggle);
+            }}
           >
-            <FontAwesomeIcon icon={faCalendarAlt} />
+            <FontAwesomeIcon icon={iconToggle ? faTimes : faCalendarAlt} />
           </div>
           {showFromDatePicker && (
             <div className="datepicker-container">
