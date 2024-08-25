@@ -182,7 +182,7 @@ const StudentDetailsView = () => {
       <div className="padding-all">
         <div className="header">
           <FontAwesomeIcon icon={faChevronLeft} onClick={() => navigate(-1)} />
-          <div>{userName}</div>
+          <div>{userName.charAt(0).toUpperCase() + userName.slice(1)}</div>
         </div>
         <div className="body">
           {cardData.map((card, index) => (
