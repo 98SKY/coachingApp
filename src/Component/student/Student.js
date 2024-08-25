@@ -22,7 +22,7 @@ const Student = () => {
   const location = useLocation();
   const [selectedIcon, setSelectedIcon] = useState("/student");
   const params = new URLSearchParams(location.search);
-  let myCoachingId = params.get("myCoachingId");
+  const myCoachingId = params.get("myCoachingId");
   const userType = params.get("userType");
   const userCategory = params.get("userCategory");
   const [searchQuery, setSearchQuery] = useState("");
@@ -30,6 +30,7 @@ const Student = () => {
   const searchRef = useRef(null);
   const [students, setStudents] = useState([]);
   const [showPlusIcon, setShowPlusIcon] = useState(true);
+  const [currentCourseIndex, setCurrentCourseIndex] = useState(0);
 
   const handleNavigation = (path) => {
     let currentPath = window.location.pathname;
@@ -66,37 +67,41 @@ const Student = () => {
     if (searchQuery === "") {
       fetchData();
     } else {
-      const filteredStudents = students.filter((student) =>
-        student.name.toLowerCase().includes(searchQuery.toLowerCase())
-      );
-      setStudents(filteredStudents);
+      applyFilter();
     }
   }, [searchQuery]);
 
   useEffect(() => {
+    const handleScroll = () => {
+      const bodyScrollTop =
+        document.documentElement.scrollTop || document.body.scrollTop;
+      setShowPlusIcon(bodyScrollTop <= 100);
+    };
+
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
-  const handleScroll = () => {
-    const bodyScrollTop =
-      document.documentElement.scrollTop || document.body.scrollTop;
-    const visible = bodyScrollTop > 100;
-    setShowPlusIcon(!visible);
-  };
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setCurrentCourseIndex((prevIndex) => prevIndex + 1);
+    }, 2000);
+
+    return () => clearInterval(intervalId);
+  }, [students]);
 
   const fetchData = async () => {
     const userData = {
       coachingId: myCoachingId,
-      userCategory: userCategory ? userCategory : "student",
-      userType: userType ? userType : "institute",
+      userCategory: userCategory || "student",
+      userType: userType || "institute",
     };
     setLoading(true);
     try {
       const response = await userListApi(userData);
-      console.log("response", response.users[8].course);
+      console.log("response", response.users);
       setStudents(response.users);
       setLoading(false);
     } catch (error) {
@@ -131,22 +136,19 @@ const Student = () => {
             </div>
           )}
         </div>
-        <div className="body" onScroll={handleScroll}>
+        <div className="body">
           {students.map((student, index) => {
-            let courses = [];
-            try {
-              const courseStr = student.course.replace(/^{|}$/g, "");
-              courses = courseStr
-                .split(",")
-                .map((course) => course.trim().replace(/"/g, ""));
-            } catch (error) {
-              console.error("Failed to parse courses:", error);
-            }
+            const courses = student.course
+              ? student.course
+                  .replace(/^{|}$/g, "")
+                  .split(",")
+                  .map((course) => course.trim().replace(/"/g, ""))
+              : [];
 
             return (
               <div
                 key={index}
-                className={"listView-card"}
+                className="listView-card"
                 onClick={() =>
                   handleNavigation(
                     `/studentDetails?${index}&uuid=${student.uuid}&name=${student.name}`
@@ -182,14 +184,17 @@ const Student = () => {
                 </div>
 
                 <div className="subject">
-                  {courses.map((course, idx) => (
-                    <div key={idx} className="course-container">
-                      <span className="course-item">{course}</span>
+                  {courses.length > 0 && (
+                    <div className="course-container">
+                      <span className="course-item">
+                        {courses[currentCourseIndex % courses.length]}
+                      </span>
                       <div className="info-box">
-                        More information about {course}
+                        More information about{" "}
+                        {courses[currentCourseIndex % courses.length]}
                       </div>
                     </div>
-                  ))}
+                  )}
                 </div>
               </div>
             );

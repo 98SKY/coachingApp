@@ -3,62 +3,36 @@
   position: absolute;
   top: 10px;
   left: 10px;
+  white-space: nowrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .address {
   text-align: center;
-  margin-top: 30px;
+  margin-top: 50px;
+  white-space: nowrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .status {
   position: absolute;
   top: 10px;
   right: 10px;
+  white-space: nowrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .fee-status {
   position: absolute;
   bottom: 10px;
   left: 10px;
-}
-
-.subject {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  display: flex;
-  gap: 5px;
-}
-
-.name,
-.address,
-.status,
-.fee-status,
-.subject {
   white-space: nowrap;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 }
 
-.course-item {
-  display: inline-block;
-  background-color: #f0f0f0;
-  padding: 3px 5px;
-  border-radius: 3px;
-  margin-right: 5px;
-}
 
-.info-box {
-  display: none;
-  position: absolute;
-  background-color: #fff;
-  color: #333;
-  padding: 8px;
-  border: 1px solid #ddd;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  z-index: 100;
-  width: 200px;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-}
+
