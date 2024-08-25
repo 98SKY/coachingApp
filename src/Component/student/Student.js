@@ -30,7 +30,7 @@ const Student = () => {
   const searchRef = useRef(null);
   const [students, setStudents] = useState([]);
   const [showPlusIcon, setShowPlusIcon] = useState(true);
-  const [currentCourseIndex, setCurrentCourseIndex] = useState(0);
+  const [currentCourseIndex, setCurrentCourseIndex] = useState({});
 
   const handleNavigation = (path) => {
     let currentPath = window.location.pathname;
@@ -85,11 +85,19 @@ const Student = () => {
   }, []);
 
   useEffect(() => {
-    const intervalId = setInterval(() => {
-      setCurrentCourseIndex((prevIndex) => prevIndex + 1);
-    }, 2000);
-
-    return () => clearInterval(intervalId);
+    const intervals = [];
+    students.forEach(student => {
+      if (student.courses && student.courses.length > 1) {
+        const intervalId = setInterval(() => {
+          setCurrentCourseIndex(prevIndex => ({
+            ...prevIndex,
+            [student.uuid]: (prevIndex[student.uuid] || 0) + 1
+          }));
+        }, 3000);
+        intervals.push(intervalId);
+      }
+    });
+    return () => intervals.forEach(intervalId => clearInterval(intervalId));
   }, [students]);
 
   const fetchData = async () => {
@@ -101,7 +109,7 @@ const Student = () => {
     setLoading(true);
     try {
       const response = await userListApi(userData);
-      console.log("response", response.users);
+      // console.log("response", response.users);
       setStudents(response.users);
       setLoading(false);
     } catch (error) {
@@ -138,12 +146,8 @@ const Student = () => {
         </div>
         <div className="body">
           {students.map((student, index) => {
-            const courses = student.course
-              ? student.course
-                  .replace(/^{|}$/g, "")
-                  .split(",")
-                  .map((course) => course.trim().replace(/"/g, ""))
-              : [];
+            const courses = student.courses || [];
+            const currentIndex = currentCourseIndex[student.uuid] || 0;
 
             return (
               <div
@@ -187,11 +191,15 @@ const Student = () => {
                   {courses.length > 0 && (
                     <div className="course-container">
                       <span className="course-item">
-                        {courses[currentCourseIndex % courses.length]}
+                        {courses.length === 1
+                          ? courses[0].course
+                          : courses[currentIndex % courses.length].course}
                       </span>
                       <div className="info-box">
                         More information about{" "}
-                        {courses[currentCourseIndex % courses.length]}
+                        {courses.length === 1
+                          ? courses[0].course
+                          : courses[currentIndex % courses.length].course}
                       </div>
                     </div>
                   )}
