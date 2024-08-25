@@ -81,8 +81,7 @@ const Teacher = () => {
         const intervalId = setInterval(() => {
           setCurrentCourseIndex((prevIndex) => ({
             ...prevIndex,
-            [teacher.uuid]:
-              (prevIndex[teacher.uuid] || 0) + 1,
+            [teacher.uuid]: (prevIndex[teacher.uuid] || 0) + 1,
           }));
         }, 3000); // 3 seconds interval for multiple courses
         intervals.push(intervalId);

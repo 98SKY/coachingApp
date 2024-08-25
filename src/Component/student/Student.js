@@ -86,18 +86,18 @@ const Student = () => {
 
   useEffect(() => {
     const intervals = [];
-    students.forEach(student => {
+    students.forEach((student) => {
       if (student.courses && student.courses.length > 1) {
         const intervalId = setInterval(() => {
-          setCurrentCourseIndex(prevIndex => ({
+          setCurrentCourseIndex((prevIndex) => ({
             ...prevIndex,
-            [student.uuid]: (prevIndex[student.uuid] || 0) + 1
+            [student.uuid]: (prevIndex[student.uuid] || 0) + 1,
           }));
         }, 3000);
         intervals.push(intervalId);
       }
     });
-    return () => intervals.forEach(intervalId => clearInterval(intervalId));
+    return () => intervals.forEach((intervalId) => clearInterval(intervalId));
   }, [students]);
 
   const fetchData = async () => {

@@ -8,7 +8,7 @@ import {
   faUsers,
   faChalkboardTeacher,
   faUser,
-  faTimes
+  faTimes,
 } from "@fortawesome/free-solid-svg-icons";
 import "../global.css";
 import "./dashBoard.css";
@@ -75,7 +75,7 @@ const DashBoard = () => {
   const handleConfirmDate = () => {
     if (selectedOptions.length > 0 && fromDate && toDate) {
       setShowPopup(false);
-      console.log("selectedOptions", selectedOptions);
+      // console.log("selectedOptions", selectedOptions);
       const lowercaseOptions = selectedOptions.map((option) =>
         option.toLowerCase()
       );
@@ -121,7 +121,7 @@ const DashBoard = () => {
       }
       setLoading(false);
     } catch (error) {
-      console.log("Failed to fetch dashBoardCount :", error);
+      // console.log("Failed to fetch dashBoardCount :", error);
       alert(error.message);
     } finally {
       setLoading(false);
