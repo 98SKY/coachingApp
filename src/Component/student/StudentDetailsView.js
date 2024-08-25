@@ -135,24 +135,38 @@ const StudentDetailsView = () => {
     try {
       const response = await myDetailsApi(userData);
       const studentDetails = response.userData[0];
+  
+      // Extracting data from the response
+      const personalInfo = studentDetails.personalInfo;
+      const instituteInfo = studentDetails.instituteInfo;
+      const feeInfo = studentDetails.feeInfo;
+      const studyInfo = studentDetails.studyInfo;
+  
+      // Setting the extracted data to state variables
       setStudentDetails(studentDetails);
-      setInitialData(studentDetails);
+      setInitialData({
+        ...personalInfo,
+        ...instituteInfo,
+        ...feeInfo,
+        ...studyInfo,
+        subjects: studentDetails.courses.map(course => course.course_name).join(', ')
+      });
       setFormData({
-        name: studentDetails.student_name,
-        age: studentDetails.age,
-        email: studentDetails.email,
-        address: studentDetails.address,
-        EnterDate: studentDetails.enterdate,
-        gender: studentDetails.gender,
-        Mobile: studentDetails.phone_no,
-        institute: studentDetails.institute_name,
-        institute_address: studentDetails.institute_address,
-        userName: studentDetails.username,
-        Status: studentDetails.user_status,
-        userType: studentDetails.role_type,
-        fees: studentDetails.amount,
-        paymentStatus: studentDetails.description,
-        subjects: studentDetails.course,
+        name: personalInfo.name || "",
+        age: personalInfo.dob || "",
+        email: personalInfo.email || "",
+        address: personalInfo.address || "",
+        EnterDate: personalInfo.entered_date || "",
+        gender: personalInfo.gender || "",
+        Mobile: personalInfo.phone_no || "",
+        institute: instituteInfo.institute_name || "",
+        institute_address: instituteInfo.institute_address || "",
+        userName: instituteInfo.institute_userName || "",
+        Status: personalInfo.user_status || "",
+        userType: instituteInfo.role_type || "",
+        fees: feeInfo.amount || "",
+        paymentStatus: feeInfo.description || "",
+        subjects: studentDetails.courses.map(course => course.course_name).join(', ')
       });
       setLoading(false);
     } catch (error) {
@@ -161,6 +175,7 @@ const StudentDetailsView = () => {
       setLoading(false);
     }
   };
+  
 
   return (
     <div className="wrapper">
