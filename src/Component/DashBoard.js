@@ -190,7 +190,7 @@ const DashBoard = () => {
 
         <div className="body">
           <div className="card notification-card">
-            <h3>Notifications</h3>
+            <h3 className="headNotification">Notifications</h3>
             <p>Latest updates and alerts will appear here.</p>
           </div>
 
@@ -206,7 +206,7 @@ const DashBoard = () => {
                   : `info ${instituteInfo}`}
               </div>
             </div>
-            <div className="card" onClick={() => handleCardClick("students")}>
+            <div className="card" onDoubleClick={() => handleCardClick("students")}>
               <h3 className="dashBoardCardHeader">STUDENTS</h3>
               <div className={`dasboardCardItems total`}>
                 {loading && selectedOption === "students"
@@ -224,7 +224,7 @@ const DashBoard = () => {
                   : `Inactive ${studentsData.inactiveStudents}`}
               </div>
             </div>
-            <div className="card" onClick={() => handleCardClick("teachers")}>
+            <div className="card" onDoubleClick={() => handleCardClick("teachers")}>
               <h3 className="dashBoardCardHeader">TEACHERS</h3>
               <div className={`dasboardCardItems total`}>
                 {loading && selectedOption === "teachers"

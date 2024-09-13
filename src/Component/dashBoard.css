@@ -117,3 +117,6 @@
 .inactive {
   background-color: rgb(245, 226, 226);
 }
+.headNotification{
+  margin-top: -35px;
+}
