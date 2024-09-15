@@ -22,7 +22,7 @@
     flex: 1;
     padding: 50px 20px 20px;
     text-align: center;
-    display: grid;
+    /* display: grid; */
     flex-direction: column;
     align-items: center;
   }
@@ -209,8 +209,8 @@
     padding: 20px;
     cursor: pointer;
     width: 100%;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-top: 11px;
+    margin-bottom: -2px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     overflow: auto;
   }
