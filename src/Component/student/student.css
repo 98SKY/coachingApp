@@ -1,26 +1,33 @@
 .name {
-  font-weight: bold;
+  font-weight: 600; /* slightly thicker for better readability */
+  font-size: 1.2em; /* larger name size */
+  color: #333; /* darker text for readability */
   position: absolute;
-  top: 10px;
-  left: 10px;
+  top: 12px;
+  left: 12px;
   white-space: nowrap;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
+  overflow-x: hidden; /* prevent overflow */
+  text-overflow: ellipsis; /* add ellipsis for long names */
 }
 
 .address {
-  text-align: center;
-  margin-top: 50px;
+  text-align: left;
+  margin-top: 60px; /* more space for better hierarchy */
+  font-size: 1em; /* standard text size */
+  color: #555; /* lighter text for less importance */
   white-space: nowrap;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
 }
 
 .fee-status {
   position: absolute;
-  bottom: 10px;
-  left: 10px;
-  white-space: nowrap;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
+  bottom: 12px;
+  left: 12px;
+  background-color: rgb(90, 154, 194); /* green background for "Active" status */
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 5px; /* rounded edges for badges */
+  font-size: 0.9em; /* smaller badge font */
+  font-weight: 500; /* medium font weight */
 }
