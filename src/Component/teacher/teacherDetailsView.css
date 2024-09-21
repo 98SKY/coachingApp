@@ -30,14 +30,21 @@
 }
 
 .input-field {
-  margin-bottom: 15px;
+  position: relative;
+  margin-bottom: 30px;
 }
 
 .input-field label {
-  display: block;
-  margin-bottom: 8px;
-  font-weight: bold;
-  color: #333;
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  transform: translateY(-50%);
+  background-color: white;
+  padding: 0 5px;
+  color: #999;
+  font-size: 1em;
+  transition: all 0.3s ease;
+  pointer-events: none;
 }
 
 .input-field input {
@@ -45,14 +52,12 @@
   border: 1px solid #ccc;
   border-radius: 5px;
   width: 100%;
-  box-sizing: border-box;
   font-size: 1em;
   transition: border-color 0.3s ease;
 }
 
-.input-field input:focus {
-  border-color: #2b8aba;
-  outline: none;
+.input-field input:focus::placeholder {
+  opacity: 0;
 }
 
 button {
@@ -74,4 +79,20 @@ button:disabled {
   background-color: #ccc;
   color: #666;
   cursor: not-allowed;
+}
+
+.input-field input:focus + label,
+.input-field input:not(:placeholder-shown) + label,
+.input-field input:not([value=""]) + label,
+.input-field input.not-empty + label {
+  top: -2px;
+  left: 10px;
+  color: #2b8aba;
+  font-size: 0.9em;
+  background-color: white;
+}
+
+.input-field input:focus {
+  border-color: #2b8aba;
+  outline: none;
 }

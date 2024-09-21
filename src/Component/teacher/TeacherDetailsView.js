@@ -121,7 +121,7 @@ const TeacherDetailsView = () => {
       <div className="padding-all">
         <div className="header">
           <FontAwesomeIcon icon={faChevronLeft} onClick={() => navigate(-1)} />
-          <div>{userName}</div>
+          <div>{userName.charAt(0).toUpperCase() + userName.slice(1)}</div>
         </div>
         <div className="body">
           {cardData.map((card, index) => (
@@ -134,82 +134,44 @@ const TeacherDetailsView = () => {
               </div>
               {expandedCard === index && (
                 <div className="card-content">
-                  {/* For non-courses data (e.g., personal details, institute details) */}
+                  {/* For non-courses data */}
                   {card.title !== "Courses" ? (
                     Object.entries(card.data).map(([key, value]) => (
                       <div key={key} className="input-field">
                         <input
                           type="text"
                           value={value || ""}
-                          placeholder={key} // Placeholder will be the field name
-                          onFocus={(e) => e.target.placeholder = ""}
-                          onBlur={(e) => e.target.placeholder = key} // Show placeholder when not focused
                           onChange={(e) =>
-                            setFormData((prev) => ({ ...prev, [key]: e.target.value }))
+                            setFormData((prev) => ({
+                              ...prev,
+                              [key]: e.target.value,
+                            }))
                           }
                         />
+                        <label>{key}</label>
                       </div>
                     ))
                   ) : (
                     // For course details
                     card.data.map((course, courseIndex) => (
                       <div key={courseIndex} className="course-details">
-                        <div className="input-field">
-                          <input
-                            type="text"
-                            value={course.course_name || ""}
-                            placeholder="Course Name"
-                            onFocus={(e) => e.target.placeholder = ""}
-                            onBlur={(e) => e.target.placeholder = "Course Name"}
-                            onChange={(e) => {
-                              const newCourses = [...teacherData.courses];
-                              newCourses[courseIndex].course_name = e.target.value;
-                              setTeacherDetails({ ...teacherData, courses: newCourses });
-                            }}
-                          />
-                        </div>
-                        <div className="input-field">
-                          <input
-                            type="text"
-                            value={course.course_status || ""}
-                            placeholder="Course Status"
-                            onFocus={(e) => e.target.placeholder = ""}
-                            onBlur={(e) => e.target.placeholder = "Course Status"}
-                            onChange={(e) => {
-                              const newCourses = [...teacherData.courses];
-                              newCourses[courseIndex].course_status = e.target.value;
-                              setTeacherDetails({ ...teacherData, courses: newCourses });
-                            }}
-                          />
-                        </div>
-                        <div className="input-field">
-                          <input
-                            type="text"
-                            value={course.course_enrolled_date || ""}
-                            placeholder="Enrolled Date"
-                            onFocus={(e) => e.target.placeholder = ""}
-                            onBlur={(e) => e.target.placeholder = "Enrolled Date"}
-                            onChange={(e) => {
-                              const newCourses = [...teacherData.courses];
-                              newCourses[courseIndex].course_enrolled_date = e.target.value;
-                              setTeacherDetails({ ...teacherData, courses: newCourses });
-                            }}
-                          />
-                        </div>
-                        <div className="input-field">
-                          <input
-                            type="text"
-                            value={course.experience || ""}
-                            placeholder="Experience"
-                            onFocus={(e) => e.target.placeholder = ""}
-                            onBlur={(e) => e.target.placeholder = "Experience"}
-                            onChange={(e) => {
-                              const newCourses = [...teacherData.courses];
-                              newCourses[courseIndex].experience = e.target.value;
-                              setTeacherDetails({ ...teacherData, courses: newCourses });
-                            }}
-                          />
-                        </div>
+                        {["course_name", "course_status", "course_enrolled_date", "experience"].map((field, idx) => (
+                          <div key={idx} className="input-field">
+                            <input
+                              type="text"
+                              value={course[field] || ""}
+                              onChange={(e) => {
+                                const newCourses = [...teacherData.courses];
+                                newCourses[courseIndex][field] = e.target.value;
+                                setTeacherDetails({
+                                  ...teacherData,
+                                  courses: newCourses,
+                                });
+                              }}
+                            />
+                            <label>{field.replace(/_/g, " ")}</label>
+                          </div>
+                        ))}
                       </div>
                     ))
                   )}
@@ -227,6 +189,7 @@ const TeacherDetailsView = () => {
       </div>
     </div>
   );
+  
   
 };
 
