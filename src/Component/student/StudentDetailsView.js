@@ -187,10 +187,7 @@ const StudentDetailsView = () => {
         <div className="body">
           {cardData.map((card, index) => (
             <div key={index} className="card-detailsView">
-              <div
-                className="card-header"
-                onClick={() => handleExpandCard(index)}
-              >
+              <div className="card-header" onClick={() => handleExpandCard(index)}>
                 <div>{card.title}</div>
                 <FontAwesomeIcon
                   icon={expandedCard === index ? faChevronUp : faChevronDown}
@@ -200,12 +197,15 @@ const StudentDetailsView = () => {
                 <div className="card-content">
                   {Object.entries(card.data).map(([key, value]) => (
                     <div key={key} className="input-field">
-                      <label>{key}</label>
                       <input
                         type="text"
-                        value={value}
+                        placeholder=" " // Keep placeholder empty
+                        value={value || ""} // Ensure empty string for controlled input
                         onChange={(e) => handleInputChange(key, e.target.value)}
+                        required
+                        className={value ? "not-empty" : ""} // Add a class if there's a value
                       />
+                      <label>{key}</label>
                     </div>
                   ))}
                   <button
