@@ -1,6 +1,6 @@
 .input-field {
   position: relative;
-  margin-bottom: 30px; /* Increase this value to add more space */
+  margin-bottom: 30px;
 }
 
 .input-field input {
@@ -22,7 +22,7 @@
 .input-field input:not(:placeholder-shown) + label,
 .input-field input:not([value=""]) + label,
 .input-field input.not-empty + label {
-  top: -10px;
+  top: -2px;
   left: 10px;
   color: #2b8aba;
   font-size: 0.9em;
