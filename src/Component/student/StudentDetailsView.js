@@ -48,30 +48,30 @@ const StudentDetailsView = () => {
     {
       title: "Personal Info",
       data: {
-        name: formData.name,
-        age: formData.age,
-        email: formData.email,
-        address: formData.address,
+        Name: formData.name,
+        Age: formData.age,
+        Email: formData.email,
+        Address: formData.address,
         EnterDate: formData.EnterDate,
-        gender: formData.gender,
+        Gender: formData.gender,
         Mobile: formData.Mobile,
       },
     },
     {
       title: "Institute Info",
       data: {
-        institute: formData.institute,
-        address: formData.institute_address,
-        userName: formData.userName,
+        Institute: formData.institute,
+        Address: formData.institute_address,
+        UserName: formData.userName,
         Status: formData.Status,
-        userType: formData.userType,
+        UserType: formData.userType,
       },
     },
     {
       title: "Fee Info",
-      data: { fees: formData.fees, paymentStatus: formData.paymentStatus },
+      data: { Fees: formData.fees, PaymentStatus: formData.paymentStatus },
     },
-    { title: "Study Info", data: { subjects: formData.subjects } },
+    { title: "Study Info", data: { Subjects: formData.subjects } },
   ];
 
   const handleExpandCard = (index) => {
@@ -135,21 +135,21 @@ const StudentDetailsView = () => {
     try {
       const response = await myDetailsApi(userData);
       const studentDetails = response.userData[0];
-  
-      // Extracting data from the response
+
       const personalInfo = studentDetails.personalInfo;
       const instituteInfo = studentDetails.instituteInfo;
       const feeInfo = studentDetails.feeInfo;
       const studyInfo = studentDetails.studyInfo;
-  
-      // Setting the extracted data to state variables
+
       setStudentDetails(studentDetails);
       setInitialData({
         ...personalInfo,
         ...instituteInfo,
         ...feeInfo,
         ...studyInfo,
-        subjects: studentDetails.courses.map(course => course.course_name).join(', ')
+        subjects: studentDetails.courses
+          .map((course) => course.course_name)
+          .join(", "),
       });
       setFormData({
         name: personalInfo.name || "",
@@ -166,7 +166,9 @@ const StudentDetailsView = () => {
         userType: instituteInfo.role_type || "",
         fees: feeInfo.amount || "",
         paymentStatus: feeInfo.description || "",
-        subjects: studentDetails.courses.map(course => course.course_name).join(', ')
+        subjects: studentDetails.courses
+          .map((course) => course.course_name)
+          .join(", "),
       });
       setLoading(false);
     } catch (error) {
@@ -175,7 +177,6 @@ const StudentDetailsView = () => {
       setLoading(false);
     }
   };
-  
 
   return (
     <div className="wrapper">
@@ -187,7 +188,10 @@ const StudentDetailsView = () => {
         <div className="body">
           {cardData.map((card, index) => (
             <div key={index} className="card-detailsView">
-              <div className="card-header" onClick={() => handleExpandCard(index)}>
+              <div
+                className="card-header"
+                onClick={() => handleExpandCard(index)}
+              >
                 <div>{card.title}</div>
                 <FontAwesomeIcon
                   icon={expandedCard === index ? faChevronUp : faChevronDown}
@@ -199,11 +203,11 @@ const StudentDetailsView = () => {
                     <div key={key} className="input-field">
                       <input
                         type="text"
-                        placeholder=" " // Keep placeholder empty
-                        value={value || ""} // Ensure empty string for controlled input
+                        placeholder=" "
+                        value={value || ""}
                         onChange={(e) => handleInputChange(key, e.target.value)}
                         required
-                        className={value ? "not-empty" : ""} // Add a class if there's a value
+                        className={value ? "not-empty" : ""}
                       />
                       <label>{key}</label>
                     </div>

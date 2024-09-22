@@ -3,7 +3,11 @@ import { useNavigate } from "react-router-dom";
 import "../../global.css";
 import "./teacherDetailsView.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronLeft, faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
+import {
+  faChevronLeft,
+  faChevronDown,
+  faChevronUp,
+} from "@fortawesome/free-solid-svg-icons";
 import { useLocation } from "react-router-dom";
 import { userDetails as myDetailsApi } from "../Global";
 
@@ -31,23 +35,23 @@ const TeacherDetailsView = () => {
     {
       title: "Personal Info",
       data: {
-        name: formData.name || "",
-        email: formData.email || "",
-        address: formData.address || "",
+        Name: formData.name || "",
+        Email: formData.email || "",
+        Address: formData.address || "",
         EnterDate: formData.entered_date || "",
-        gender: formData.gender || "",
+        Gender: formData.gender || "",
         Mobile: formData.phone_no || "",
-        status: formData.user_status || "",
+        Status: formData.user_status || "",
       },
     },
     {
       title: "Institute Info",
       data: {
-        institute: formData.institute_name || "",
-        address: formData.institute_address || "",
-        userName: formData.institute_userName || "",
+        Institute: formData.institute_name || "",
+        Address: formData.institute_address || "",
+        UserName: formData.institute_userName || "",
         Status: formData.user_status || "",
-        userType: formData.role_type || "",
+        UserType: formData.role_type || "",
       },
     },
     {
@@ -57,10 +61,10 @@ const TeacherDetailsView = () => {
     {
       title: "Payment Info",
       data: {
-        fees: formData.amount || "",
-        paymentStatus: formData.description || "",
+        Fees: formData.amount || "",
+        PaymentStatus: formData.description || "",
       },
-    }
+    },
   ];
 
   const handleExpandCard = (index) => {
@@ -102,7 +106,8 @@ const TeacherDetailsView = () => {
         user_status: teacherDetails.personalInfo.user_status || "",
         institute_name: teacherDetails.instituteInfo.institute_name || "",
         institute_address: teacherDetails.instituteInfo.institute_address || "",
-        institute_userName: teacherDetails.instituteInfo.institute_userName || "",
+        institute_userName:
+          teacherDetails.instituteInfo.institute_userName || "",
         role_type: teacherDetails.instituteInfo.role_type || "",
         amount: teacherDetails.feeInfo.amount || "",
         description: teacherDetails.feeInfo.description || "",
@@ -126,7 +131,10 @@ const TeacherDetailsView = () => {
         <div className="body">
           {cardData.map((card, index) => (
             <div key={index} className="card-detailsView">
-              <div className="card-header" onClick={() => handleExpandCard(index)}>
+              <div
+                className="card-header"
+                onClick={() => handleExpandCard(index)}
+              >
                 <div>{card.title}</div>
                 <FontAwesomeIcon
                   icon={expandedCard === index ? faChevronUp : faChevronDown}
@@ -135,49 +143,57 @@ const TeacherDetailsView = () => {
               {expandedCard === index && (
                 <div className="card-content">
                   {/* For non-courses data */}
-                  {card.title !== "Courses" ? (
-                    Object.entries(card.data).map(([key, value]) => (
-                      <div key={key} className="input-field">
-                        <input
-                          type="text"
-                          value={value || ""}
-                          onChange={(e) =>
-                            setFormData((prev) => ({
-                              ...prev,
-                              [key]: e.target.value,
-                            }))
-                          }
-                        />
-                        <label>{key}</label>
-                      </div>
-                    ))
-                  ) : (
-                    // For course details
-                    card.data.map((course, courseIndex) => (
-                      <div key={courseIndex} className="course-details">
-                        {["course_name", "course_status", "course_enrolled_date", "experience"].map((field, idx) => (
-                          <div key={idx} className="input-field">
-                            <input
-                              type="text"
-                              value={course[field] || ""}
-                              onChange={(e) => {
-                                const newCourses = [...teacherData.courses];
-                                newCourses[courseIndex][field] = e.target.value;
-                                setTeacherDetails({
-                                  ...teacherData,
-                                  courses: newCourses,
-                                });
-                              }}
-                            />
-                            <label>{field.replace(/_/g, " ")}</label>
-                          </div>
-                        ))}
-                      </div>
-                    ))
-                  )}
+                  {card.title !== "Courses"
+                    ? Object.entries(card.data).map(([key, value]) => (
+                        <div key={key} className="input-field">
+                          <input
+                            type="text"
+                            placeholder=" "
+                            value={value || ""}
+                            onChange={(e) =>
+                              setFormData((prev) => ({
+                                ...prev,
+                                [key]: e.target.value,
+                              }))
+                            }
+                          />
+                          <label>{key}</label>
+                        </div>
+                      ))
+                    : // For course details
+                      card.data.map((course, courseIndex) => (
+                        <div key={courseIndex} className="course-details">
+                          {[
+                            "course_name",
+                            "course_status",
+                            "course_enrolled_date",
+                            "experience",
+                          ].map((field, idx) => (
+                            <div key={idx} className="input-field">
+                              <input
+                                type="text"
+                                placeholder=" "
+                                value={course[field] || ""}
+                                onChange={(e) => {
+                                  const newCourses = [...teacherData.courses];
+                                  newCourses[courseIndex][field] =
+                                    e.target.value;
+                                  setTeacherDetails({
+                                    ...teacherData,
+                                    courses: newCourses,
+                                  });
+                                }}
+                              />
+                              <label>{field.replace(/_/g, " ")}</label>
+                            </div>
+                          ))}
+                        </div>
+                      ))}
                   <button
                     onClick={() => handleSave(index)}
-                    disabled={card.title !== "Courses" && !isFormValid(card.data)}
+                    disabled={
+                      card.title !== "Courses" && !isFormValid(card.data)
+                    }
                   >
                     Save
                   </button>
@@ -189,8 +205,6 @@ const TeacherDetailsView = () => {
       </div>
     </div>
   );
-  
-  
 };
 
 export default TeacherDetailsView;
