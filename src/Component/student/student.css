@@ -1,5 +1,5 @@
 .name {
-  font-weight: 600; /* slightly thicker for better readability */
+  font-weight: bold; /* slightly thicker for better readability */
   font-size: 1.2em; /* larger name size */
   color: #333; /* darker text for readability */
   position: absolute;

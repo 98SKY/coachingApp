@@ -160,11 +160,12 @@ const Student = () => {
               >
                 <div className="name">
                   {student.name
-                    ? student.name.length > 20
-                      ? student.name.slice(0, 20) + "..."
-                      : student.name
+                    ? student.name.charAt(0).toUpperCase() +
+                      student.name.slice(1, 20) +
+                      (student.name.length > 20 ? "..." : "")
                     : ""}
                 </div>
+
                 <div
                   className={`status chip ${
                     student.user_status === "Active" ? "green" : "red"
