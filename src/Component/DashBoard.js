@@ -182,6 +182,7 @@ const DashBoard = () => {
                   selected={toDate}
                   onChange={(date) => handleDateChange(date, "to")}
                   minDate={fromDate}
+                  maxDate={new Date()}
                 />
               </div>
             </div>
