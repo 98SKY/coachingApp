@@ -5,10 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { registerInstitute, courseName } from "./Global";
 import { useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faChevronLeft,
-  faCheckCircle,
-} from "@fortawesome/free-solid-svg-icons";
+import { faChevronLeft, faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -109,6 +106,7 @@ const SignUp = () => {
       setLoading(true);
       try {
         const formDataWithUserType = { ...formData, userType, myCoachingId };
+        console.log("formDataWithUserType", formDataWithUserType);
         const response = await registerInstitute(formDataWithUserType);
         setLoading(false);
         alert(
@@ -212,8 +210,17 @@ const SignUp = () => {
                 <input
                   type="text"
                   name="std"
-                  placeholder="Enter std"
+                  placeholder="Enter standard (std)"
                   value={formData.std}
+                  onChange={handleChange}
+                  required
+                  className="myInput-field"
+                />
+                <input
+                  type="text"
+                  name="medium"
+                  placeholder="Enter medium (e.g., English, Hindi)"
+                  value={formData.medium}
                   onChange={handleChange}
                   required
                   className="myInput-field"
@@ -370,7 +377,7 @@ const SignUp = () => {
                 <input
                   type="text"
                   name="address"
-                  placeholder="Enter Address"
+                  placeholder="Enter address"
                   value={formData.address}
                   onChange={handleChange}
                   required
