@@ -75,6 +75,7 @@ const DashBoard = () => {
   const handleConfirmDate = () => {
     if (selectedOptions.length > 0 && fromDate && toDate) {
       setShowPopup(false);
+      setIconToggle(false);
       // console.log("selectedOptions", selectedOptions);
       const lowercaseOptions = selectedOptions.map((option) =>
         option.toLowerCase()
@@ -89,6 +90,7 @@ const DashBoard = () => {
 
   const handleCancelDate = () => {
     setShowPopup(false);
+    setIconToggle(false);
   };
 
   const fetchDashBoardCount = async (categories, fromDate, toDate) => {
@@ -129,8 +131,10 @@ const DashBoard = () => {
   };
 
   const getFirstDayOfMonth = () => {
-    const now = new Date();
-    return new Date(now.getFullYear(), now.getMonth(), 1);
+    const date = new Date();
+    date.setDate(1);
+    // date.setHours(0, 0, 0, 0);
+    return date;
   };
 
   const handleCardClick = (category) => {
@@ -207,7 +211,10 @@ const DashBoard = () => {
                   : `info ${instituteInfo}`}
               </div>
             </div>
-            <div className="card" onDoubleClick={() => handleCardClick("students")}>
+            <div
+              className="card"
+              onDoubleClick={() => handleCardClick("students")}
+            >
               <h3 className="dashBoardCardHeader">STUDENTS</h3>
               <div className={`dasboardCardItems total`}>
                 {loading && selectedOption === "students"
@@ -225,7 +232,10 @@ const DashBoard = () => {
                   : `Inactive ${studentsData.inactiveStudents}`}
               </div>
             </div>
-            <div className="card" onDoubleClick={() => handleCardClick("teachers")}>
+            <div
+              className="card"
+              onDoubleClick={() => handleCardClick("teachers")}
+            >
               <h3 className="dashBoardCardHeader">TEACHERS</h3>
               <div className={`dasboardCardItems total`}>
                 {loading && selectedOption === "teachers"

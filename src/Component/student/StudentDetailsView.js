@@ -9,39 +9,21 @@ import {
   faChevronUp,
 } from "@fortawesome/free-solid-svg-icons";
 import { useLocation } from "react-router-dom";
-import { userDetails as myDetailsApi } from ".././Global";
+import { userDetails as myDetailsApi } from "../Global";
 
 const StudentDetailsView = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [loading, setLoading] = useState(false);
   const params = new URLSearchParams(location.search);
-  let myCoachingId = params.get("myCoachingId");
-  let userName = params.get("name");
+  const myCoachingId = params.get("myCoachingId");
+  const userName = params.get("name");
   const userType = params.get("userType");
   const uuid = params.get("uuid");
   const userCategory = params.get("userCategory");
   const [expandedCard, setExpandedCard] = useState(null);
   const [studentData, setStudentDetails] = useState({});
-
-  const [formData, setFormData] = useState({
-    name: "",
-    age: "",
-    email: "",
-    address: "",
-    EnterDate: "",
-    gender: "",
-    Mobile: "",
-    institute: "",
-    institute_address: "",
-    userName: "",
-    Status: "",
-    userType: "",
-    fees: "",
-    paymentStatus: "",
-    subjects: "",
-  });
-
+  const [formData, setFormData] = useState({});
   const [initialData, setInitialData] = useState({});
 
   const cardData = [
@@ -71,15 +53,14 @@ const StudentDetailsView = () => {
       title: "Fee Info",
       data: { Fees: formData.fees, PaymentStatus: formData.paymentStatus },
     },
-    { title: "Study Info", data: { Subjects: formData.subjects } },
+    {
+      title: "Courses",
+      data: studentData.courses || [],
+    },
   ];
 
   const handleExpandCard = (index) => {
-    if (expandedCard === index) {
-      setExpandedCard(null);
-    } else {
-      setExpandedCard(index);
-    }
+    setExpandedCard(expandedCard === index ? null : index);
   };
 
   const handleSave = async (index) => {
@@ -109,20 +90,12 @@ const StudentDetailsView = () => {
     }
   };
 
-  const isFormValid = (formData) => {
-    return Object.values(formData).every((value) => value !== "");
-  };
-
   const handleInputChange = (key, value) => {
     setFormData({
       ...formData,
       [key]: value,
     });
   };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
 
   const fetchData = async () => {
     const userData = {
@@ -135,55 +108,40 @@ const StudentDetailsView = () => {
     try {
       const response = await myDetailsApi(userData);
       const studentDetails = response.userData[0];
-
-      const personalInfo = studentDetails.personalInfo;
-      const instituteInfo = studentDetails.instituteInfo;
-      const feeInfo = studentDetails.feeInfo;
-      const studyInfo = studentDetails.studyInfo;
-
       setStudentDetails(studentDetails);
-      setInitialData({
-        ...personalInfo,
-        ...instituteInfo,
-        ...feeInfo,
-        ...studyInfo,
-        subjects: studentDetails.courses
-          .map((course) => course.course_name)
-          .join(", "),
-      });
       setFormData({
-        name: personalInfo.name || "",
-        age: personalInfo.dob || "",
-        email: personalInfo.email || "",
-        address: personalInfo.address || "",
-        EnterDate: personalInfo.entered_date || "",
-        gender: personalInfo.gender || "",
-        Mobile: personalInfo.phone_no || "",
-        institute: instituteInfo.institute_name || "",
-        institute_address: instituteInfo.institute_address || "",
-        userName: instituteInfo.institute_userName || "",
-        Status: personalInfo.user_status || "",
-        userType: instituteInfo.role_type || "",
-        fees: feeInfo.amount || "",
-        paymentStatus: feeInfo.description || "",
-        subjects: studentDetails.courses
-          .map((course) => course.course_name)
-          .join(", "),
+        name: studentDetails.personalInfo.name || "",
+        age: studentDetails.personalInfo.dob || "",
+        email: studentDetails.personalInfo.email || "",
+        address: studentDetails.personalInfo.address || "",
+        EnterDate: studentDetails.personalInfo.entered_date || "",
+        gender: studentDetails.personalInfo.gender || "",
+        Mobile: studentDetails.personalInfo.phone_no || "",
+        institute: studentDetails.instituteInfo.institute_name || "",
+        institute_address: studentDetails.instituteInfo.institute_address || "",
+        userName: studentDetails.instituteInfo.institute_userName || "",
+        Status: studentDetails.personalInfo.user_status || "",
+        userType: studentDetails.instituteInfo.role_type || "",
+        fees: studentDetails.feeInfo.amount || "",
+        paymentStatus: studentDetails.feeInfo.description || "",
       });
       setLoading(false);
     } catch (error) {
-      console.error("Failed to fetch Data:", error.message);
-      alert(error.message);
+      console.error("Failed to fetch data:", error.message);
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   return (
     <div className="wrapper">
       <div className="padding-all">
         <div className="header">
           <FontAwesomeIcon icon={faChevronLeft} onClick={() => navigate(-1)} />
-          <div>{userName.charAt(0).toUpperCase() + userName.slice(1)}</div>
+          <div>{userName?.charAt(0).toUpperCase() + userName.slice(1)}</div>
         </div>
         <div className="body">
           {cardData.map((card, index) => (
@@ -199,25 +157,48 @@ const StudentDetailsView = () => {
               </div>
               {expandedCard === index && (
                 <div className="card-content">
-                  {Object.entries(card.data).map(([key, value]) => (
-                    <div key={key} className="input-field">
-                      <input
-                        type="text"
-                        placeholder=" "
-                        value={value || ""}
-                        onChange={(e) => handleInputChange(key, e.target.value)}
-                        required
-                        className={value ? "not-empty" : ""}
-                      />
-                      <label>{key}</label>
-                    </div>
-                  ))}
-                  <button
-                    onClick={() => handleSave(index)}
-                    disabled={!isFormValid(formData)}
-                  >
-                    Save
-                  </button>
+                  {card.title !== "Courses"
+                    ? Object.entries(card.data).map(([key, value]) => (
+                        <div key={key} className="input-field">
+                          <input
+                            type="text"
+                            placeholder=" "
+                            value={value || ""}
+                            onChange={(e) =>
+                              handleInputChange(key, e.target.value)
+                            }
+                          />
+                          <label>{key}</label>
+                        </div>
+                      ))
+                    : card.data.map((course, courseIndex) => (
+                        <div key={courseIndex} className="course-details">
+                          {[
+                            "course_name",
+                            "course_status",
+                            "course_enrolled_date",
+                          ].map((field, idx) => (
+                            <div key={idx} className="input-field">
+                              <input
+                                type="text"
+                                placeholder=" "
+                                value={course[field] || ""}
+                                onChange={(e) => {
+                                  const newCourses = [...studentData.courses];
+                                  newCourses[courseIndex][field] =
+                                    e.target.value;
+                                  setStudentDetails({
+                                    ...studentData,
+                                    courses: newCourses,
+                                  });
+                                }}
+                              />
+                              <label>{field.replace("_", " ")}</label>
+                            </div>
+                          ))}
+                        </div>
+                      ))}
+                  <button onClick={() => handleSave(index)}>Save</button>
                 </div>
               )}
             </div>
