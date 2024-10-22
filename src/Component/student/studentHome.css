@@ -1,0 +1,181 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    background-color: #f0f2f5;
+    min-height: 100vh; 
+}
+
+.header {
+    font-size: 26px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #FFFFFF;
+}
+
+.body {
+    flex: 1;
+}
+
+.overview-section {
+    margin-bottom: 30px;
+}
+
+.overview-section h2 {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #444;
+}
+
+.stats {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    background: #fff;
+    border-radius: 10px;
+    padding: 1%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    flex-basis: calc(33.33% - 20px);
+    min-width: 150px;
+}
+
+.stat-item p {
+    margin-top: 8px;
+    font-size: 16px;
+    color: #555;
+}
+
+.card-sections {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+.student-card {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    flex: 1;
+    padding: 0;
+    min-width: 250px;
+    max-width: calc(33.33% - 20px);
+}
+
+.student-card-header {
+    padding: 15px;
+    background-color: #a9cee0;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    color: #303030;
+    font-weight: bold;
+}
+
+.student-card-body {
+    padding: 15px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.student-card-body ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.student-card-body li {
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.progress-bar {
+    width: 100%;
+    background: #e0e0e0;
+    border-radius: 5px;
+    height: 8px;
+    overflow: hidden;
+    margin-top: 5px;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background-color: #4caf50;
+    transition: width 0.4s ease;
+}
+
+.progress-text {
+    font-size: 12px;
+    color: #777;
+}
+
+.mainFooter {
+    display: flex;
+    justify-content: space-around;
+    padding: 15px 0;
+    background-color: #2b8aba;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    border-top: 1px solid #ccc;
+    z-index: 10;
+}
+
+.mainFooter .selected {
+    color: rgb(11, 10, 10);
+}
+
+.mainFooter .fa-icon {
+    font-size: 24px;
+    cursor: pointer;
+    color: #bbb;
+    transition: color 0.3s;
+}
+
+.mainFooter .fa-icon:hover {
+    color: #4caf50;
+}
+
+@media (max-width: 1024px) {
+    .card-sections {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    .student-card {
+        max-width: calc(50% - 10px);
+    }
+}
+
+@media (max-width: 768px) {
+    .card-sections {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .stat-item {
+        flex-basis: calc(50% - 20px);
+    }
+
+    .student-card {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .stat-item {
+        flex-basis: 100%;
+    }
+    .mainFooter {
+        flex-wrap: wrap;
+    }
+}

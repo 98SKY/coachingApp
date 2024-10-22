@@ -76,7 +76,6 @@ const DashBoard = () => {
     if (selectedOptions.length > 0 && fromDate && toDate) {
       setShowPopup(false);
       setIconToggle(false);
-      // console.log("selectedOptions", selectedOptions);
       const lowercaseOptions = selectedOptions.map((option) =>
         option.toLowerCase()
       );
@@ -123,7 +122,6 @@ const DashBoard = () => {
       }
       setLoading(false);
     } catch (error) {
-      // console.log("Failed to fetch dashBoardCount :", error);
       alert(error.message);
     } finally {
       setLoading(false);
