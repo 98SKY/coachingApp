@@ -1,3 +1,4 @@
+/* Wrapper and Layout Styles */
 .wrapper {
     display: flex;
     flex-direction: column;
@@ -55,6 +56,7 @@
     color: #555;
 }
 
+/* Card Styles */
 .card-sections {
     display: flex;
     flex-wrap: wrap;
@@ -98,6 +100,7 @@
     font-size: 14px;
 }
 
+/* Progress Bar Styles */
 .progress-bar {
     width: 100%;
     background: #e0e0e0;
@@ -109,73 +112,36 @@
 
 .progress-bar-fill {
     height: 100%;
-    background-color: #4caf50;
     transition: width 0.4s ease;
+}
+
+/* Progress Bar Color Classes */
+.progress-bar-fill.red {
+    background-color: #f44336;
+}
+
+.progress-bar-fill.orange {
+    background-color: #ff9800;
+}
+
+.progress-bar-fill.green {
+    background-color: #4caf50;
 }
 
 .progress-text {
     font-size: 12px;
-    color: #777;
+    color: #444;
 }
 
+/* Footer Navigation Styles */
 .mainFooter {
     display: flex;
     justify-content: space-around;
-    padding: 15px 0;
-    background-color: #2b8aba;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    border-top: 1px solid #ccc;
-    z-index: 10;
+    align-items: center;
+    background-color: rgb(43, 138, 186);
+    padding: 12px;
 }
 
 .mainFooter .selected {
-    color: rgb(11, 10, 10);
-}
-
-.mainFooter .fa-icon {
-    font-size: 24px;
-    cursor: pointer;
-    color: #bbb;
-    transition: color 0.3s;
-}
-
-.mainFooter .fa-icon:hover {
-    color: #4caf50;
-}
-
-@media (max-width: 1024px) {
-    .card-sections {
-        flex-wrap: wrap;
-        gap: 10px;
-    }
-    .student-card {
-        max-width: calc(50% - 10px);
-    }
-}
-
-@media (max-width: 768px) {
-    .card-sections {
-        flex-direction: column;
-        gap: 15px;
-    }
-
-    .stat-item {
-        flex-basis: calc(50% - 20px);
-    }
-
-    .student-card {
-        max-width: 100%;
-    }
-}
-
-@media (max-width: 480px) {
-    .stat-item {
-        flex-basis: 100%;
-    }
-    .mainFooter {
-        flex-wrap: wrap;
-    }
+    color: black;
 }

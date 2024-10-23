@@ -41,7 +41,7 @@ const StudentHome = () => {
     setCourses([
       { id: 1, name: "Mathematics", progress: 80 },
       { id: 2, name: "Physics", progress: 60 },
-      { id: 3, name: "Chemistry", progress: 90 },
+      { id: 3, name: "Chemistry", progress: 30 },
     ]);
 
     setAssignments([
