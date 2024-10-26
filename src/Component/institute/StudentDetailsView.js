@@ -9,7 +9,7 @@ import {
   faChevronUp,
 } from "@fortawesome/free-solid-svg-icons";
 import { useLocation } from "react-router-dom";
-import  {userDetails}   from "../Api/Institute/instituteApi";
+import { userDetails } from "../Api/Institute/instituteApi";
 
 const StudentDetailsView = () => {
   const navigate = useNavigate();
@@ -17,7 +17,10 @@ const StudentDetailsView = () => {
   const [loading, setLoading] = useState(false);
   const params = new URLSearchParams(location.search);
   const myCoachingId = params.get("myCoachingId");
-  const userName = params.get("name");
+  const userNamefromParm = params.get("name");
+  const userName = userNamefromParm
+    ? decodeURIComponent(userNamefromParm.replace(/\?$/, ""))
+    : "";
   const userType = params.get("userType");
   const uuid = params.get("uuid");
   const userCategory = params.get("userCategory");

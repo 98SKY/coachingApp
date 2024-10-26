@@ -177,24 +177,30 @@ const Profile = () => {
           <div className="icon">
             <FontAwesomeIcon
               icon={faHome}
-              className={selectedIcon === "/controlPanel" ? "selected" : ""}
-              onClick={() => handleNavigation("/controlPanel")}
+              className={
+                selectedIcon === "/institute/controlPanel" ? "selected" : ""
+              }
+              onClick={() => handleNavigation("/institute/controlPanel")}
             />
             <span className="label">Home</span>
           </div>
           <div className="icon">
             <FontAwesomeIcon
               icon={faUsers}
-              className={selectedIcon === "/student" ? "selected" : ""}
-              onClick={() => handleNavigation("/student")}
+              className={
+                selectedIcon === "/institute/student" ? "selected" : ""
+              }
+              onClick={() => handleNavigation("/institute/student")}
             />
             <span className="label">Students</span>
           </div>
           <div className="icon">
             <FontAwesomeIcon
               icon={faChalkboardTeacher}
-              className={selectedIcon === "/teacher" ? "selected" : ""}
-              onClick={() => handleNavigation("/teacher")}
+              className={
+                selectedIcon === "/institute/teacher" ? "selected" : ""
+              }
+              onClick={() => handleNavigation("/institute/teacher")}
             />
             <span className="label">Teachers</span>
           </div>

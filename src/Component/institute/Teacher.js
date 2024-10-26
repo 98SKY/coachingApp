@@ -20,7 +20,7 @@ const Teacher = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [loading, setLoading] = useState(false);
-  const [selectedIcon, setSelectedIcon] = useState("/teacher");
+  const [selectedIcon, setSelectedIcon] = useState("/institute/teacher");
   const params = new URLSearchParams(location.search);
   let myCoachingId = params.get("myCoachingId");
   const userType = params.get("userType");
@@ -34,7 +34,7 @@ const Teacher = () => {
 
   const handleNavigation = (path) => {
     const currentPath = window.location.pathname;
-    const newPath = `${path}&myCoachingId=${myCoachingId}&userType=${userType}`;
+    const newPath = `${path}?&myCoachingId=${myCoachingId}&userType=${userType}`;
     if (currentPath === path || currentPath === newPath) {
       return;
     }
@@ -158,7 +158,7 @@ const Teacher = () => {
                 className="listView-card"
                 onClick={() =>
                   handleNavigation(
-                    `/teacherDetails?${index}&uuid=${teacher.uuid}&name=${teacher.name}&`
+                    `/institute/teacherDetails?${index}&uuid=${teacher.uuid}&name=${teacher.name}&`
                   )
                 }
               >
@@ -225,24 +225,30 @@ const Teacher = () => {
           <div className="icon">
             <FontAwesomeIcon
               icon={faHome}
-              className={selectedIcon === "/controlPanel" ? "selected" : ""}
-              onClick={() => handleNavigation("/controlPanel?")}
+              className={
+                selectedIcon === "/institute/controlPanel" ? "selected" : ""
+              }
+              onClick={() => handleNavigation("/institute/controlPanel")}
             />
             <span className="label">Home</span>
           </div>
           <div className="icon">
             <FontAwesomeIcon
               icon={faUsers}
-              className={selectedIcon === "/student" ? "selected" : ""}
-              onClick={() => handleNavigation("/student?")}
+              className={
+                selectedIcon === "/institute/student" ? "selected" : ""
+              }
+              onClick={() => handleNavigation("/institute/student")}
             />
             <span className="label">Students</span>
           </div>
           <div className="icon">
             <FontAwesomeIcon
               icon={faChalkboardTeacher}
-              className={selectedIcon === "/teacher" ? "selected" : ""}
-              onClick={() => handleNavigation("/teacher")}
+              className={
+                selectedIcon === "/institute/teacher" ? "selected" : ""
+              }
+              onClick={() => handleNavigation("/institute/teacher")}
             />
             <span className="label">Teachers</span>
           </div>
@@ -250,7 +256,7 @@ const Teacher = () => {
             <FontAwesomeIcon
               icon={faUser}
               className={selectedIcon === "/profile" ? "selected" : ""}
-              onClick={() => handleNavigation("/profile?")}
+              onClick={() => handleNavigation("/profile")}
             />
             <span className="label">Profile</span>
           </div>
