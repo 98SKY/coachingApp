@@ -5,16 +5,16 @@ import {
   faHome,
   faUser,
   faBookOpen,
-  faBell,
   faClipboardCheck,
   faChartLine,
 } from "@fortawesome/free-solid-svg-icons";
 import "./studentHome.css";
+import {StudentInternalRoutes} from '../../route/StudentRoute';
 
 const StudentHome = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const [selectedIcon, setSelectedIcon] = useState("/studentHome");
+  const [selectedIcon, setSelectedIcon] = useState(StudentInternalRoutes.STUDENT.HOME);
 
   const handleNavigation = (path) => {
     setSelectedIcon(path);
@@ -153,28 +153,28 @@ const StudentHome = () => {
         <div className="mainFooter">
           <FontAwesomeIcon
             icon={faHome}
-            className={selectedIcon === "/studentHome" ? "selected" : ""}
-            onClick={() => handleNavigation("/studentHome")}
+            className={selectedIcon === StudentInternalRoutes.STUDENT.HOME ? "selected" : ""}
+            onClick={() => handleNavigation(StudentInternalRoutes.STUDENT.HOME)}
           />
           <FontAwesomeIcon
             icon={faBookOpen}
-            className={selectedIcon === "/student" ? "selected" : ""}
-            onClick={() => handleNavigation("/student")}
+            className={selectedIcon === StudentInternalRoutes.STUDENT.COURSE ? "selected" : ""}
+            onClick={() => handleNavigation(StudentInternalRoutes.STUDENT.COURSE)}
           />
           <FontAwesomeIcon
             icon={faClipboardCheck}
-            className={selectedIcon === "/teacher" ? "selected" : ""}
-            onClick={() => handleNavigation("/teacher")}
+            className={selectedIcon === StudentInternalRoutes.STUDENT.ASSIGNMENT ? "selected" : ""}
+            onClick={() => handleNavigation(StudentInternalRoutes.STUDENT.ASSIGNMENT)}
           />
           <FontAwesomeIcon
             icon={faChartLine}
-            className={selectedIcon === "/profile" ? "selected" : ""}
-            onClick={() => handleNavigation("/profile")}
+            className={selectedIcon === StudentInternalRoutes.STUDENT.ATTENDENCE ? "selected" : ""}
+            onClick={() => handleNavigation(StudentInternalRoutes.STUDENT.ATTENDENCE)}
           />
           <FontAwesomeIcon
             icon={faUser}
-            className={selectedIcon === "/notifications" ? "selected" : ""}
-            onClick={() => handleNavigation("/notifications")}
+            className={selectedIcon === StudentInternalRoutes.STUDENT.PROFILE ? "selected" : ""}
+            onClick={() => handleNavigation(StudentInternalRoutes.STUDENT.PROFILE)}
           />
         </div>
       </div>

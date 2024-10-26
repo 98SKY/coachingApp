@@ -43,10 +43,10 @@ const Login = () => {
           navigate(`/institute/controlPanel?userType=${userType}&myCoachingId=${myCoachingId}`);
           break;
         case (token && userType === 'user' && userCategory === 'student'):
-          navigate(`/student/studentHome?userType=${userType}&myCoachingId=${myCoachingId}`);
+          navigate(`/student/home?userType=${userType}&myCoachingId=${myCoachingId}`);
           break;
         case (token && userType === 'user' && userCategory === 'teacher'):
-          navigate(`/institute/teacherHome?userType=${userType}&myCoachingId=${myCoachingId}`);
+          navigate(`/teacher/home?userType=${userType}&myCoachingId=${myCoachingId}`);
           break;
         default:
           navigate("/");
@@ -71,10 +71,10 @@ const Login = () => {
         navigate(`/institute/controlPanel?userType=${userTypeForLogin}&myCoachingId=${myCoachingIdForLogin}`);
         break;
       case (token && userTypeForLogin === 'user' && userCategoryForLogin === 'student'):
-        navigate(`/student/studentHome?userType=${userTypeForLogin}&myCoachingId=${myCoachingIdForLogin}`);
+        navigate(`/student/home?userType=${userTypeForLogin}&myCoachingId=${myCoachingIdForLogin}`);
         break;
       case (token && userTypeForLogin === 'user' && userCategoryForLogin === 'teacher'):
-        navigate(`/institute/teacherHome?userType=${userTypeForLogin}&myCoachingId=${myCoachingIdForLogin}`);
+        navigate(`/teacher/home?userType=${userTypeForLogin}&myCoachingId=${myCoachingIdForLogin}`);
         break;
       default:
         setUsername('');
