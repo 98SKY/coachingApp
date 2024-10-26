@@ -10,10 +10,10 @@ import {
   faUser,
   faTimes,
 } from "@fortawesome/free-solid-svg-icons";
-import "../global.css";
+import "../../global.css";
 import "./dashBoard.css";
 import "react-datepicker/dist/react-datepicker.css";
-import { dashBoardCount as dashBoardCountApi } from "./Global";
+import {dashBoardCount} from "../Api/Institute/instituteApi";
 
 const DashBoard = () => {
   const navigate = useNavigate();
@@ -101,7 +101,7 @@ const DashBoard = () => {
     };
     setLoading(true);
     try {
-      const response = await dashBoardCountApi(dashBoardData);
+      const response = await dashBoardCount(dashBoardData);
       const data = response.counts;
       if (categories.includes("students")) {
         setStudentsData({

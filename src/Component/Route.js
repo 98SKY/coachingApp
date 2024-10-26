@@ -3,13 +3,12 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Login from './Login';
 import SignUp from './SignUp';
 import ForgotPass from './ForgotPass';
-import DashBoard from './DashBoard';
+import InstituteRoutes from '../route/InstituteRoute';
+
 import Decide from './Decide';
-import Student from './student/Student';
+
 import StudentHome from './student/StudentHome';
-import StudentDetailsView from './student/StudentDetailsView';
-import TeacherDetailsView from './teacher/TeacherDetailsView'
-import Teacher from './teacher/Teacher';
+
 import Profile from './profile/Profile';
 
 const Navigate = () => {
@@ -21,15 +20,16 @@ const Navigate = () => {
             <Route path='/login' element={<Login/>}/>
             <Route path='/signUp' element={<SignUp/>}/>
             <Route path='/forgotPass' element={<ForgotPass/>}/>
-            <Route path='/controlPanel' element={<DashBoard/>}/>
-            <Route path='/student' element={<Student/>}/>
+            {/* <Route path='/controlPanel' element={<DashBoard/>}/>
+            <Route path='/student' element={<Student/>}/> */}
             <Route path='/studentHome'element={<StudentHome/>}/>
-            <Route path='/teacher' element={<Teacher/>}/>
-            <Route path='/teacherDetails' element={<TeacherDetailsView/>}/>
+            {/* <Route path='/teacher' element={<Teacher/>}/>
+            <Route path='/teacherDetails' element={<TeacherDetailsView/>}/> */}
             <Route path='/profile' element={<Profile/>}/>
-            <Route path='/studentDetails' element={<StudentDetailsView/>}/>
+            {/* <Route path='/studentDetails' element={<StudentDetailsView/>}/> */}
 
         </Routes>
+        <InstituteRoutes></InstituteRoutes>
       </Router>
     </div>
   )
