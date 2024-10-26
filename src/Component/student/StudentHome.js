@@ -3,8 +3,6 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHome,
-  faUsers,
-  faChalkboardTeacher,
   faUser,
   faBookOpen,
   faBell,
@@ -159,22 +157,22 @@ const StudentHome = () => {
             onClick={() => handleNavigation("/studentHome")}
           />
           <FontAwesomeIcon
-            icon={faUsers}
+            icon={faBookOpen}
             className={selectedIcon === "/student" ? "selected" : ""}
             onClick={() => handleNavigation("/student")}
           />
           <FontAwesomeIcon
-            icon={faChalkboardTeacher}
+            icon={faClipboardCheck}
             className={selectedIcon === "/teacher" ? "selected" : ""}
             onClick={() => handleNavigation("/teacher")}
           />
           <FontAwesomeIcon
-            icon={faUser}
+            icon={faChartLine}
             className={selectedIcon === "/profile" ? "selected" : ""}
             onClick={() => handleNavigation("/profile")}
           />
           <FontAwesomeIcon
-            icon={faBell}
+            icon={faUser}
             className={selectedIcon === "/notifications" ? "selected" : ""}
             onClick={() => handleNavigation("/notifications")}
           />
