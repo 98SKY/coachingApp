@@ -151,31 +151,56 @@ const StudentHome = () => {
         </div>
         {/* Footer Navigation */}
         <div className="mainFooter">
+          <div
+          className="icon"
+            onClick={() => handleNavigation(StudentInternalRoutes.STUDENT.HOME)}
+          >
           <FontAwesomeIcon
             icon={faHome}
             className={selectedIcon === StudentInternalRoutes.STUDENT.HOME ? "selected" : ""}
-            onClick={() => handleNavigation(StudentInternalRoutes.STUDENT.HOME)}
           />
+          <span className="label">Home</span>
+          </div>
+          <div
+          className="icon"
+          onClick={() => handleNavigation(StudentInternalRoutes.STUDENT.COURSE)}
+          >
           <FontAwesomeIcon
             icon={faBookOpen}
             className={selectedIcon === StudentInternalRoutes.STUDENT.COURSE ? "selected" : ""}
-            onClick={() => handleNavigation(StudentInternalRoutes.STUDENT.COURSE)}
           />
+          <span className="label">Course</span>
+          </div>
+          <div
+          className="icon"
+          onClick={() => handleNavigation(StudentInternalRoutes.STUDENT.ASSIGNMENT)}
+          >
           <FontAwesomeIcon
             icon={faClipboardCheck}
             className={selectedIcon === StudentInternalRoutes.STUDENT.ASSIGNMENT ? "selected" : ""}
-            onClick={() => handleNavigation(StudentInternalRoutes.STUDENT.ASSIGNMENT)}
           />
+          <span className="label">assignment</span>
+          </div>
+          <div
+          className="icon"
+          onClick={() => handleNavigation(StudentInternalRoutes.STUDENT.ATTENDENCE)}
+          >
           <FontAwesomeIcon
             icon={faChartLine}
             className={selectedIcon === StudentInternalRoutes.STUDENT.ATTENDENCE ? "selected" : ""}
-            onClick={() => handleNavigation(StudentInternalRoutes.STUDENT.ATTENDENCE)}
           />
+          <span className="label">Attendance</span>
+          </div>
+          <div
+          className="icon"
+          onClick={() => handleNavigation(StudentInternalRoutes.STUDENT.PROFILE)}
+          >
           <FontAwesomeIcon
             icon={faUser}
             className={selectedIcon === StudentInternalRoutes.STUDENT.PROFILE ? "selected" : ""}
-            onClick={() => handleNavigation(StudentInternalRoutes.STUDENT.PROFILE)}
           />
+          <span className="label">Profile</span>
+          </div>
         </div>
       </div>
     </div>

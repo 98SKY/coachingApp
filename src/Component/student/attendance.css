@@ -1,0 +1,49 @@
+/* attendance.css */
+.attendance-wrapper {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .student-profile {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .attendance-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .attendance-list {
+    margin-top: 20px;
+    max-height: 400px;
+    overflow-y: auto;
+  }
+  
+  .attendance-card {
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 15px;
+    margin: 10px 0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  }
+  
+  .present {
+    color: #2ecc71; /* Green */
+  }
+  
+  .absent {
+    color: #e74c3c; /* Red */
+  }
+  
+  .attendance-calendar {
+    padding: 10px;
+    border-bottom: 2px solid #3498db;
+  }
+  
