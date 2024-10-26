@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../global.css";
 import { userList as userListApi } from ".././Global";
-import "./student.css";
+// import "./student.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHome,
@@ -15,12 +15,13 @@ import {
   faChevronLeft,
 } from "@fortawesome/free-solid-svg-icons";
 import { useLocation } from "react-router-dom";
+import {InternalRoutes} from '../../route/InstituteRoute';
 
 const Student = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const location = useLocation();
-  const [selectedIcon, setSelectedIcon] = useState("/institute/student");
+  const [selectedIcon, setSelectedIcon] = useState(InternalRoutes.INSTITUTE.STUDENT);
   const params = new URLSearchParams(location.search);
   const myCoachingId = params.get("myCoachingId");
   const userType = params.get("userType");
@@ -154,7 +155,7 @@ const Student = () => {
                 className="listView-card"
                 onClick={() =>
                   handleNavigation(
-                    `/institute/studentDetails?${index}&uuid=${student.uuid}&name=${student.name}`
+                    `${InternalRoutes.INSTITUTE.STUDENT_DETAILS}?${index}&uuid=${student.uuid}&name=${student.name}`
                   )
                 }
               >
@@ -217,7 +218,7 @@ const Student = () => {
           <div
             className="plushIcon"
             style={{ display: isSearchVisible ? "none" : "" }}
-            onClick={() => handleNavigation(`/SignUp?userType=student`)}
+            onClick={() => handleNavigation(`${InternalRoutes.SIGN_UP}?userType=${userType}`)}
           >
             <FontAwesomeIcon icon={faPlus} />
           </div>
@@ -232,9 +233,9 @@ const Student = () => {
             <FontAwesomeIcon
               icon={faHome}
               className={
-                selectedIcon === "/institute/controlPanel" ? "selected" : ""
+                selectedIcon === InternalRoutes.INSTITUTE.CONTROL_PANEL ? "selected" : ""
               }
-              onClick={() => handleNavigation("/institute/controlPanel")}
+              onClick={() => handleNavigation(InternalRoutes.INSTITUTE.CONTROL_PANEL)}
             />
             <span className="label">Home</span>
           </div>
@@ -242,9 +243,9 @@ const Student = () => {
             <FontAwesomeIcon
               icon={faUsers}
               className={
-                selectedIcon === "/institute/student" ? "selected" : ""
+                selectedIcon === InternalRoutes.INSTITUTE.STUDENT ? "selected" : ""
               }
-              onClick={() => handleNavigation("/institute/student")}
+              onClick={() => handleNavigation(InternalRoutes.INSTITUTE.STUDENT)}
             />
             <span className="label">Students</span>
           </div>
@@ -252,17 +253,17 @@ const Student = () => {
             <FontAwesomeIcon
               icon={faChalkboardTeacher}
               className={
-                selectedIcon === "/institute/teacher" ? "selected" : ""
+                selectedIcon === InternalRoutes.INSTITUTE.TEACHER ? "selected" : ""
               }
-              onClick={() => handleNavigation("/institute/teacher")}
+              onClick={() => handleNavigation(InternalRoutes.INSTITUTE.TEACHER)}
             />
             <span className="label">Teachers</span>
           </div>
           <div className="icon">
             <FontAwesomeIcon
               icon={faUser}
-              className={selectedIcon === "/profile" ? "selected" : ""}
-              onClick={() => handleNavigation("/profile")}
+              className={selectedIcon === InternalRoutes.PROFILE ? "selected" : ""}
+              onClick={() => handleNavigation(InternalRoutes.PROFILE)}
             />
             <span className="label">Profile</span>
           </div>
