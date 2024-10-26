@@ -14,7 +14,7 @@ import "../../global.css";
 import "./dashBoard.css";
 import "react-datepicker/dist/react-datepicker.css";
 import { dashBoardCount } from "../Api/Institute/instituteApi";
-import {InternalRoutes} from '../../route/InstituteRoute';
+import { InternalRoutes } from "../../route/InstituteRoute";
 
 const DashBoard = () => {
   const navigate = useNavigate();
@@ -23,7 +23,9 @@ const DashBoard = () => {
   const params = new URLSearchParams(location.search);
   const myCoachingId = params.get("myCoachingId");
   const userType = params.get("userType");
-  const [selectedIcon, setSelectedIcon] = useState(InternalRoutes.INSTITUTE.CONTROL_PANEL);
+  const [selectedIcon, setSelectedIcon] = useState(
+    InternalRoutes.INSTITUTE.CONTROL_PANEL
+  );
   const [fromDate, setFromDate] = useState(null);
   const [toDate, setToDate] = useState(null);
   const [showFromDatePicker, setShowFromDatePicker] = useState(false);
@@ -256,41 +258,59 @@ const DashBoard = () => {
         </div>
 
         <div className="mainFooter">
-          <div className="icon">
+          <div
+            className="icon"
+            onClick={() =>
+              handleNavigation(InternalRoutes.INSTITUTE.CONTROL_PANEL)
+            }
+          >
             <FontAwesomeIcon
               icon={faHome}
               className={
-                selectedIcon === InternalRoutes.INSTITUTE.CONTROL_PANEL ? "selected" : ""
+                selectedIcon === InternalRoutes.INSTITUTE.CONTROL_PANEL
+                  ? "selected"
+                  : ""
               }
-              onClick={() => handleNavigation(InternalRoutes.INSTITUTE.CONTROL_PANEL)}
             />
             <span className="label">Home</span>
           </div>
-          <div className="icon">
+          <div
+            className="icon"
+            onClick={() => handleNavigation(InternalRoutes.INSTITUTE.STUDENT)}
+          >
             <FontAwesomeIcon
               icon={faUsers}
               className={
-                selectedIcon === InternalRoutes.INSTITUTE.STUDENT ? "selected" : ""
+                selectedIcon === InternalRoutes.INSTITUTE.STUDENT
+                  ? "selected"
+                  : ""
               }
-              onClick={() => handleNavigation(InternalRoutes.INSTITUTE.STUDENT)}
             />
             <span className="label">Students</span>
           </div>
-          <div className="icon">
+          <div
+            className="icon"
+            onClick={() => handleNavigation(InternalRoutes.INSTITUTE.TEACHER)}
+          >
             <FontAwesomeIcon
               icon={faChalkboardTeacher}
               className={
-                selectedIcon === InternalRoutes.INSTITUTE.TEACHER ? "selected" : ""
+                selectedIcon === InternalRoutes.INSTITUTE.TEACHER
+                  ? "selected"
+                  : ""
               }
-              onClick={() => handleNavigation(InternalRoutes.INSTITUTE.TEACHER)}
             />
             <span className="label">Teachers</span>
           </div>
-          <div className="icon">
+          <div
+            className="icon"
+            onClick={() => handleNavigation(InternalRoutes.PROFILE)}
+          >
             <FontAwesomeIcon
               icon={faUser}
-              className={selectedIcon === InternalRoutes.PROFILE ? "selected" : ""}
-              onClick={() => handleNavigation(InternalRoutes.PROFILE)}
+              className={
+                selectedIcon === InternalRoutes.PROFILE ? "selected" : ""
+              }
             />
             <span className="label">Profile</span>
           </div>

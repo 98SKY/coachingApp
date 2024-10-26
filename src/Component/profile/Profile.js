@@ -13,7 +13,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import "../../global.css";
 import "./profile.css";
-import {InternalRoutes} from '../../route/InstituteRoute';
+import { InternalRoutes } from "../../route/InstituteRoute";
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -45,7 +45,9 @@ const Profile = () => {
 
   const logOut = () => {
     localStorage.clear();
-    handleNavigation(`${InternalRoutes.LOGIN}?language=english&userType=${userType}&`);
+    handleNavigation(
+      `${InternalRoutes.LOGIN}?language=english&userType=${userType}&`
+    );
   };
 
   useEffect(() => {
@@ -175,41 +177,59 @@ const Profile = () => {
           </div>
         </div>
         <div className="mainFooter">
-          <div className="icon">
+          <div
+            className="icon"
+            onClick={() =>
+              handleNavigation(InternalRoutes.INSTITUTE.CONTROL_PANEL)
+            }
+          >
             <FontAwesomeIcon
               icon={faHome}
               className={
-                selectedIcon === InternalRoutes.INSTITUTE.CONTROL_PANEL ? "selected" : ""
+                selectedIcon === InternalRoutes.INSTITUTE.CONTROL_PANEL
+                  ? "selected"
+                  : ""
               }
-              onClick={() => handleNavigation(InternalRoutes.INSTITUTE.CONTROL_PANEL)}
             />
             <span className="label">Home</span>
           </div>
-          <div className="icon">
+          <div
+            className="icon"
+            onClick={() => handleNavigation(InternalRoutes.INSTITUTE.STUDENT)}
+          >
             <FontAwesomeIcon
               icon={faUsers}
               className={
-                selectedIcon === InternalRoutes.INSTITUTE.STUDENT ? "selected" : ""
+                selectedIcon === InternalRoutes.INSTITUTE.STUDENT
+                  ? "selected"
+                  : ""
               }
-              onClick={() => handleNavigation(InternalRoutes.INSTITUTE.STUDENT)}
             />
             <span className="label">Students</span>
           </div>
-          <div className="icon">
+          <div
+            className="icon"
+            onClick={() => handleNavigation(InternalRoutes.INSTITUTE.TEACHER)}
+          >
             <FontAwesomeIcon
               icon={faChalkboardTeacher}
               className={
-                selectedIcon === InternalRoutes.INSTITUTE.TEACHER ? "selected" : ""
+                selectedIcon === InternalRoutes.INSTITUTE.TEACHER
+                  ? "selected"
+                  : ""
               }
-              onClick={() => handleNavigation(InternalRoutes.INSTITUTE.TEACHER)}
             />
             <span className="label">Teachers</span>
           </div>
-          <div className="icon">
+          <div
+            className="icon"
+            onClick={() => handleNavigation(InternalRoutes.PROFILE)}
+          >
             <FontAwesomeIcon
               icon={faUser}
-              className={selectedIcon === InternalRoutes.PROFILE ? "selected" : ""}
-              onClick={() => handleNavigation(InternalRoutes.PROFILE)}
+              className={
+                selectedIcon === InternalRoutes.PROFILE ? "selected" : ""
+              }
             />
             <span className="label">Profile</span>
           </div>
