@@ -61,29 +61,17 @@ const Attendance = ({ student }) => {
         <div className="header">
           Attendance
           <div className="attendance-calendar">
-            
-              <FontAwesomeIcon icon={faCalendarAlt} />
-              <DatePicker
-                selected={selectedDate}
-                onChange={handleDateChange}
-                dateFormat="MMMM yyyy"
-                showMonthYearPicker
-                withPortal
-              />
-            
+            <FontAwesomeIcon icon={faCalendarAlt} />
+            <DatePicker
+              selected={selectedDate}
+              onChange={handleDateChange}
+              dateFormat="MMMM yyyy"
+              showMonthYearPicker
+              withPortal
+            />
           </div>
         </div>
         <div className="body">
-          <div className="student-profile">
-            <h2>{student.name}'s Attendance Record</h2>
-            <p>
-              <strong>Student ID:</strong> {student.id}
-            </p>
-            <p>
-              <strong>Class:</strong> {student.class}
-            </p>
-          </div>
-
           <div className="attendance-header">
             <h3>Attendance History</h3>
           </div>
