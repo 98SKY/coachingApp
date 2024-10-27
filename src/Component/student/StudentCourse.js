@@ -95,10 +95,7 @@ const StudentCourse = () => {
         <div className="header">
           Courses
           <div className="course-filter">
-            <select
-              onChange={(e) => setFilter(e.target.value)}
-              value={filter}
-            >
+            <select onChange={(e) => setFilter(e.target.value)} value={filter}>
               <option value="All">All</option>
               <option value="In Progress">In Progress</option>
               <option value="Completed">Completed</option>
