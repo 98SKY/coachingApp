@@ -11,6 +11,7 @@ import {
   faBookOpen,
   faClipboardCheck,
   faChartLine,
+  faSadTear,
 } from "@fortawesome/free-solid-svg-icons";
 import { StudentInternalRoutes } from "../../route/StudentRoute";
 
@@ -20,10 +21,7 @@ const StudentCourse = () => {
   const [selectedIcon, setSelectedIcon] = useState(
     StudentInternalRoutes.STUDENT.COURSE
   );
-  const [announcements, setAnnouncements] = useState([]);
   const [courses, setCourses] = useState([]);
-  const [assignments, setAssignments] = useState([]);
-  const [attendance, setAttendance] = useState(0);
   const [filter, setFilter] = useState("All");
   const [expandedCourses, setExpandedCourses] = useState({});
 
@@ -94,25 +92,25 @@ const StudentCourse = () => {
   return (
     <div className="wrapper">
       <div className="padding-all">
-        <div className="header">Courses
-        <div className="course-filter">
-              {/* <label>Filter:</label> */}
-              <select
-                onChange={(e) => setFilter(e.target.value)}
-                value={filter}
-              >
-                <option value="All">All</option>
-                <option value="In Progress">In Progress</option>
-                <option value="Completed">Completed</option>
-              </select>
-            </div>
+        <div className="header">
+          Courses
+          <div className="course-filter">
+            <select
+              onChange={(e) => setFilter(e.target.value)}
+              value={filter}
+            >
+              <option value="All">All</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Completed">Completed</option>
+            </select>
+          </div>
         </div>
         <div className="body">
-            <div className="course-list">
-              {filteredCourses.map((course) => (
+          <div className="course-list">
+            {filteredCourses.length > 0 ? (
+              filteredCourses.map((course) => (
                 <div key={course.id} className="course-card">
                   <div className="course-info">
-                    <h3>{course.name}</h3>
                     <div className="progress-chart">
                       <Doughnut
                         data={{
@@ -136,9 +134,8 @@ const StudentCourse = () => {
                       />
                     </div>
                     <div className="course-details">
-                      <p>
-                        <strong>Instructor:</strong> {course.instructor}
-                      </p>
+                      <h3>{course.name}</h3>
+                      <p>{course.instructor}</p>
                       <button onClick={() => toggleExpand(course.id)}>
                         {expandedCourses[course.id]
                           ? "Less Details"
@@ -153,7 +150,6 @@ const StudentCourse = () => {
                       </button>
                     </div>
                   </div>
-
                   {expandedCourses[course.id] && (
                     <div className="expanded-section">
                       <p>{course.description}</p>
@@ -174,10 +170,19 @@ const StudentCourse = () => {
                     </div>
                   )}
                 </div>
-              ))}
-            </div>
+              ))
+            ) : (
+              <div className="no-courses">
+                <FontAwesomeIcon icon={faSadTear} size="3x" />
+                <p>
+                  {filter === "Completed"
+                    ? "No courses completed yet."
+                    : "You haven't enrolled in any courses yet. Enroll now!"}
+                </p>
+              </div>
+            )}
+          </div>
         </div>
-        {/*body end */}
         <div className="mainFooter">
           <div
             className="icon"
@@ -223,7 +228,7 @@ const StudentCourse = () => {
                   : ""
               }
             />
-            <span className="label">assignment</span>
+            <span className="label">Assignment</span>
           </div>
           <div
             className="icon"

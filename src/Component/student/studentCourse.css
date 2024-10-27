@@ -1,9 +1,3 @@
-.student-course-wrapper {
-  padding: 20px;
-  background-color: #f4f6f9;
-}
-
-
 .course-filter {
   display: flex;
   justify-content: center;
@@ -35,7 +29,7 @@
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  position: relative;
+  position:relative;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -43,7 +37,7 @@
 
 .course-info {
   display: flex;
-  align-items: center;
+  align-items:flex-start;
   justify-content: space-between;
   margin-bottom: 15px;
 }
@@ -72,12 +66,8 @@
   color: #3498db;
   cursor: pointer;
   font-size: 14px;
+  width: 90%;
   transition: color 0.3s ease;
-}
-
-.course-details button:hover {
-  text-decoration: underline;
-  color: #2c7cbf;
 }
 
 .expanded-section {
@@ -121,4 +111,19 @@
   right: 30px;
   transform: translateY(-50%);
   cursor: pointer;
+}
+
+.no-courses, .no-completed-courses {
+  text-align: center;
+  color: #999;
+  margin-top: 20px;
+}
+
+.no-courses p, .no-completed-courses p {
+  margin-top: 10px;
+  font-size: 16px;
+}
+
+.no-courses .faExclamationCircle, .no-completed-courses .faExclamationCircle {
+  color: #3498db;
 }
