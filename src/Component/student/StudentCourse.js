@@ -1,12 +1,27 @@
 import React, { useState, useEffect } from "react";
 import "./studentCourse.css";
+import { useNavigate, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import { Doughnut } from "react-chartjs-2";
 import 'chart.js/auto';
+import {
+  faHome,
+  faUser,
+  faBookOpen,
+  faClipboardCheck,
+  faChartLine,
+} from "@fortawesome/free-solid-svg-icons";
+import {StudentInternalRoutes} from '../../route/StudentRoute';
 
 const StudentCourse = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [selectedIcon, setSelectedIcon] = useState(StudentInternalRoutes.STUDENT.COURSE);
+  const [announcements, setAnnouncements] = useState([]);
   const [courses, setCourses] = useState([]);
+  const [assignments, setAssignments] = useState([]);
+  const [attendance, setAttendance] = useState(0);
   const [filter, setFilter] = useState("All");
   const [expandedCourses, setExpandedCourses] = useState({});
 
@@ -68,7 +83,16 @@ const StudentCourse = () => {
     }));
   };
 
+  const handleNavigation = (path) => {
+    setSelectedIcon(path);
+    navigate(path);
+  };
+
   return (
+    <div className="wrapper">
+      <div className="padding-all">
+      <div className="header">Courses</div>
+      <div className="body">
     <div className="student-course-wrapper">
       <div className="course-header">
         <h2>My Courses</h2>
@@ -135,6 +159,62 @@ const StudentCourse = () => {
           </div>
         ))}
       </div>
+    </div>
+    </div>
+    {/*body end */}
+    <div className="mainFooter">
+          <div
+          className="icon"
+            onClick={() => handleNavigation(StudentInternalRoutes.STUDENT.HOME)}
+          >
+          <FontAwesomeIcon
+            icon={faHome}
+            className={selectedIcon === StudentInternalRoutes.STUDENT.HOME ? "selected" : ""}
+          />
+          <span className="label">Home</span>
+          </div>
+          <div
+          className="icon"
+          onClick={() => handleNavigation(StudentInternalRoutes.STUDENT.COURSE)}
+          >
+          <FontAwesomeIcon
+            icon={faBookOpen}
+            className={selectedIcon === StudentInternalRoutes.STUDENT.COURSE ? "selected" : ""}
+          />
+          <span className="label">Course</span>
+          </div>
+          <div
+          className="icon"
+          onClick={() => handleNavigation(StudentInternalRoutes.STUDENT.ASSIGNMENT)}
+          >
+          <FontAwesomeIcon
+            icon={faClipboardCheck}
+            className={selectedIcon === StudentInternalRoutes.STUDENT.ASSIGNMENT ? "selected" : ""}
+          />
+          <span className="label">assignment</span>
+          </div>
+          <div
+          className="icon"
+          onClick={() => handleNavigation(StudentInternalRoutes.STUDENT.ATTENDENCE)}
+          >
+          <FontAwesomeIcon
+            icon={faChartLine}
+            className={selectedIcon === StudentInternalRoutes.STUDENT.ATTENDENCE ? "selected" : ""}
+          />
+          <span className="label">Attendance</span>
+          </div>
+          <div
+          className="icon"
+          onClick={() => handleNavigation(StudentInternalRoutes.STUDENT.PROFILE)}
+          >
+          <FontAwesomeIcon
+            icon={faUser}
+            className={selectedIcon === StudentInternalRoutes.STUDENT.PROFILE ? "selected" : ""}
+          />
+          <span className="label">Profile</span>
+          </div>
+        </div>
+    </div>
     </div>
   );
 };

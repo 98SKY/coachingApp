@@ -63,7 +63,7 @@ const StudentHome = () => {
   return (
     <div className="wrapper">
       <div className="padding-all">
-        <div className="header">Student Dashboard</div>
+        <div className="header">Dashboard</div>
         <div className="body">
           {/* Overview Section */}
           <div className="overview-section">
