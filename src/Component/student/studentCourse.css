@@ -1,125 +1,124 @@
 .student-course-wrapper {
-    padding: 20px;
-    background-color: #f4f6f9;
-  }
-  
-  .course-header {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .course-header h2 {
-    font-size: 26px;
-    color: #333;
-  }
-  
-  .course-filter {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-  
-  .course-filter label {
-    margin-right: 10px;
-    font-size: 16px;
-  }
-  
-  .course-filter select {
-    padding: 5px 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    font-size: 14px;
-  }
-  
-  .course-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
-  }
-  
-  .course-card {
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .course-info {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 15px;
-  }
-  
-  .course-info h3 {
-    margin: 0;
-    font-size: 18px;
-    color: #444;
-  }
-  
-  .progress-chart {
-    width: 100%;
-    max-width: 150px; /* Set a maximum size for the chart */
-    height: auto; /* Let the height adjust automatically */
-    margin: 0 auto;
-  }
-  
-  .course-details {
-    margin-top: 10px;
-    text-align: center;
-  }
-  
-  .course-details button {
-    background: none;
-    border: none;
-    color: #3498db;
-    cursor: pointer;
-    font-size: 14px;
-    transition: color 0.3s ease;
-  }
-  
-  .course-details button:hover {
-    text-decoration: underline;
-    color: #2c7cbf;
-  }
-  
-  .expanded-section {
-    margin-top: 15px;
-    background-color: #f9f9f9;
-    padding: 10px;
-    border-radius: 5px;
-  }
-  
-  .expanded-section h4 {
-    font-size: 16px;
-    color: #555;
-    margin-bottom: 10px;
-  }
-  
-  .expanded-section ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .expanded-section ul li {
-    margin-bottom: 5px;
-  }
-  
-  .expanded-section ul li a {
-    color: #3498db;
-    text-decoration: none;
-    font-size: 14px;
-    transition: color 0.3s ease;
-  }
-  
-  .expanded-section ul li a:hover {
-    text-decoration: underline;
-    color: #2c7cbf;
-  }
-  
+  padding: 20px;
+  background-color: #f4f6f9;
+}
+
+
+.course-filter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.course-filter label {
+  margin-right: 10px;
+  font-size: 16px;
+}
+
+.course-filter select {
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.course-list {
+  display: flex;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  margin-top: 2%;
+}
+
+.course-card {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.course-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.course-info h3 {
+  margin: 0;
+  font-size: 18px;
+  color: #444;
+}
+
+.progress-chart {
+  width: 100%;
+  max-width: 150px;
+  height: auto;
+  margin: 0 auto;
+}
+
+.course-details {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.course-details button {
+  background: none;
+  border: none;
+  color: #3498db;
+  cursor: pointer;
+  font-size: 14px;
+  transition: color 0.3s ease;
+}
+
+.course-details button:hover {
+  text-decoration: underline;
+  color: #2c7cbf;
+}
+
+.expanded-section {
+  margin-top: 15px;
+  background-color: #f9f9f9;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.expanded-section h4 {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.expanded-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.expanded-section ul li {
+  margin-bottom: 5px;
+}
+
+.expanded-section ul li a {
+  color: #3498db;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.3s ease;
+}
+
+.expanded-section ul li a:hover {
+  text-decoration: underline;
+  color: #2c7cbf;
+}
+
+.course-filter {
+  position: absolute;
+  top: 70%;
+  right: 30px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
