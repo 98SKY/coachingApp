@@ -11,7 +11,6 @@ import {
   faChartLine,
 } from "@fortawesome/free-solid-svg-icons";
 import {StudentInternalRoutes} from '../../route/StudentRoute';
-// Example assignments data
 const exampleAssignments = [
   {
     id: 1,
@@ -64,18 +63,16 @@ function Assignments({ assignments = exampleAssignments }) { // Default to examp
   return (
     <div className="wrapper">
       <div className="padding-all">
-        <div className="header">Assignments</div>
-        <div className='body'>
-    <div className="assignments-wrapper">
-      <div className="assignments-header">
-        <h2>Assignments</h2>
-        <label htmlFor="filter">Filter:</label>
+        <div className="header">Assignments
+        <div className="assignments-header">
         <select id="filter" onChange={(e) => setFilter(e.target.value)} value={filter}>
           <option value="All">All</option>
           <option value="Due Soon">Due Soon</option>
           <option value="Completed">Completed</option>
         </select>
       </div>
+        </div>
+        <div className='body'>
 
       <div className="assignments-list">
         {filteredAssignments.length > 0 ? (
@@ -91,7 +88,6 @@ function Assignments({ assignments = exampleAssignments }) { // Default to examp
           <p>No assignments found.</p>
         )}
       </div>
-    </div>
     </div>
     {/*end of body */}
     <div className="mainFooter">
