@@ -10,6 +10,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useLocation } from "react-router-dom";
 import { userDetails } from "../Api/Institute/instituteApi";
+import { formatDate } from "./commonFunction";
 
 const StudentDetailsView = () => {
   const navigate = useNavigate();
@@ -29,6 +30,8 @@ const StudentDetailsView = () => {
   const [formData, setFormData] = useState({});
   const [initialData, setInitialData] = useState({});
 
+  
+
   const cardData = [
     {
       title: "Personal Info",
@@ -37,7 +40,7 @@ const StudentDetailsView = () => {
         Age: formData.age,
         Email: formData.email,
         Address: formData.address,
-        EnterDate: formData.EnterDate,
+        EnterDate: formatDate(formData.EnterDate),
         Gender: formData.gender,
         Mobile: formData.Mobile,
       },
@@ -58,7 +61,12 @@ const StudentDetailsView = () => {
     },
     {
       title: "Courses",
-      data: studentData.courses || [],
+      data: studentData.courses
+      ? studentData.courses.map(course => ({
+          ...course,
+          course_enrolled_date: formatDate(course.course_enrolled_date) // Formatting date
+        }))
+      : [],
     },
   ];
 
@@ -196,7 +204,7 @@ const StudentDetailsView = () => {
                                   });
                                 }}
                               />
-                              <label>{field.replace("_", " ")}</label>
+                              <label>{field.replaceAll("_", " ")}</label>
                             </div>
                           ))}
                         </div>

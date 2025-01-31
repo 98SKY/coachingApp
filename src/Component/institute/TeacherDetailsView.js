@@ -10,6 +10,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useLocation } from "react-router-dom";
 import {userDetails} from "../Api/Institute/instituteApi";
+import { formatDate } from "./commonFunction";
 
 const TeacherDetailsView = () => {
   const navigate = useNavigate();
@@ -38,7 +39,7 @@ const TeacherDetailsView = () => {
         Name: formData.name || "",
         Email: formData.email || "",
         Address: formData.address || "",
-        EnterDate: formData.entered_date || "",
+        EnterDate: formatDate(formData.entered_date) || "",
         Gender: formData.gender || "",
         Mobile: formData.phone_no || "",
         Status: formData.user_status || "",
@@ -56,7 +57,12 @@ const TeacherDetailsView = () => {
     },
     {
       title: "Courses",
-      data: teacherData.courses,
+      data: teacherData.courses
+      ? teacherData.courses.map(course => ({
+          ...course,
+          course_enrolled_date: formatDate(course.course_enrolled_date) // Formatting date
+        }))
+      : [],
     },
     {
       title: "Payment Info",
