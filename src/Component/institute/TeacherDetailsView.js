@@ -129,87 +129,86 @@ const TeacherDetailsView = () => {
 
   return (
     <div className="wrapper">
-      <div className="padding-all">
-        <div className="header">
-          <FontAwesomeIcon icon={faChevronLeft} onClick={() => navigate(-1)} />
-          <div>{userName.charAt(0).toUpperCase() + userName.slice(1)}</div>
-        </div>
-        <div className="body">
-          {cardData.map((card, index) => (
-            <div key={index} className="card-detailsView">
-              <div
-                className="card-header"
-                onClick={() => handleExpandCard(index)}
-              >
-                <div>{card.title}</div>
-                <FontAwesomeIcon
-                  icon={expandedCard === index ? faChevronUp : faChevronDown}
-                />
-              </div>
-              {expandedCard === index && (
-                <div className="card-content">
-                  {/* For non-courses data */}
-                  {card.title !== "Courses"
-                    ? Object.entries(card.data).map(([key, value]) => (
-                        <div key={key} className="input-field">
-                          <input
-                            type="text"
-                            placeholder=" "
-                            value={value || ""}
-                            onChange={(e) =>
-                              setFormData((prev) => ({
-                                ...prev,
-                                [key]: e.target.value,
-                              }))
-                            }
-                          />
-                          <label>{key}</label>
-                        </div>
-                      ))
-                    : // For course details
-                      card.data.map((course, courseIndex) => (
-                        <div key={courseIndex} className="course-details">
-                          {[
-                            "course_name",
-                            "course_status",
-                            "course_enrolled_date",
-                            "experience",
-                          ].map((field, idx) => (
-                            <div key={idx} className="input-field">
-                              <input
-                                type="text"
-                                placeholder=" "
-                                value={course[field] || ""}
-                                onChange={(e) => {
-                                  const newCourses = [...teacherData.courses];
-                                  newCourses[courseIndex][field] =
-                                    e.target.value;
-                                  setTeacherDetails({
-                                    ...teacherData,
-                                    courses: newCourses,
-                                  });
-                                }}
-                              />
-                              <label>{field.replace(/_/g, " ")}</label>
-                            </div>
-                          ))}
-                        </div>
-                      ))}
-                  <button
-                    onClick={() => handleSave(index)}
-                    disabled={
-                      card.title !== "Courses" && !isFormValid(card.data)
-                    }
-                  >
-                    Save
-                  </button>
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
-      </div>
+  <div className="padding-all">
+    <div className="header">
+      <FontAwesomeIcon icon={faChevronLeft} onClick={() => navigate(-1)} />
+      <div>{userName.charAt(0).toUpperCase() + userName.slice(1)}</div>
     </div>
+    <div className="body">
+      {cardData.map((card, index) => (
+        <div key={index} className="card-detailsView">
+          <div className="card-header" onClick={() => handleExpandCard(index)}>
+            <div>{card.title}</div>
+            <FontAwesomeIcon
+              icon={expandedCard === index ? faChevronUp : faChevronDown}
+            />
+          </div>
+          {expandedCard === index && (
+            <div className="card-content">
+              {/* For non-courses data */}
+              {card.title !== "Courses" ? (
+                <div className="grid-container">
+                  {Object.entries(card.data).map(([key, value]) => (
+                    <div key={key} className="input-field">
+                      <input
+                        type="text"
+                        placeholder=" "
+                        value={value || ""}
+                        onChange={(e) =>
+                          setFormData((prev) => ({
+                            ...prev,
+                            [key]: e.target.value,
+                          }))
+                        }
+                      />
+                      <label>{key}</label>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                // For course details
+                card.data.map((course, courseIndex) => (
+                  <div key={courseIndex} className="grid-container">
+                    {[
+                      "course_name",
+                      "course_status",
+                      "course_enrolled_date",
+                      "experience",
+                    ].map((field, idx) => (
+                      <div key={idx} className="input-field">
+                        <input
+                          type="text"
+                          placeholder=" "
+                          value={course[field] || ""}
+                          onChange={(e) => {
+                            const newCourses = [...teacherData.courses];
+                            newCourses[courseIndex][field] = e.target.value;
+                            setTeacherDetails({
+                              ...teacherData,
+                              courses: newCourses,
+                            });
+                          }}
+                        />
+                        <label>{field.replace(/_/g, " ")}</label>
+                      </div>
+                    ))}
+                  </div>
+                ))
+              )}
+              <button
+                onClick={() => handleSave(index)}
+                disabled={card.title !== "Courses" && !isFormValid(card.data)}
+              >
+                Save
+              </button>
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+  </div>
+</div>
+
   );
 };
 

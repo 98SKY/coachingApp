@@ -30,8 +30,6 @@ const StudentDetailsView = () => {
   const [formData, setFormData] = useState({});
   const [initialData, setInitialData] = useState({});
 
-  
-
   const cardData = [
     {
       title: "Personal Info",
@@ -62,11 +60,11 @@ const StudentDetailsView = () => {
     {
       title: "Courses",
       data: studentData.courses
-      ? studentData.courses.map(course => ({
-          ...course,
-          course_enrolled_date: formatDate(course.course_enrolled_date) // Formatting date
-        }))
-      : [],
+        ? studentData.courses.map((course) => ({
+            ...course,
+            course_enrolled_date: formatDate(course.course_enrolled_date), // Formatting date
+          }))
+        : [],
     },
   ];
 
@@ -168,8 +166,9 @@ const StudentDetailsView = () => {
               </div>
               {expandedCard === index && (
                 <div className="card-content">
-                  {card.title !== "Courses"
-                    ? Object.entries(card.data).map(([key, value]) => (
+                  {card.title !== "Courses" ? (
+                    <div className="grid-container">
+                      {Object.entries(card.data).map(([key, value]) => (
                         <div key={key} className="input-field">
                           <input
                             type="text"
@@ -181,34 +180,39 @@ const StudentDetailsView = () => {
                           />
                           <label>{key}</label>
                         </div>
-                      ))
-                    : card.data.map((course, courseIndex) => (
-                        <div key={courseIndex} className="course-details">
-                          {[
-                            "course_name",
-                            "course_status",
-                            "course_enrolled_date",
-                          ].map((field, idx) => (
-                            <div key={idx} className="input-field">
-                              <input
-                                type="text"
-                                placeholder=" "
-                                value={course[field] || ""}
-                                onChange={(e) => {
-                                  const newCourses = [...studentData.courses];
-                                  newCourses[courseIndex][field] =
-                                    e.target.value;
-                                  setStudentDetails({
-                                    ...studentData,
-                                    courses: newCourses,
-                                  });
-                                }}
-                              />
-                              <label>{field.replaceAll("_", " ")}</label>
-                            </div>
-                          ))}
-                        </div>
                       ))}
+                    </div>
+                  ) : (
+                    card.data.map((course, courseIndex) => (
+                      <div
+                        key={courseIndex}
+                        className="course-details grid-container"
+                      >
+                        {[
+                          "course_name",
+                          "course_status",
+                          "course_enrolled_date",
+                        ].map((field, idx) => (
+                          <div key={idx} className="input-field">
+                            <input
+                              type="text"
+                              placeholder=" "
+                              value={course[field] || ""}
+                              onChange={(e) => {
+                                const newCourses = [...studentData.courses];
+                                newCourses[courseIndex][field] = e.target.value;
+                                setStudentDetails({
+                                  ...studentData,
+                                  courses: newCourses,
+                                });
+                              }}
+                            />
+                            <label>{field.replaceAll("_", " ")}</label>
+                          </div>
+                        ))}
+                      </div>
+                    ))
+                  )}
                   <button onClick={() => handleSave(index)}>Save</button>
                 </div>
               )}

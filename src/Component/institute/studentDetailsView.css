@@ -1,0 +1,11 @@
+.grid-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.input-field {
+  flex: 1 1 calc(25% - 16px); /* 25% width for 4 items per row */
+  min-width: 200px;
+  max-width: calc(25% - 16px); /* Prevent stretching when alone */
+}

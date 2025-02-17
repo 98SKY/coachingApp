@@ -71,15 +71,15 @@ const StudentHome = () => {
 
             <div className="stats">
               <div className="stat-item">
-                <FontAwesomeIcon icon={faBookOpen} />
+                <FontAwesomeIcon icon={faBookOpen} fontSize='20px'/>
                 <p>{courses.length} Courses Enrolled</p>
               </div>
               <div className="stat-item">
-                <FontAwesomeIcon icon={faClipboardCheck} />
+                <FontAwesomeIcon icon={faClipboardCheck} fontSize='20px'/>
                 <p>{assignments.length} Upcoming Assignments</p>
               </div>
               <div className="stat-item">
-                <FontAwesomeIcon icon={faChartLine} />
+                <FontAwesomeIcon icon={faChartLine} fontSize='20px'/>
                 <p>{attendance}% Attendance</p>
               </div>
             </div>
