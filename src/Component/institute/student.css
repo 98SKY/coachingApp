@@ -1,20 +1,20 @@
 .name {
-  font-weight: bold; /* slightly thicker for better readability */
-  font-size: 1.2em; /* larger name size */
-  color: #333; /* darker text for readability */
+  font-weight: bold;
+  font-size: 1.2em;
+  color: #333;
   position: absolute;
   top: 12px;
   left: 12px;
   white-space: nowrap;
-  overflow-x: hidden; /* prevent overflow */
-  text-overflow: ellipsis; /* add ellipsis for long names */
+  overflow-x: hidden;
+  text-overflow: ellipsis;
 }
 
 .address {
   text-align: left;
-  margin-top: 60px; /* more space for better hierarchy */
-  font-size: 1em; /* standard text size */
-  color: #555; /* lighter text for less importance */
+  margin-top: 60px;
+  font-size: 1em;
+  color: #555;
   white-space: nowrap;
   overflow-x: hidden;
   text-overflow: ellipsis;
@@ -24,10 +24,35 @@
   position: absolute;
   bottom: 12px;
   left: 12px;
-  background-color: rgb(90, 154, 194); /* green background for "Active" status */
+  background-color: rgb(90, 154, 194);
   color: #fff;
   padding: 6px 12px;
-  border-radius: 5px; /* rounded edges for badges */
-  font-size: 0.9em; /* smaller badge font */
-  font-weight: 500; /* medium font weight */
+  border-radius: 5px;
+  font-size: 0.9em;
+  font-weight: 500;
+}
+
+.no-students {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-top: 20%;
+  text-align: center;
+}
+
+.no-students i {
+  font-size: 40px;
+  color: #ff6347;
+  margin-bottom: 10px;
+}
+
+.no-students p {
+  font-size: 16px;
+  color: #555;
+  font-weight: 500;
 }

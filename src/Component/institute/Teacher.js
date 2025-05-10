@@ -151,66 +151,73 @@ const Teacher = () => {
           )}
         </div>
         <div className="body" onScroll={handleScroll}>
-          {teachers.map((teacher, index) => {
-            const courses = teacher.courses || [];
-            const currentIndex = currentCourseIndex[teacher.uuid] || 0;
+          {teachers.length === 0 ? (
+            <div className="no-students">
+              <i className="fa fa-user-plus"></i>
+              <p>No teachers available. Please add some teachers.</p>
+            </div>
+          ) : (
+            teachers.map((teacher, index) => {
+              const courses = teacher.courses || [];
+              const currentIndex = currentCourseIndex[teacher.uuid] || 0;
 
-            return (
-              <div
-                key={index}
-                className="listView-card"
-                onClick={() =>
-                  handleNavigation(
-                    `${InternalRoutes.INSTITUTE.TEACHER_DETAILS}?${index}&uuid=${teacher.uuid}&name=${teacher.name}&`
-                  )
-                }
-              >
-                <div className="name">
-                  {teacher.name
-                    ? teacher.name.length > 20
-                      ? teacher.name.slice(0, 20) + "..."
-                      : teacher.name
-                    : ""}
-                </div>
+              return (
                 <div
-                  className={`status chip ${
-                    teacher.user_status === "Active" ? "green" : "red"
-                  }`}
+                  key={index}
+                  className="listView-card"
+                  onClick={() =>
+                    handleNavigation(
+                      `${InternalRoutes.INSTITUTE.TEACHER_DETAILS}?${index}&uuid=${teacher.uuid}&name=${teacher.name}&`
+                    )
+                  }
                 >
-                  {teacher.user_status}
-                </div>
-                <div className="address">
-                  {teacher.address
-                    ? teacher.address.length > 20
-                      ? teacher.address.slice(0, 20) + "..."
-                      : teacher.address
-                    : ""}
-                </div>
-                <div className="fee-status">{teacher.phone_no}</div>
-                <div className="subject">
-                  {courses.length > 0 && (
-                    <div
-                      className={`course-item ${
-                        currentIndex % 2 === 0
-                          ? "course-item-even"
-                          : "course-item-odd"
-                      }`}
-                    >
-                      {courses.length === 1
-                        ? courses[0].course
-                        : courses[currentIndex % courses.length].course}
-                      <div className="info-box">
-                        More information about{" "}
+                  <div className="name">
+                    {teacher.name
+                      ? teacher.name.length > 20
+                        ? teacher.name.slice(0, 20) + "..."
+                        : teacher.name
+                      : ""}
+                  </div>
+                  <div
+                    className={`status chip ${
+                      teacher.user_status === "Active" ? "green" : "red"
+                    }`}
+                  >
+                    {teacher.user_status}
+                  </div>
+                  <div className="address">
+                    {teacher.address
+                      ? teacher.address.length > 20
+                        ? teacher.address.slice(0, 20) + "..."
+                        : teacher.address
+                      : ""}
+                  </div>
+                  <div className="fee-status">{teacher.phone_no}</div>
+                  <div className="subject">
+                    {courses.length > 0 && (
+                      <div
+                        className={`course-item ${
+                          currentIndex % 2 === 0
+                            ? "course-item-even"
+                            : "course-item-odd"
+                        }`}
+                      >
                         {courses.length === 1
                           ? courses[0].course
                           : courses[currentIndex % courses.length].course}
+                        <div className="info-box">
+                          More information about{" "}
+                          {courses.length === 1
+                            ? courses[0].course
+                            : courses[currentIndex % courses.length].course}
+                        </div>
                       </div>
-                    </div>
-                  )}
+                    )}
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })
+          )}
           <div
             className="plushIcon"
             style={{ display: isSearchVisible ? "none" : "" }}

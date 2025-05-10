@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../global.css";
 import { userList as userListApi } from ".././Global";
-// import "./student.css";
+import "./student.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHome,
@@ -147,75 +147,82 @@ const Student = () => {
           )}
         </div>
         <div className="body">
-          {students.map((student, index) => {
-            const courses = student.courses || [];
-            const currentIndex = currentCourseIndex[student.uuid] || 0;
+          {students.length === 0 ? (
+            <div className="no-students">
+              <i className="fa fa-user-plus"></i>
+              <p>No students available. Please add some students.</p>
+            </div>
+          ) : (
+            students.map((student, index) => {
+              const courses = student.courses || [];
+              const currentIndex = currentCourseIndex[student.uuid] || 0;
 
-            return (
-              <div
-                key={index}
-                className="listView-card"
-                onClick={() =>
-                  handleNavigation(
-                    `${InternalRoutes.INSTITUTE.STUDENT_DETAILS}?${index}&uuid=${student.uuid}&name=${student.name}`
-                  )
-                }
-              >
-                <div className="name">
-                  {student.name
-                    ? student.name.charAt(0).toUpperCase() +
-                      student.name.slice(1, 20) +
-                      (student.name.length > 20 ? "..." : "")
-                    : ""}
-                </div>
-
+              return (
                 <div
-                  className={`status chip ${
-                    student.user_status === "Active" ? "green" : "red"
-                  }`}
+                  key={index}
+                  className="listView-card"
+                  onClick={() =>
+                    handleNavigation(
+                      `${InternalRoutes.INSTITUTE.STUDENT_DETAILS}?${index}&uuid=${student.uuid}&name=${student.name}`
+                    )
+                  }
                 >
-                  {student.user_status}
-                </div>
-                <div className="address">
-                  {student.address
-                    ? student.address.length > 20
-                      ? student.address.slice(0, 20) + "..."
-                      : student.address
-                    : ""}
-                </div>
-                <div className="fee-status-container">
-                  <div className="fee-status">{student.medium}</div>
-                  <div className="info-box">
-                    More information about the medium
+                  <div className="name">
+                    {student.name
+                      ? student.name.charAt(0).toUpperCase() +
+                        student.name.slice(1, 20) +
+                        (student.name.length > 20 ? "..." : "")
+                      : ""}
+                  </div>
+
+                  <div
+                    className={`status chip ${
+                      student.user_status === "Active" ? "green" : "red"
+                    }`}
+                  >
+                    {student.user_status}
+                  </div>
+                  <div className="address">
+                    {student.address
+                      ? student.address.length > 20
+                        ? student.address.slice(0, 20) + "..."
+                        : student.address
+                      : ""}
+                  </div>
+                  <div className="fee-status-container">
+                    <div className="fee-status">{student.medium}</div>
+                    <div className="info-box">
+                      More information about the medium
+                    </div>
+                  </div>
+
+                  <div className="subject">
+                    {courses.length > 0 && (
+                      <div className="course-container">
+                        <span
+                          className={`course-item ${
+                            currentIndex % 2 === 0
+                              ? "course-item-even"
+                              : "course-item-odd"
+                          }`}
+                        >
+                          {courses.length === 1
+                            ? courses[0].course
+                            : courses[currentIndex % courses.length].course}
+                        </span>
+                        <div className="info-box">
+                          More information about{" "}
+                          {courses.length === 1
+                            ? courses[0].course
+                            : courses[currentIndex % courses.length].course}
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </div>
-
-                <div className="subject">
-                  {courses.length > 0 && (
-                    <div className="course-container">
-                      <span
-                        className={`course-item ${
-                          currentIndex % 2 === 0
-                            ? "course-item-even"
-                            : "course-item-odd"
-                        }`}
-                      >
-                        {courses.length === 1
-                          ? courses[0].course
-                          : courses[currentIndex % courses.length].course}
-                      </span>
-                      <div className="info-box">
-                        More information about{" "}
-                        {courses.length === 1
-                          ? courses[0].course
-                          : courses[currentIndex % courses.length].course}
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </div>
-            );
-          })}
+              );
+            })
+          )}
 
           <div
             className="plushIcon"

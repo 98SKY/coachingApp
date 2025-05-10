@@ -30,7 +30,7 @@ const Login = () => {
     setLoading(true);
     try {
       const response = await loginApi({ username, password, userType });
-      const myCoachingId = response?.getInstituteId;
+      const myCoachingId = response?.id;
       localStorage.setItem('token', response?.token);
       localStorage.setItem('userType', userType);
       localStorage.setItem('name', username);

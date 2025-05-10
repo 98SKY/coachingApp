@@ -106,22 +106,22 @@ const SignUp = () => {
       setLoading(true);
       try {
         const formDataWithUserType = { ...formData, userType, myCoachingId };
-        console.log("formDataWithUserType", formDataWithUserType);
         const response = await registerInstitute(formDataWithUserType);
-        setLoading(false);
-        alert(
-          `Check your email or phone for the user ID and one-time password.`
-        );
-        setFormValid(true);
-        if (userType !== "institute") {
-          navigate(`/login?language=english&userType=${userType}`);
+        if (response.code === 201) {
+          alert(response?.message);
+          setFormValid(true);
+          if (userType !== "institute") {
+            navigate(`/login?language=english&userType=${userType}`);
+          } else {
+            window.history.back();
+          }
         } else {
-          window.history.back();
+          alert(response.message)
         }
       } catch (error) {
-        setLoading(false);
-        console.error(error);
         alert(error);
+      }finally{
+        setLoading(false);
       }
     } else {
       alert("Please fill in all required fields.");
@@ -170,11 +170,7 @@ const SignUp = () => {
       <div className="myPadding-all">
         <div className="header">
           <FontAwesomeIcon icon={faChevronLeft} onClick={() => navigate(-1)} />
-          {isStudent
-            ? "Student Registration"
-            : isTeacher
-            ? "Teacher Registration"
-            : "Register Myself"}
+          {`${userType} Registration`}
         </div>
         <form onSubmit={handleSubmit}>
           <div className="body">

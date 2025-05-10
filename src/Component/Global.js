@@ -1,6 +1,6 @@
 import { json } from "react-router-dom";
 export const BASE_URL = process.env.REACT_APP_BASE_URL;
-console.log("BASE_URL:", BASE_URL);
+
 export const registerInstitute = (userData) => {
   const apiUrl = `${BASE_URL}/register`;
 
@@ -21,7 +21,7 @@ export const registerInstitute = (userData) => {
     })
     .then((data) => {
       if (data && data.message) {
-        return data.message;
+        return data;
       } else {
         throw new Error("Failed to create user");
       }
@@ -32,7 +32,7 @@ export const registerInstitute = (userData) => {
 };
 
 export const login = (username, password, userType) => {
-  const apiUrl = `${BASE_URL}/login`;
+  const apiUrl = `${BASE_URL}/auth/login`;
 
   return fetch(apiUrl, {
     method: "POST",

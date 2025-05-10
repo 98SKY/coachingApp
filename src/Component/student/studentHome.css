@@ -31,16 +31,17 @@
 
 .stats {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    gap: 10px;
-    margin-top: 10px;
+  flex-direction: row;
+  flex-wrap: nowrap; /* Prevent wrapping */
+  overflow-x: auto; /* Enable horizontal scrolling */
+  gap: 10px;
+  margin-top: 10px;
 }
 
 .stat-item {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
+    flex: 0 0 auto;
+    /* align-items: center;
+    flex-direction: column; */
     text-align: center;
     background: #fff;
     border-radius: 10px;
